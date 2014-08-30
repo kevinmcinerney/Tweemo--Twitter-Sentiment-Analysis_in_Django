@@ -1,0 +1,100 @@
+from django.http import HttpResponse
+from django.template.loader import get_template # used by temp_test
+from django.template import Context # used by temp_test
+
+from tweemo.models import TwitterStream
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+import tweepy
+from tweepy import API
+import pymongo
+import sys
+import sys
+import json
+
+ckey = "UJpisXUidLEdjEMVQhNOw"
+csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"
+atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"
+asecret = "prwsP2dSD6UqlC2Pmaer0Vt5EyJTInGgOClOqT00c"
+
+auth = tweepy.OAuthHandler(ckey, csecret)
+auth.set_access_token(atoken, asecret)
+
+
+# Connection to Mongo DB
+try:
+    conn=pymongo.MongoClient()
+    print "Connected successfully!!!"
+except pymongo.errors.ConnectionFailure, e:
+   print "Could not connect to MongoDB: %s" % e 
+conn
+
+#Define my mongoDB database
+db = conn.storage
+# Define my collection where I'll insert my search
+posts = db.tweemo_twitterstream
+
+#lookup ='the'
+api = tweepy.API(auth)
+
+query = q
+max_tweets = 10
+searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
+
+print searched_tweets
+
+"""#tweets = api.search(geocode='39.833193,-94.862794,5mi')
+
+scores = {}
+# BAD PRACTICE!!!!!!!!! USE STATIC FOLDER!!!!!!
+with open("/home/kevin/django-kevin/bin/twitter/assets/Dictionaries/AFINN-111.txt") as f:
+	for line in f:
+       		(key, val) = line.split('\t')
+       		scores[key] = val
+
+# print scores.items() # Print every (term, score) pair in the dictionary
+
+tot = 0
+c = 1
+word_list = []
+
+for line in searched_tweets:
+	twitter_line = json.loads(line)
+	if "text" in twitter_line:
+		word_list.append(twitter_line['text'])
+
+for i in range (len(word_list)):
+	text = word_list[i]
+	text = text.split()
+	for word in text:
+		if word in scores:
+			tot += scores[word]
+	tot = 0
+	c = c + 1
+
+posts.remove({})
+# loop through search and insert dictionary into mongoDB
+for tweet in search:
+    # Empty dictionary for storing tweet related data
+    data ={}
+    data['text'] = tweet.text
+    # Insert process
+    posts.insert(data)
+return ''"""
+
+		
+	
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+

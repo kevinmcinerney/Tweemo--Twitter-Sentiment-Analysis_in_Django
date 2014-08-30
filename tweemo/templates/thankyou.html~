@@ -1,0 +1,26 @@
+{% extends "bootstrap.html" %}
+{% load static %}
+
+
+{% block carousel %}
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block search %}
+<h3>Contact Information</h3>
+
+<p>Thank you for contacting us.</p>
+
+<p>We will attempt to get back to you within 48 hours</p>
+		
+{% endblock %}
+
+{% block footer %}
+<!-- FOOTER -->
+<footer style="float:left; margin-top:200px;" >
+<p style="margin-left:700px;" class="pull-right"><a href="#">Back to top</a></p>
+<p style="margin-left:100px;float:left;">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+{% endblock %}

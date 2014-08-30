@@ -1,0 +1,38 @@
+import sys
+import json
+from nltk.stem.lancaster import LancasterStemmer
+ 
+
+st = LancasterStemmer()
+sentilist = open(sys.argv[1])
+scores = {} # initialize an empty dictionary
+score = 0
+term = ""
+count = 0
+for line in sentilist:
+	for i in line.split('\t'):
+		count += 1
+		if count == 1:
+			term = i
+		elif count == 2:
+			score = i
+		else:
+			continue
+	scores[term] = int(score)
+	count = 0
+
+s = ''
+dic = {}
+for i in scores:
+	for letter in i:
+		if letter != '*':
+			s += letter
+	dic[s] = scores[i]
+	s = ''
+
+for i in dic:
+	print str(i) + str('\t') + str(dic[i])	
+
+
+
+

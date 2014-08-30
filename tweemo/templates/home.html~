@@ -1,0 +1,20 @@
+{% extends "bootstrap.html" %}
+
+
+
+
+{% block searchbox %}
+<form id="search" action="/home/results/" method="get">
+	{% csrf_token %}
+	<label for="query">Search:</label>
+	<input id="query" type="text" name="query" value="{{ current_query }}">
+	<input type="submit" value="Search">
+</form> 
+
+<a class="twitter-timeline" href="https://www.twitter.com/hashtag/ireland" data-widget-id="490558569901608960">#ireland Tweets</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+
+{%  endblock %}

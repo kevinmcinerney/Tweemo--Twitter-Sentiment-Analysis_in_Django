@@ -1,0 +1,144 @@
+{% load static %}
+{% for tweet in here %}
+{% if tweet.country == 'Ireland' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{%  endif %}
+{% endif %}
+
+
+{% if tweet.country == 'America' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{%  endif %}
+{% endif %}
+
+
+
+{% if tweet.country == 'Spain' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{%  endif %}
+{% endif %}
+
+
+
+{% if tweet.country == 'Germany' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% endif %}
+{% endif %}
+
+
+
+{% if tweet.country == 'Canada' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% endif %}
+{% endif %}
+
+
+{% if tweet.country == 'England' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% endif %}
+{% endif %}
+
+
+{% if tweet.country == 'France' %}
+{% if tweet.sentiment < 0 %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% elif tweet.sentiment == 0%}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% else %}
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<p>Tweet: {{ tweet.text }}</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="irish_flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} Matched Stem(s): {{ tweet.matches }}  </p>
+</div>
+{% endif %}
+{% endif %}
+{% endfor %}

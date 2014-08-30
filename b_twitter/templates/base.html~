@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %} Tweemo {% endblock %} </title>
+	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/default.css' %}">
+
+</head>
+
+<body>
+	<div id="page">
+	
+		<div id="header">
+			{% block header %} 
+			<h1> HEADER </h1> 
+			{% endblock %}
+		</div>
+
+		<div id="sidebar">
+			{%  block sidebar %}
+			<ul>
+				<li><a href="/home/all">Home</a></li>
+				<br />
+				<br />
+				<li><a href="/home/aboutus">About Us</a></li>
+				<br />
+				<br />
+				<li><a href="/home/contactus">Contact</a></li>
+				<br />
+				<br />
+				<img src="{% static 'assets/images/twitter_logo.jpg' %}" width='150'/>
+			</ul>
+			{% endblock %}
+		</div>
+		<div id="content">
+		{% block content %}This is the content area {% endblock %}
+		</div>
+	</div>
+</body>
+</html>
+
+	
+	

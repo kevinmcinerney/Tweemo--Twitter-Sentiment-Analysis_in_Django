@@ -1,0 +1,210 @@
+{% extends "bootstrap.html" %}
+{% load static %}
+
+
+{% block carousel %}
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block search %}
+
+<html>
+	  <head>
+		    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		    <script type="text/javascript">
+			      google.load("visualization", "1", {packages:["corechart"]});
+			      google.setOnLoadCallback(drawChart);
+			      function drawChart() {
+					var data = {{ djangodict|safe }};
+					var data = google.visualization.arrayToDataTable(data);
+
+					var options = {
+					  	title: 'Sentiment Polarity',
+						colors: ['red','gray','green']
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+					chart.draw(data, options);
+			      }
+		    </script>
+		    <script type="text/javascript">
+			      google.load("visualization", "1", {packages:["corechart"]});
+			      google.setOnLoadCallback(drawChart);
+			      function drawChart() {
+					var data = {{ djangodict2|safe }};
+					var data = google.visualization.arrayToDataTable(data);
+
+					var options = {
+					  	title: 'Sentiment Strength',
+						colors: ['red','green']
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+					chart.draw(data, options);
+			      }
+		    </script>
+		    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+		    <script type='text/javascript'>
+			     google.load('visualization', '1', {'packages': ['geochart']});
+			     google.setOnLoadCallback(drawRegionsMap);
+
+      	    	             function drawRegionsMap() {
+					var data = {{ djangodict3|safe }};
+       			     		var data = google.visualization.arrayToDataTable(data);
+
+					var options = {};
+
+					var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+					chart.draw(data, { colors:['red','green'] } );
+    			}
+    		    </script>
+		    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		    <script type="text/javascript">
+			      google.load("visualization", "1", {packages:["corechart"]});
+			      google.setOnLoadCallback(drawChart);
+			      function drawChart() {
+					var data = {{ djangodict5|safe }};
+					var data = google.visualization.arrayToDataTable(data);
+
+					var options = {
+					  	title: 'Sentiment Timeline: {{ query }}'
+					};
+
+					var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+					chart.draw(data, options);
+		      		}
+		    </script>
+  	  </head>
+  
+	  <body style="width:990px;margin-left:150px;margin-top:100px;">
+		<h1 style="margin-left:300px;margin-top:100px;"> You searched for: {{ query }} </h1>
+		
+		<div style="border:1px solid black;margin-top:70px; width: 380px; height: 280px;float:left" id="piechart" ></div>
+		<div style="border:1px solid black;margin-right:5px;margin-top: 70px; float:right; width: 600px; height: 400px;"id="chart_div"></div>
+	    	<div style="margin-top:5px;border:1px solid black; width: 380px; height: 280px;float:left" id="piechart2"></div>
+
+	  	<div style="float:left;margin-left:5px;margin-top:5px">
+	      		<iframe src='/home/stream' id="info" name="info" width="600px" height="160px" seamless="">
+	     		</iframe>
+    		</div>
+		<table style="margin-top:5px; border:1px solid black; width: 985px; height: 280px;float:left;border-collapse:collapse;width:985px">
+			<th> Descriptive Statistics </th>
+			<tr style="border:1px solid black">
+				<td>Country</td>
+				<td>Total</td>
+				<td>No#: <img  src="{% static 'assets/images/smile.JPG' %}" alt="smile" style="heigth:20px;width:20px"></td>
+				<td>No#: <img  src="{% static 'assets/images/neutral.JPG' %}" alt="neutral" style="heigth:20px;width:20px"></td>
+				<td>No#: <img  src="{% static 'assets/images/sad.JPG' %}" alt="sad" style="heigth:20px;width:20px"></td>
+				<td>Strength: <img  src="{% static 'assets/images/smile.JPG' %}" alt="smile" style="heigth:20px;width:20px"></td>
+				<td>Strength: <img  src="{% static 'assets/images/sad.JPG' %}" alt="sad" style="heigth:20px;width:20px"></td>	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/ireland.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.0 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/spain.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.1 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/germany.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.2 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/america.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.3 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/uk.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.4 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/canada.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.5 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+			<tr style="border:1px solid black">
+				<td><img  src="{% static 'assets/images/france.JPG' %}" alt="irish_flag"></td>
+				{% for i in djangodict4.6 %}
+					<td> {{ i.6 }} </td>
+					<td> {{ i.4 }} </td>
+					<td> {{ i.3 }} </td>
+					<td> {{ i.5 }} </td>
+					<td> {{ i.2 }} </td>
+					<td> {{ i.1 }} </td>
+				{% endfor %}	
+				
+			</tr>
+		</table>
+		<div style="float:left;margin-top:5px;border:1px solid black;width: 985px; height: 400px;" id="chart_div2"></div>
+		<div>
+	      		<iframe src='/home/tweets' id="info" name="info" width="985px" height="400px" seamless="">
+	     		</iframe>
+    		</div>
+		
+		</br> 
+		
+		{% endblock %}
+
+		{% block footer %}
+	        <!-- FOOTER -->
+	        <footer style="float:left; margin-top:200px;" >
+		<p style="margin-left:700px;" class="pull-right"><a href="#">Back to top</a></p>
+		<p style="margin-left:100px;float:left;">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	        </footer>
+	        {% endblock %}
+	</body>
+</html>
+
+
+

@@ -1,0 +1,29 @@
+{% extends "bootstrap.html" %}
+{% load static %}
+
+
+{% block carousel %}
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block search %}
+<h2 style="margin-left:200px" id="search" class="featurette-heading">How to Make your own Tweemo?.<h2>
+<h3 style="margin-left:200px"><span class="text-muted">It's Easy.</span></h3>
+<img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
+<div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
+<p> This page is being updated.Thanks for your patience. </p>
+</div>	
+{% endblock %}
+
+{% block footer %}
+<!-- FOOTER -->
+<footer style="float:left; margin-top:200px;" >
+<p style="margin-left:700px;" class="pull-right"><a href="#">Back to top</a></p>
+<p style="margin-left:100px;float:left;">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+{% endblock %}
+
+
+

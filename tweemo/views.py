@@ -198,11 +198,11 @@ def pull_tweets(q):
 	tot = 0
 
 	stopw = set()
-	stopw = set(open(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords.txt'))
+	stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	word_splitter = WordPunctTokenizer()
 	st = LancasterStemmer()
-	m_names = os.path.join(BASE_DIR, 'assets/Dictionaries/males.txt')
-	w_names = os.path.join(BASE_DIR, 'assets/Dictionaries/females.txt')
+	m_names = '/app/assets/Dictionaries/males.txt'
+	w_names = '/app/assets/Dictionaries/females.txt'
 	c_score = {}
 	c_score['Canada'] = []
 	c_score['England'] = []

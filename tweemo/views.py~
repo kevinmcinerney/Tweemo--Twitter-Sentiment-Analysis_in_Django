@@ -198,7 +198,7 @@ def pull_tweets(q):
 	tot = 0
 
 	stopw = set()
-	stopw = set(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords.txt')
+	stopw = set(open(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords.txt'))
 	word_splitter = WordPunctTokenizer()
 	st = LancasterStemmer()
 	m_names = os.path.join(BASE_DIR, 'assets/Dictionaries/males.txt')

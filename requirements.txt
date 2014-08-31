@@ -22,3 +22,4 @@ psycopg2==2.5.3
 dj-database-url==0.3.0
 django-easy-maps==0.9
 geopy==1.1.2
+nltk==2.0.4

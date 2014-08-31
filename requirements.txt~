@@ -8,7 +8,6 @@ django-bootstrap-toolkit==2.15.0
 django-mongodb-engine==0.5.1
 djangotoolbox==1.6.2
 gunicorn==19.1.1
-nltk==2.0.4
 numpy==1.8.1
 pymongo==2.7.1
 static3==0.5.1
@@ -23,3 +22,4 @@ psycopg2==2.5.3
 dj-database-url==0.3.0
 django-easy-maps==0.9
 geopy==1.1.2
+nltk==2.0.4

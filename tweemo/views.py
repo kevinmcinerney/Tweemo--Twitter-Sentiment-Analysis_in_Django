@@ -14,7 +14,7 @@ import sys
 import json
 from datetime import date,datetime, timedelta
 from nltk.stem.lancaster import LancasterStemmer
-from nltk.corpus import stopwords, names
+'from nltk.corpus import stopwords, names'
 from nltk import WordPunctTokenizer
 from tweemo.models import ContactForm
 from django import forms as forms
@@ -198,11 +198,11 @@ def pull_tweets(q):
 	tot = 0
 
 	stopw = set()
-	stopw = set(stopwords.words('english'))
+	stopw = set(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords.txt')
 	word_splitter = WordPunctTokenizer()
 	st = LancasterStemmer()
-	m_names = names.words('male.txt')
-	w_names = names.words('female.txt')
+	m_names = os.path.join(BASE_DIR, 'assets/Dictionaries/males.txt')
+	w_names = os.path.join(BASE_DIR, 'assets/Dictionaries/females.txt')
 	c_score = {}
 	c_score['Canada'] = []
 	c_score['England'] = []

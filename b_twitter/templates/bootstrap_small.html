@@ -30,6 +30,16 @@
     
 
   </head>
+      {% block search %}
+      <div  style="text-align:center; margin-top:-100px;" class="row featurette">
+        <h2 id="search" class="featurette-heading">Give it a go. <span class="text-muted">Enter a search word.</span></h2>
+	<form style="text-align:center; margin-top:100px;" action="/home/results/" method="get">
+	<label for="query">                                                </label>
+	<input id="query" type="text" name="query" value="{{ current_query }}">
+	<input type="submit" value="Search">
+	</form>
+      </div>
+      {% endblock %}
 
       {% block footer %}
       <!-- FOOTER -->

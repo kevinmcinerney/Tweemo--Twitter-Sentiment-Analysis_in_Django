@@ -246,7 +246,6 @@ def pull_tweets(q):
 			print len(searched_tweets)
 			
 			for tweet in searched_tweets:
-				print tweet.text
 				if tweet.text:	
 					words = word_splitter.tokenize(tweet.text)
 					for word in words:

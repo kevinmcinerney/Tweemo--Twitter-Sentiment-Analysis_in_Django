@@ -114,7 +114,7 @@ TEMPLATE_LOADERS = (
 
 #Enter valid gmail + password below
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'myemail'
-EMAIL_HOST_PASSWORD = 'mypassword'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 EMAIL_PORT = 587

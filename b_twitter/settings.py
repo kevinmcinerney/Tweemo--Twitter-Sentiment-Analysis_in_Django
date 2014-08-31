@@ -70,7 +70,6 @@ DATABASES = {
     }
 }
 
-
 SOUTH_DATABASE_ADAPTERS = {
     'default': "south.db.sqlite3"
 }
@@ -101,8 +100,8 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = (
-	os.path.join(BASE_DIR, 'b_twitter/templates'),
-	os.path.join(BASE_DIR, 'tweemo/templates'),
+	os.path.join(BASE_DIR, '/apps/templates'),
+	os.path.join(BASE_DIR, '/app/tweemo/templates'),
 )
 
 TEMPLATE_LOADERS = (

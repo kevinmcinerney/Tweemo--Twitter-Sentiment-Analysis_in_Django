@@ -2,12 +2,6 @@
 {% load static %}
 
 
-{% block carousel %}
-{% endblock %}
-
-{% block features %}
-{% endblock %}
-
 {% block search %}
 <div id="contact_wrap">
 

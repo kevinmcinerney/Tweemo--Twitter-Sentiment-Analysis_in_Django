@@ -96,12 +96,14 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (
-('assets', os.path.join(BASE_DIR, 'static')),
+	os.path.join(BASE_DIR, 'static'),
+	('assets', '/app/b_twitter/static'),
 )
 
+print BASE_DIR
 TEMPLATE_DIRS = (
-	os.path.join(BASE_DIR, '/apps/templates'),
-	os.path.join(BASE_DIR, '/app/tweemo/templates'),
+	'/app/templates',
+	'/app/tweemo/templates',
 )
 
 TEMPLATE_LOADERS = (

@@ -99,9 +99,10 @@ STATICFILES_DIRS = (
 ('assets', os.path.join(BASE_DIR, 'static')),
 )
 
+print BASE_DIR
 TEMPLATE_DIRS = (
-	os.path.join(BASE_DIR, '/apps/templates'),
-	os.path.join(BASE_DIR, '/app/tweemo/templates'),
+	os.path.join(BASE_DIR, '/../templates'),
+	os.path.join(BASE_DIR, '/../tweemo/templates'),
 )
 
 TEMPLATE_LOADERS = (

@@ -102,7 +102,7 @@ STATICFILES_DIRS = (
 
 print BASE_DIR
 TEMPLATE_DIRS = (
-	'/app/templates',
+	'/app/b_twitter/templates',
 	'/app/tweemo/templates',
 )
 

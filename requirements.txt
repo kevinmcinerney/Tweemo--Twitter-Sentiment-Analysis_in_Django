@@ -1,5 +1,5 @@
 Django==1.5.8
-PAM==0.4.2
+PAM==0.1
 Pillow==2.3.0
 PyYAML==3.11
 South==1.0

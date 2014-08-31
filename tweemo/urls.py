@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^results/$', 'tweemo.views.results'),
     url(r'^thankyou/$', 'tweemo.views.thankyou'),
     url(r'^gallary/$', 'tweemo.views.gallary'),
+    url(r'^stream/$', 'tweemo.views.stream'),
     url(r'^usingtweemo/$', 'tweemo.views.usingtweemo'),
     url(r'^howto/$', 'tweemo.views.howto'),
     

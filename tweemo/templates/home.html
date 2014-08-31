@@ -4,7 +4,7 @@
 
 
 {% block searchbox %}
-<form action="/home/results/" method="get">
+<form action="/results/" method="get">
 	{% csrf_token %}
 	<label for="query">Search:</label>
 	<input id="query" type="text" name="query" value="{{ current_query }}">

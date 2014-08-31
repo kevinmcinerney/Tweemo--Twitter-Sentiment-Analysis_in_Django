@@ -1,4 +1,4 @@
-{% extends "bootstrap.html" %}
+{% extends "bootstrap_small.html" %}
 {% load static %}
 
 
@@ -15,7 +15,7 @@
 <div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
 <p> 1.) To search for phrases like 'bread and butter' use quotes to identify the phrase.</p>
 <p> 2.) To search for one of two words use the 'or' word as so: happy or :-)</p>
-<p> 1.) To search fortwo words in any partof a tweet justlist the terms: bread butter</p>
+<p> 3.) To search fortwo words in any partof a tweet justlist the terms: bread butter</p>
 </div>	
 {% endblock %}
 

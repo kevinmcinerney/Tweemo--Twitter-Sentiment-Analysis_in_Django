@@ -1,4 +1,4 @@
-{% extends "bootstrap.html" %}
+{% extends "bootstrap_small.html" %}
 {% load static %}
 
 
@@ -20,8 +20,11 @@
                         <label id="id_name">Name:</label>
                         <input type="text" name="name" value="" id="name" />
 			</br>
+			</br>
                         <label id="id_email">Email:</label>
                         <input type="text" name="email" value="" id="Email" />
+			</br>
+			</br>
                     </div><!-- end name_email -->
                     <div id="message">
                         <label id="id_message">Message:</label>

@@ -9,11 +9,15 @@
 {% endblock %}
 
 {% block search %}
+
+<div style="margin-top:100px;margin-left:400px;text-align:center;width:400px">
 <h3>Contact Information</h3>
 
 <p>Thank you for contacting us.</p>
 
 <p>We will attempt to get back to you within 48 hours</p>
+
+</div>
 		
 {% endblock %}
 

@@ -1,4 +1,4 @@
-{% extends "bootstrap.html" %}
+{% extends "bootstrap_small.html" %}
 {% load static %}
 
 
@@ -13,7 +13,7 @@
 <h3 style="margin-left:400px"><span class="text-muted">Kevin Mc Inerney.</span></h3>
 <img  src="{% static 'assets/images/round_face.jpg' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
 <div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
-<p>Kevin is a graduate of Computer Science from University College Dublin, Ireland. He designed this Twitter Analysis Tool as part of an MSc program he completed in 2014. Kevin would like to prusue data science in the future and is fascinated by big data and the future of data analytics. If you'd like to drop kevin a message click <a href="/home/contactus">here</a></p> When Kevin's not coding he likes traveling, reading philosophy, and eating good food. 
+<p>Kevin is a graduate of Computer Science from University College Dublin, Ireland. He designed this Twitter Analysis Tool as part of an MSc program he completed in 2014. Kevin would like to pursue data science in the future and is fascinated by big data and the future of data analytics. If you'd like to drop kevin a message click <a href="/home/contactus">here</a></p> When Kevin's not coding he likes travelling, reading philosophy, and eating good food. 
 </div>	
 {% endblock %}
 

@@ -1,4 +1,4 @@
-{% extends "bootstrap.html" %}
+{% extends "bootstrap_small.html" %}
 {% load static %}
 
 
@@ -18,7 +18,7 @@
 <p>Negative feelings were high in Ireland when Garth Brooks cancelled several concerts.</p>
 </div>
 	
-<div style="float:left;margin-left:100px;margin-top:10px">
+<div style="float:right;margin-right:100px;margin-top:10px">
 <img  src="{% static 'assets/images/garth.JPG' %}" alt="Generic placeholder image" style="width: 800px; height: 420px;">
 <p>Negative feelings were high in Ireland when Garth Brooks cancelled several concerts.</p>
 </div>

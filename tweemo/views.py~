@@ -157,16 +157,21 @@ def pull_tweets(q):
 
 	for time in time_list:
 		for country in country_dictionary:
+			
+			# Stores total sentiment-strength score (must be reset)
 			tot = 0
+
+			# Stores matched sentiment words from tweets (must be reset)
 			matches = []
+
+			# Stores total sentiment-counts (must be reset)
 			positive_sentiment_total = 0
 			positive_sentiment_count = 0
 			negative_sentiment_total = 0
 			neutral_sentiment_count = 0
 			negative_sentiment_count = 0	
-			# this doesn'ensure the query is in the text!
 			
-
+			# Tweepy query for collecting tweets
 			searched_tweets = [status for status in tweepy.Cursor(api.search, 
 									      q=query, 
 									      lang="en",
@@ -174,7 +179,6 @@ def pull_tweets(q):
 									      until=time[0] + timedelta(days=1),
 									      geocode=country_dictionary[country], 
 									      ).items(max_tweets)]
-			print len(searched_tweets)
 			
 			for tweet in searched_tweets:
 				if tweet.text:	
@@ -201,9 +205,6 @@ def pull_tweets(q):
 		                        }
 	
 				posts.insert(data)	
-
-				#Stores matched sentiment words from tweets
-				matches = []
 
 			# Append new Country data for each day 		
 			c_score[country].append(

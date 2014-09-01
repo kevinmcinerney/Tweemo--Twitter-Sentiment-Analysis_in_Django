@@ -281,6 +281,7 @@ def connect():
 
 	return conn
 
+scores = {}
 def create_lexicon():
 	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/super.txt')) as f:

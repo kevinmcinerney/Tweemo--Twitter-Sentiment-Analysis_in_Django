@@ -159,7 +159,7 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets: 
-				tot = send_processed_tweet(tweet)
+				tot = send_processed_tweet_to_db(tweet)
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot
@@ -359,7 +359,7 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 							      ).items(max_tweets)]
 	return searched_tweets
 
-def preprocess_tweet(tweet):
+def send_processed_tweet_to_db(tweet):
 
 	# initialize sentiment score
 	tot = 0

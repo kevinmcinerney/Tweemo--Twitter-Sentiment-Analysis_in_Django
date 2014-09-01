@@ -391,7 +391,7 @@ def send_processed_tweet_to_db(tweet):
                  'matches': matches 
                 }
 
-		# insert tweet data to MongoDB
-		posts.insert(data)
+	# insert tweet data to MongoDB
+	posts.insert(data)
 	return tot
 

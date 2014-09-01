@@ -240,53 +240,20 @@ def pull_tweets(q):
 			time_sample_2[c] += i['sentiment'] 
 		elif i['created_at'].date() == time_dictionary[0][0]:
 			time_sample_3[c] += i['sentiment'] 
-
-	for country in c_score:
-		print country
-		print c_score[country][0][6] 
-		print c_score[country][1][6][0]
-		print c_score[country][2][6][0]
-		print c_score[country][0][6] - (c_score[country][1][6][0] + c_score[country][2][6][0])
-		
-	print time_sample_1
-	print time_sample_2
-	print time_sample_3
        		
 	for i in time_sample_1:
 		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
 		if d1 != 0:
-			print '----1'
-			print i
-			print time_sample_1[i]
-			print (c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0]))
- 
 			time_sample_1[i] = float(time_sample_1[i] / (c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0]))
 )
-		else:
-			print ''
 	for i in time_sample_2:
 		if c_score[i][1][6][0] != 0:
-			print '---2'
-                        print i
-                        print time_sample_2[i]
-                        print  c_score[i][1][6][0]
 			time_sample_2[i] = float(time_sample_2[i] / (c_score[i][1][6][0]))
-		else:
-			 print ''
+
 	for i in time_sample_3:
 		if c_score[i][2][6][0] != 0:
-			print '---3'
-                        print i
-                        print time_sample_3[i]
-                        print c_score[i][2][6][0]
 			time_sample_3[i] = float(time_sample_3[i] / (c_score[i][2][6][0]))
-		else:
-			print ''
-
-	print time_sample_1
-	print time_sample_2
-        print time_sample_3
-
+		
 
 	master_samples = [[time_sample_1],[time_sample_2],[time_sample_3]]
 	

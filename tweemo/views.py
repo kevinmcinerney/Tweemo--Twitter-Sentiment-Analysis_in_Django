@@ -127,7 +127,7 @@ def pull_tweets(q):
 	overall_negative_strength = 0
 	overall_positive_strength = 0
 
-	stopw = set()
+	
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	word_splitter = WordPunctTokenizer()
 	m_names = '/app/assets/Dictionaries/males.txt'

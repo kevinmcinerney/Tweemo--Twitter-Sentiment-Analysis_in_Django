@@ -147,7 +147,7 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets: 
-				tot = send_processed_tweet_to_db(country_dictionary[country],tweet)
+				tot = send_processed_tweet_to_db(country,tweet)
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot

@@ -181,6 +181,7 @@ def pull_tweets(q):
 			c_score[country][0][i] = c_score[country][0][i][0] + c_score[country][1][i][0] + c_score[country][2][i][0]
 
 	# retrieve tweet summaries from MongoDB (MOngo wasn't actually necassy here, but it's educational)
+	posts = create_mongo_collection()
 	cursor = posts.find()
 
 	# divide the tweet sentiment scores into three samples based on day
@@ -354,9 +355,8 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 							      ).items(max_tweets)]
 	return searched_tweets
 
-#--------------------------------------------------------------------------------#
-def send_processed_tweet_to_db(country, tweet):
 
+def create_mongo_collection():
 	# Connection to MongoLab via pymongo
 	conn = connect()
 
@@ -365,7 +365,13 @@ def send_processed_tweet_to_db(country, tweet):
 
 	# Define MongoDB collection 
 	posts = db.tweemo_twitterstream
-	
+
+	return posts
+#--------------------------------------------------------------------------------#
+def send_processed_tweet_to_db(country, tweet):
+
+	posts = create_mongo_collection()
+
 	# Clear any old Tweets from collection
 	posts.remove({})
 

@@ -147,13 +147,7 @@ def pull_tweets(q):
 	c_score['Germany'] = []
 	c_score['Ireland'] = []
 
-	time_sample_1 ={'Ireland': 0, 
-			'Canada': 0, 
-                        'America': 0, 
-                        'Germany': 0, 
-                        'Spain': 0, 
-                        'England': 0, 
-                        'France': 0 }
+	time_sample_1 ={}
 	time_sample_2 = time_sample_1.copy()
 	time_sample_3 = time_sample_1.copy()
 	master_samples = []

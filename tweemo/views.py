@@ -50,21 +50,7 @@ def gallary(request):
 	return render_to_response('gallary.html')
 
 def contactus(request):
-		subject = request.POST.get('topic', '')
-		message = request.POST.get('message', '')
-		from_email = request.POST.get('email', '')
-
-		if subject and message and from_email:
-		        try:
-				send_mail(subject, message, from_email, ['kevinmcinerney8@gmail.com'])
-        		except BadHeaderError:
-            			return HttpResponse('Invalid header found.')
-        		return HttpResponseRedirect('/home/thankyou')
-		else:
-			return render_to_response('contactus.html', {'form': ContactForm()})
-	
-		return render_to_response('contactus.html', {'form': ContactForm()},
-			RequestContext(request))
+	return send_message(request)
 
 def thankyou(request):
 		return render_to_response('thankyou.html')
@@ -397,7 +383,19 @@ def create_lexicon():
 	return scores
 
 
+def send_message(request):
+	subject = request.POST.get('topic', '')
+	message = request.POST.get('message', '')
+	from_email = request.POST.get('email', '')
 
+	if subject and message and from_email:
+	        try:
+			send_mail(subject, message, from_email, ['kevinmcinerney8@gmail.com'])
+		except BadHeaderError:
+    			return HttpResponse('Invalid header found.')
+		return HttpResponseRedirect('/home/thankyou')
+	else:
+		return render_to_response('contactus.html', {'form': ContactForm()})
 
 
 

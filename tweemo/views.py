@@ -99,7 +99,7 @@ def pull_tweets(q):
 	#Define MongoDB database
 	db = conn.twitter
 
-	# Define MOngoDB collection 
+	# Define MongoDB collection 
 	posts = db.tweemo_twitterstream
 	
 	# Clear any old Tweets from collection
@@ -127,17 +127,8 @@ def pull_tweets(q):
 	overall_negative_strength = 0
 	overall_positive_strength = 0
 
-	# nltk tokenizer
-	word_splitter = WordPunctTokenizer()
-
-	# three nltk corpi
-	stopw = set('/app/assets/Dictionaries/stopwords.txt')
-	m_names = '/app/assets/Dictionaries/males.txt'
-	w_names = '/app/assets/Dictionaries/females.txt'
-
 	# c_score contains 7 different sentiment scores for each country
-	# and appends this information three  separate times, once 
-	# for each of three days measured
+	# and appends this information for each day(3)
 	c_score = {}
 	c_score['Canada'] = []
 	c_score['England'] = []
@@ -147,10 +138,21 @@ def pull_tweets(q):
 	c_score['Germany'] = []
 	c_score['Ireland'] = []
 
-	time_sample_1 ={}
+	# initialize three dictionaries to store sentiment scores 
+	time_sample_1 ={'Ireland': 0, 
+			'Canada': 0, 
+                        'America': 0, 
+                        'Germany': 0, 
+                        'Spain': 0, 
+                        'England': 0, 
+                        'France': 0 }
 	time_sample_2 = time_sample_1.copy()
 	time_sample_3 = time_sample_1.copy()
+
+	# initialize list to store all three time samples
 	master_samples = []
+
+	# initialize tweepy authorization and key search parameters
 	api = tweepy.API(auth)
 	query = q
 	max_tweets = 1
@@ -159,9 +161,6 @@ def pull_tweets(q):
 	for time in time_list:
 		for country in country_dictionary:
 			
-			# Stores total sentiment-strength score (must be reset)
-			tot = 0
-
 			# Stores matched sentiment words from tweets (must be reset)
 			matches = []
 
@@ -173,41 +172,16 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 			
 			# Tweepy query for collecting tweets
-			searched_tweets = [status for status in tweepy.Cursor(api.search, 
-									      q=query, 
-									      lang="en",
-									      since=time[0],
-									      until=time[0] + timedelta(days=1),
-									      geocode=country_dictionary[country], 
-									      ).items(max_tweets)]
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],max_tweets):
 			
-			for tweet in searched_tweets:
-				if tweet.text:	
-					words = word_splitter.tokenize(tweet.text)
-					for word in words:
-						w = word.lower()
-						if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
-							tot += scores[w]
-							matches.append(w)
-					if tot < 0:
-						negative_sentiment_count += 1
-						negative_sentiment_total += tot
-					elif tot > 0:
-						positive_sentiment_count += 1
-						positive_sentiment_total += tot
-					elif tot == 0:
-							neutral_sentiment_count += 1
-				data = { 'text': tweet.text, 
-		                         'created_at': tweet.created_at, 
-		                         'retweet_count': tweet.retweet_count, 
-		                         'sentiment': tot , 
-		                         'country': country, 
-		                         'matches': matches 
-		                        }
-	
-				posts.insert(data)	
+			# make tweets lowercase, filter out names and stopwords, update relevant global values and
+			# return a summary of each tweet 
+			data = preprocess_tweets(searched_tweets)
 
-			# Append new Country data for each day 		
+			# insert tweet data to MongoDB
+			posts.insert(data)	
+
+			# Append new Country data for new day 		
 			c_score[country].append(
 					       [[positive_sentiment_total + negative_sentiment_total],
 					       [negative_sentiment_total],
@@ -224,13 +198,15 @@ def pull_tweets(q):
 			overall_positive_count += positive_sentiment_count
 			overall_neutral_count += neutral_sentiment_count
 
+	# To get total scores just by country (and not also by day) we must add the data together from the three days.
 	for country in c_score:
 		for i in range(0,7):
 			c_score[country][0][i] = c_score[country][0][i][0] + c_score[country][1][i][0] + c_score[country][2][i][0]
 
-	
+	# retrieve tweet summaries from MongoDB (MOngo wasn't actually necassy here, but it's educational)
 	cursor = posts.find()
 
+	# divide the tweet sentiment scores into three samples based on day
 	for i in cursor:
 		c = str(i['country'])
 		if i['created_at'].date() == time_list[2][0]:		
@@ -239,7 +215,9 @@ def pull_tweets(q):
 			time_sample_2[c] += i['sentiment'] 
 		elif i['created_at'].date() == time_list[0][0]:
 			time_sample_3[c] += i['sentiment'] 
-       		
+       	
+	# find AVERAGE scores for each country-day combination 
+	# based on the number of tweets retrieved in each case 	
 	for i in time_sample_1:
 		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
 		if d1 != 0:
@@ -253,6 +231,9 @@ def pull_tweets(q):
 		if c_score[i][2][6][0] != 0:
 			time_sample_3[i] = float(time_sample_3[i] / (c_score[i][2][6][0]))
 		
+
+	#-----------------------------------------------------------------------------------#
+	# Collect the four main data structures and return one composite structure
 
 	master_samples = [[time_sample_1],[time_sample_2],[time_sample_3]]
 	
@@ -365,4 +346,52 @@ def create_dictData5(data):
 							  data[3][0][2][0]['England'],
 							  data[3][0][2][0]['Canada']]]
 	return dictData5
+
+def tweepy_search(q,lang,since,until,country,max_tweets):
+	searched_tweets = [status for status in tweepy.Cursor(api.search, 
+							      q=q, 
+							      lang=lang,
+							      since=since,
+							      until=until,
+							      geocode=country, 
+							      ).items(max_tweets)]
+	return searched_tweets
+
+def preprocess_tweets(searched_tweets):
+
+	# initialize sentiment score
+	tot = 0
+	
+	# nltk tokenizer
+	word_splitter = WordPunctTokenizer()
+
+	# three nltk corpi
+	stopw = set('/app/assets/Dictionaries/stopwords.txt')
+	m_names = '/app/assets/Dictionaries/males.txt'
+	w_names = '/app/assets/Dictionaries/females.txt'
+
+	for tweet in searched_tweets:
+		if tweet.text:	
+			words = word_splitter.tokenize(tweet.text)
+			for word in words:
+				w = word.lower()
+				if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
+					tot += scores[w]
+					matches.append(w)
+			if tot < 0:
+				negative_sentiment_count += 1
+				negative_sentiment_total += tot
+			elif tot > 0:
+				positive_sentiment_count += 1
+				positive_sentiment_total += tot
+			elif tot == 0:
+					neutral_sentiment_count += 1
+		data = { 'text': tweet.text, 
+                         'created_at': tweet.created_at, 
+                         'retweet_count': tweet.retweet_count, 
+                         'sentiment': tot , 
+                         'country': country, 
+                         'matches': matches 
+                        }
+	return data
 

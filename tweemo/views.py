@@ -157,11 +157,18 @@ def pull_tweets(q):
 			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
-			# return a summary of each tweet 
-			data = preprocess_tweets(searched_tweets)
-
-			# insert tweet data to MongoDB
-			posts.insert(data)	
+			# return a summary of each tweet
+			for tweet in searched_tweets: 
+				tot = send_processed_tweet_to_db(tweet)
+				if tot < 0:
+					negative_sentiment_count += 1
+					negative_sentiment_total += tot
+				elif tot > 0:
+					positive_sentiment_count += 1
+					positive_sentiment_total += tot
+				elif tot == 0:
+					neutral_sentiment_count += 1
+				
 
 			# Append new Country data for new day 		
 			c_score[country].append(
@@ -352,7 +359,7 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 							      ).items(max_tweets)]
 	return searched_tweets
 
-def preprocess_tweets(searched_tweets):
+def send_processed_tweet_to_db(tweet):
 
 	# initialize sentiment score
 	tot = 0
@@ -368,28 +375,23 @@ def preprocess_tweets(searched_tweets):
 	m_names = '/app/assets/Dictionaries/males.txt'
 	w_names = '/app/assets/Dictionaries/females.txt'
 
-	for tweet in searched_tweets:
-		if tweet.text:	
-			words = word_splitter.tokenize(tweet.text)
-			for word in words:
-				w = word.lower()
-				if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
-					tot += scores[w]
-					matches.append(w)
-			if tot < 0:
-				negative_sentiment_count += 1
-				negative_sentiment_total += tot
-			elif tot > 0:
-				positive_sentiment_count += 1
-				positive_sentiment_total += tot
-			elif tot == 0:
-					neutral_sentiment_count += 1
-		data = { 'text': tweet.text, 
-                         'created_at': tweet.created_at, 
-                         'retweet_count': tweet.retweet_count, 
-                         'sentiment': tot , 
-                         'country': country, 
-                         'matches': matches 
-                        }
-	return data
+	
+	if tweet.text:	
+		words = word_splitter.tokenize(tweet.text)
+		for word in words:
+			w = word.lower()
+			if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
+				tot += scores[w]
+				matches.append(w)
+	data = { 'text': tweet.text, 
+                 'created_at': tweet.created_at, 
+                 'retweet_count': tweet.retweet_count, 
+                 'sentiment': tot , 
+                 'country': country, 
+                 'matches': matches 
+                }
+
+		# insert tweet data to MongoDB
+		posts.insert(data)
+	return tot
 

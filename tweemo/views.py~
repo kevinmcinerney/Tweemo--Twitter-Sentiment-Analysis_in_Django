@@ -22,10 +22,6 @@ from django.core.mail import send_mail, BadHeaderError
 import os
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
- 
-
-
 def home(request):
 	return render_to_response('home.html')
 
@@ -59,12 +55,16 @@ def results(request):
 	message = request.GET['query']
         message = message.encode('ascii','ignore')
 	
-	create_lexicon()
+	# create dictionary of word-sentiment scores
+	scores = create_lexicon()
+
+	# create data necessary for graphs/analysis
 	data = pull_tweets(message)
 		
     else:
         message = 'You submitted an empty form.'
     
+    # call methods to parse data as required for graphs/analysis
     dictData = create_dictData(data)
     dictData2 = create_dictData2(data)
     dictData3 = create_dictData3(data)
@@ -84,7 +84,10 @@ def results(request):
 
 def pull_tweets(q):
 
+	# Connection to MongoLab via pymongo
 	conn = connect()
+
+	# Twitter Authorization codes
 	ckey = "UJpisXUidLEdjEMVQhNOw"
 	csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"
 	atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"
@@ -93,14 +96,16 @@ def pull_tweets(q):
 	auth = tweepy.OAuthHandler(ckey, csecret)
 	auth.set_access_token(atoken, asecret)
 
-	#Define my mongoDB database
+	#Define MongoDB database
 	db = conn.twitter
 
-	# Define my collection where I'll insert my search
+	# Define MOngoDB collection 
 	posts = db.tweemo_twitterstream
 	
+	# Clear any old Tweets from collection
 	posts.remove({})
 	
+	# For the purposes of iterating over the API.search by country
 	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
 			       'Canada': '43.653226,-79.383184,50mi', 
                                'America': '40.7127,-74.0059,50mi', 
@@ -109,22 +114,18 @@ def pull_tweets(q):
                                'England': '51.5072,0.1275,100mi', 
                                'France': '48.8567,2.3508,100mi' }
 
+	# For the purposes of iterating over the API.search by day
 	today = date.today()
-	time_dictionary = []
-	time_dictionary =[[today - timedelta(days=2)],
+	time_list =[[today - timedelta(days=2)],
 			  [today - timedelta(days=1)],
 			  [today 		    ]]
 	
+	# initialize/store total values (not by country or day) for pie charts
 	overall_negative_count = 0
 	overall_neutral_count = 0
 	overall_positive_count = 0
 	overall_negative_strength = 0
 	overall_positive_strength = 0
-	
-	date_list = []
-
-	matches = []
-	tot = 0
 
 	stopw = set()
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
@@ -154,9 +155,10 @@ def pull_tweets(q):
 	max_tweets = 1
 	
 
-	for time in time_dictionary:
+	for time in time_list:
 		for country in country_dictionary:
 			tot = 0
+			matches = []
 			positive_sentiment_total = 0
 			positive_sentiment_count = 0
 			negative_sentiment_total = 0
@@ -197,8 +199,6 @@ def pull_tweets(q):
 		                         'country': country, 
 		                         'matches': matches 
 		                        }
-				
-				date_list.append(tweet.created_at)
 	
 				posts.insert(data)	
 
@@ -231,11 +231,11 @@ def pull_tweets(q):
 
 	for i in cursor:
 		c = str(i['country'])
-		if i['created_at'].date() == time_dictionary[2][0]:		
+		if i['created_at'].date() == time_list[2][0]:		
 			time_sample_1[c] += i['sentiment'] 
-		elif i['created_at'].date() == time_dictionary[1][0]:	
+		elif i['created_at'].date() == time_list[1][0]:	
 			time_sample_2[c] += i['sentiment'] 
-		elif i['created_at'].date() == time_dictionary[0][0]:
+		elif i['created_at'].date() == time_list[0][0]:
 			time_sample_3[c] += i['sentiment'] 
        		
 	for i in time_sample_1:
@@ -270,7 +270,6 @@ def pull_tweets(q):
 
 def connect():
 	
-	# Connection to Mongo DB
 	url =  'mongodb://kevin:6841734aa@ds027489.mongolab.com:27489/twitter'
 	try:
 	    conn=pymongo.MongoClient(url)
@@ -281,8 +280,8 @@ def connect():
 
 	return conn
 
-scores = {}
 def create_lexicon():
+	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/super.txt')) as f:
 		for line in f:
 	       		(key, val) = line.split('\t')

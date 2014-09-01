@@ -152,12 +152,6 @@ def pull_tweets(q):
 	# initialize list to store all three time samples
 	master_samples = []
 
-	# initialize tweepy authorization and key search parameters
-	api = tweepy.API(auth)
-	query = q
-	max_tweets = 1
-	
-
 	for time in time_list:
 		for country in country_dictionary:
 			
@@ -348,6 +342,12 @@ def create_dictData5(data):
 	return dictData5
 
 def tweepy_search(q,lang,since,until,country,max_tweets):
+
+	# initialize tweepy authorization and key search parameters
+	api = tweepy.API(auth)
+	query = q
+	max_tweets = 1
+
 	searched_tweets = [status for status in tweepy.Cursor(api.search, 
 							      q=q, 
 							      lang=lang,

@@ -87,15 +87,6 @@ def pull_tweets(q):
 	# Connection to MongoLab via pymongo
 	conn = connect()
 
-	# Twitter Authorization codes
-	ckey = "UJpisXUidLEdjEMVQhNOw"
-	csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"
-	atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"
-	asecret = "prwsP2dSD6UqlC2Pmaer0Vt5EyJTInGgOClOqT00c"
-
-	auth = tweepy.OAuthHandler(ckey, csecret)
-	auth.set_access_token(atoken, asecret)
-
 	#Define MongoDB database
 	db = conn.twitter
 
@@ -128,7 +119,7 @@ def pull_tweets(q):
 	overall_positive_strength = 0
 
 	# c_score contains 7 different sentiment scores for each country
-	# and appends this information for each day(3)
+	# and will append this information for each day (3 times)
 	c_score = {}
 	c_score['Canada'] = []
 	c_score['England'] = []
@@ -138,7 +129,7 @@ def pull_tweets(q):
 	c_score['Germany'] = []
 	c_score['Ireland'] = []
 
-	# initialize three dictionaries to store sentiment scores 
+	# initialize three dictionaries to store sentiment scores by day
 	time_sample_1 ={'Ireland': 0, 
 			'Canada': 0, 
                         'America': 0, 
@@ -342,6 +333,15 @@ def create_dictData5(data):
 	return dictData5
 
 def tweepy_search(q,lang,since,until,country,max_tweets):
+
+	# Twitter Authorization codes
+	ckey = "UJpisXUidLEdjEMVQhNOw"
+	csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"
+	atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"
+	asecret = "prwsP2dSD6UqlC2Pmaer0Vt5EyJTInGgOClOqT00c"
+
+	auth = tweepy.OAuthHandler(ckey, csecret)
+	auth.set_access_token(atoken, asecret)
 
 	# initialize tweepy authorization and key search parameters
 	api = tweepy.API(auth)

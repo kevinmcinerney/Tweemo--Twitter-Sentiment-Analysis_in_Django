@@ -145,9 +145,6 @@ def pull_tweets(q):
 
 	for time in time_list:
 		for country in country_dictionary:
-			
-			# Stores matched sentiment words from tweets (must be reset)
-			matches = []
 
 			# Stores total sentiment-counts (must be reset)
 			positive_sentiment_total = 0
@@ -362,6 +359,9 @@ def preprocess_tweets(searched_tweets):
 	
 	# nltk tokenizer
 	word_splitter = WordPunctTokenizer()
+
+	# Stores matched sentiment words from tweets (must be reset)
+	matches = []
 
 	# three nltk corpi
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')

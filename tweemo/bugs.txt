@@ -1,0 +1,753 @@
+************* Module tweemo.views
+C: 15, 0: Exactly one space required after comma
+from datetime import date,datetime, timedelta
+                         ^ (bad-whitespace)
+W: 26, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 29, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 30, 0: No space allowed before bracket
+				{'here': TwitterStream.objects.all()} )
+                                          ^ (bad-whitespace)
+W: 32, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 35, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 38, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 41, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 44, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 47, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 50, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 55, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 56, 0: Exactly one space required after comma
+        message = message.encode('ascii','ignore')
+                                        ^ (bad-whitespace)
+C: 57, 0: Trailing whitespace (trailing-whitespace)
+W: 59, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 62, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 63, 0: Trailing whitespace (trailing-whitespace)
+C: 66, 0: Trailing whitespace (trailing-whitespace)
+C: 73, 0: Trailing whitespace (trailing-whitespace)
+C: 74, 0: Trailing whitespace (trailing-whitespace)
+C: 78, 0: Trailing whitespace (trailing-whitespace)
+C: 80, 0: Trailing whitespace (trailing-whitespace)
+C: 82, 0: No space allowed before bracket
+				'query': message } )
+                     ^ (bad-whitespace)
+C: 82, 0: No space allowed before bracket
+				'query': message } )
+                       ^ (bad-whitespace)
+W: 88, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 88, 0: Trailing whitespace (trailing-whitespace)
+C: 88, 0: No space allowed after bracket
+	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
+                      ^ (bad-whitespace)
+C: 89, 0: Trailing whitespace (trailing-whitespace)
+C: 90, 0: Trailing whitespace (trailing-whitespace)
+C: 91, 0: Trailing whitespace (trailing-whitespace)
+C: 92, 0: Trailing whitespace (trailing-whitespace)
+C: 93, 0: Trailing whitespace (trailing-whitespace)
+C: 94, 0: No space allowed before bracket
+                               'France': '48.8567,2.3508,100mi' }
+                                                                ^ (bad-whitespace)
+W: 97, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 98, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 98, 0: Exactly one space required after assignment
+	time_list =[[today - timedelta(days=2)],
+           ^ (bad-whitespace)
+C:100, 0: No space allowed before bracket
+			  [today 		    ]]
+                  ^ (bad-whitespace)
+C:101, 0: Trailing whitespace (trailing-whitespace)
+W:103, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:104, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:105, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:106, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:107, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:111, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:112, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:113, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:114, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:115, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:116, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:117, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:118, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:121, 0: Trailing whitespace (trailing-whitespace)
+W:121, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:121, 0: Exactly one space required after assignment
+	time_sample_1 ={'Ireland': 0, 
+               ^ (bad-whitespace)
+C:122, 0: Trailing whitespace (trailing-whitespace)
+C:123, 0: Trailing whitespace (trailing-whitespace)
+C:124, 0: Trailing whitespace (trailing-whitespace)
+C:125, 0: Trailing whitespace (trailing-whitespace)
+C:126, 0: Trailing whitespace (trailing-whitespace)
+C:127, 0: No space allowed before bracket
+                        'France': 0 }
+                                    ^ (bad-whitespace)
+W:128, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:129, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:132, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:135, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:137, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:139, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:140, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:143, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:144, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:145, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:146, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:147, 0: Trailing whitespace (trailing-whitespace)
+W:147, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:148, 0: Trailing whitespace (trailing-whitespace)
+C:150, 0: Line too long (108/80) (line-too-long)
+W:150, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:150, 0: Exactly one space required after comma
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
+                                    ^ (bad-whitespace)
+C:150, 0: Exactly one space required after comma
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
+                                         ^ (bad-whitespace)
+C:150, 0: Exactly one space required after comma
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
+                                                 ^ (bad-whitespace)
+C:150, 0: Exactly one space required after comma
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
+                                                                             ^ (bad-whitespace)
+C:150, 0: Exactly one space required after comma
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
+                                                                                                         ^ (bad-whitespace)
+C:151, 0: Trailing whitespace (trailing-whitespace)
+C:152, 0: Line too long (93/80) (line-too-long)
+C:154, 0: Trailing whitespace (trailing-whitespace)
+W:154, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:155, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:155, 0: Exactly one space required after comma
+				tot = send_processed_tweet_to_db(country,tweet)
+                                            ^ (bad-whitespace)
+W:156, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:157, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:158, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:159, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:160, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:161, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:162, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:163, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:164, 0: Trailing whitespace (trailing-whitespace)
+C:166, 0: Trailing whitespace (trailing-whitespace)
+W:167, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:174, 0: Line too long (94/80) (line-too-long)
+C:174, 0: No space allowed before bracket
+					       [negative_sentiment_count + positive_sentiment_count + neutral_sentiment_count ]])
+                                                                                           ^ (bad-whitespace)
+C:175, 0: Trailing whitespace (trailing-whitespace)
+C:176, 0: Trailing whitespace (trailing-whitespace)
+W:177, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:178, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:179, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:180, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:181, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:183, 0: Line too long (111/80) (line-too-long)
+W:184, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:185, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:185, 0: Exactly one space required after comma
+		for i in range(0,7):
+                  ^ (bad-whitespace)
+W:186, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:186, 0: Line too long (109/80) (line-too-long)
+C:188, 0: Line too long (99/80) (line-too-long)
+W:189, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:192, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:193, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:194, 0: Trailing whitespace (trailing-whitespace)
+W:194, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:195, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:195, 0: Trailing whitespace (trailing-whitespace)
+C:196, 0: Trailing whitespace (trailing-whitespace)
+W:196, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:197, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:197, 0: Trailing whitespace (trailing-whitespace)
+W:198, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:199, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:199, 0: Trailing whitespace (trailing-whitespace)
+C:200, 0: Trailing whitespace (trailing-whitespace)
+C:201, 0: Trailing whitespace (trailing-whitespace)
+C:202, 0: Trailing whitespace (trailing-whitespace)
+W:203, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:204, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:204, 0: Exactly one space required after assignment
+		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
+     ^ (bad-whitespace)
+W:205, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:206, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:208, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:209, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:210, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:212, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:213, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:214, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:215, 0: Trailing whitespace (trailing-whitespace)
+W:219, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:219, 0: Exactly one space required after comma
+	master_samples = [[time_sample_1],[time_sample_2],[time_sample_3]]
+                                  ^ (bad-whitespace)
+C:219, 0: Exactly one space required after comma
+	master_samples = [[time_sample_1],[time_sample_2],[time_sample_3]]
+                                                  ^ (bad-whitespace)
+C:220, 0: Trailing whitespace (trailing-whitespace)
+C:221, 0: Trailing whitespace (trailing-whitespace)
+C:222, 0: Trailing whitespace (trailing-whitespace)
+W:222, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:223, 0: Trailing whitespace (trailing-whitespace)
+W:227, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:230, 0: Trailing whitespace (trailing-whitespace)
+C:231, 0: Trailing whitespace (trailing-whitespace)
+W:231, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:231, 0: Exactly one space required after comma
+	data_list = [[data_count],[data_strength],[c_score],[master_samples]]	
+                          ^ (bad-whitespace)
+C:231, 0: Exactly one space required after comma
+	data_list = [[data_count],[data_strength],[c_score],[master_samples]]	
+                                          ^ (bad-whitespace)
+C:231, 0: Exactly one space required after comma
+	data_list = [[data_count],[data_strength],[c_score],[master_samples]]	
+                                                    ^ (bad-whitespace)
+C:232, 0: Trailing whitespace (trailing-whitespace)
+W:233, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:235, 0: Line too long (82/80) (line-too-long)
+C:237, 0: Trailing whitespace (trailing-whitespace)
+W:238, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:238, 0: Exactly one space required after assignment
+	url =  'mongodb://kevin:6841734aa@ds027489.mongolab.com:27489/twitter'
+     ^ (bad-whitespace)
+W:239, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:240, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:240, 0: Exactly one space required around assignment
+	    conn=pymongo.MongoClient(url)
+         ^ (bad-whitespace)
+W:241, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:242, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:243, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:243, 0: Trailing whitespace (trailing-whitespace)
+W:245, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:247, 0: Line too long (82/80) (line-too-long)
+W:250, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:251, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:252, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:253, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:254, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:255, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:257, 0: Line too long (82/80) (line-too-long)
+W:259, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:260, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:261, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:263, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:264, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:265, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:266, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:267, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:268, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:269, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:270, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:272, 0: Line too long (82/80) (line-too-long)
+W:274, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:274, 0: Line too long (92/80) (line-too-long)
+C:274, 0: Exactly one space required around assignment
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+         ^ (bad-whitespace)
+C:274, 0: No space allowed after bracket
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+           ^ (bad-whitespace)
+C:274, 0: Exactly one space required after comma
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+                                     ^ (bad-whitespace)
+C:274, 0: No space allowed before bracket
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+                                                                                          ^ (bad-whitespace)
+C:275, 0: No space allowed before bracket
+					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
+                                                          ^ (bad-whitespace)
+C:276, 0: No space allowed before bracket
+					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
+                                                          ^ (bad-whitespace)
+C:276, 0: No space allowed before bracket
+					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
+                                                            ^ (bad-whitespace)
+W:277, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:279, 0: Line too long (82/80) (line-too-long)
+W:281, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:281, 0: Line too long (93/80) (line-too-long)
+C:281, 0: Exactly one space required around assignment
+	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
+          ^ (bad-whitespace)
+C:281, 0: No space allowed after bracket
+	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
+            ^ (bad-whitespace)
+C:281, 0: Exactly one space required after comma
+	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
+                                      ^ (bad-whitespace)
+C:281, 0: No space allowed before bracket
+	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
+                                                                                           ^ (bad-whitespace)
+C:282, 0: No space allowed before bracket
+					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
+                                                           ^ (bad-whitespace)
+C:282, 0: No space allowed before bracket
+					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
+                                                             ^ (bad-whitespace)
+W:283, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:285, 0: Line too long (82/80) (line-too-long)
+W:287, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:287, 0: Trailing whitespace (trailing-whitespace)
+C:287, 0: Exactly one space required around assignment
+	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
+          ^ (bad-whitespace)
+C:287, 0: Exactly one space required after comma
+	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
+                   ^ (bad-whitespace)
+C:287, 0: No space allowed after bracket
+	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
+                                  ^ (bad-whitespace)
+C:287, 0: No space allowed before bracket
+	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
+                                                                           ^ (bad-whitespace)
+C:288, 0: Trailing whitespace (trailing-whitespace)
+C:288, 0: No space allowed after bracket
+					[ 'United Kingdom', data[2][0]['England'][0][0] ],	
+     ^ (bad-whitespace)
+C:288, 0: No space allowed before bracket
+					[ 'United Kingdom', data[2][0]['England'][0][0] ],	
+                                                     ^ (bad-whitespace)
+C:289, 0: No space allowed after bracket
+					[ 'America', data[2][0]['America'][0][0] ],
+     ^ (bad-whitespace)
+C:289, 0: No space allowed before bracket
+					[ 'America', data[2][0]['America'][0][0] ],
+                                              ^ (bad-whitespace)
+C:290, 0: Trailing whitespace (trailing-whitespace)
+C:290, 0: No space allowed after bracket
+					[ 'France', data[2][0]['France'][0][0]  ], 
+     ^ (bad-whitespace)
+C:290, 0: No space allowed before bracket
+					[ 'France', data[2][0]['France'][0][0]  ], 
+                                             ^ (bad-whitespace)
+C:291, 0: No space allowed after bracket
+					[ 'Germany', data[2][0]['Germany'][0][0] ],
+     ^ (bad-whitespace)
+C:291, 0: No space allowed before bracket
+					[ 'Germany', data[2][0]['Germany'][0][0] ],
+                                              ^ (bad-whitespace)
+C:292, 0: Trailing whitespace (trailing-whitespace)
+C:292, 0: No space allowed after bracket
+					[ 'Canada', data[2][0]['Canada'][0][0]  ], 
+     ^ (bad-whitespace)
+C:292, 0: No space allowed before bracket
+					[ 'Canada', data[2][0]['Canada'][0][0]  ], 
+                                             ^ (bad-whitespace)
+C:293, 0: No space allowed after bracket
+					[ 'Spain', data[2][0]['Spain'][0][0]  ] ]
+     ^ (bad-whitespace)
+C:293, 0: No space allowed before bracket
+					[ 'Spain', data[2][0]['Spain'][0][0]  ] ]
+                                           ^ (bad-whitespace)
+C:293, 0: No space allowed before bracket
+					[ 'Spain', data[2][0]['Spain'][0][0]  ] ]
+                                             ^ (bad-whitespace)
+W:294, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:296, 0: Line too long (82/80) (line-too-long)
+W:298, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:298, 0: Exactly one space required around assignment
+	dictData4=[	[  data[2][0]['Ireland'][0] ],
+          ^ (bad-whitespace)
+C:298, 0: No space allowed after bracket
+	dictData4=[	[  data[2][0]['Ireland'][0] ],
+           ^ (bad-whitespace)
+C:298, 0: No space allowed after bracket
+	dictData4=[	[  data[2][0]['Ireland'][0] ],
+             ^ (bad-whitespace)
+C:298, 0: No space allowed before bracket
+	dictData4=[	[  data[2][0]['Ireland'][0] ],
+                                         ^ (bad-whitespace)
+C:299, 0: No space allowed after bracket
+			[  data[2][0]['Spain'  ][0] ],
+   ^ (bad-whitespace)
+C:299, 0: No space allowed before bracket
+			[  data[2][0]['Spain'  ][0] ],
+                          ^ (bad-whitespace)
+C:299, 0: No space allowed before bracket
+			[  data[2][0]['Spain'  ][0] ],
+                               ^ (bad-whitespace)
+C:300, 0: No space allowed after bracket
+			[  data[2][0]['Germany'][0] ],
+   ^ (bad-whitespace)
+C:300, 0: No space allowed before bracket
+			[  data[2][0]['Germany'][0] ],
+                               ^ (bad-whitespace)
+C:301, 0: No space allowed after bracket
+			[  data[2][0]['America'][0] ],
+   ^ (bad-whitespace)
+C:301, 0: No space allowed before bracket
+			[  data[2][0]['America'][0] ],
+                               ^ (bad-whitespace)
+C:302, 0: No space allowed after bracket
+			[  data[2][0]['England'][0] ],
+   ^ (bad-whitespace)
+C:302, 0: No space allowed before bracket
+			[  data[2][0]['England'][0] ],
+                               ^ (bad-whitespace)
+C:303, 0: No space allowed after bracket
+			[  data[2][0]['Canada'][0] ],
+   ^ (bad-whitespace)
+C:303, 0: No space allowed before bracket
+			[  data[2][0]['Canada'][0] ],
+                              ^ (bad-whitespace)
+C:304, 0: No space allowed after bracket
+			[  data[2][0]['France'][0] ] ]
+   ^ (bad-whitespace)
+C:304, 0: No space allowed before bracket
+			[  data[2][0]['France'][0] ] ]
+                              ^ (bad-whitespace)
+C:304, 0: No space allowed before bracket
+			[  data[2][0]['France'][0] ] ]
+                                ^ (bad-whitespace)
+W:305, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:307, 0: Line too long (82/80) (line-too-long)
+W:310, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:311, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:312, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:313, 0: Line too long (94/80) (line-too-long)
+W:313, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:313, 0: Exactly one space required around assignment
+	dictData5=[ ['Day', 'Ireland', 'America', 'Germany', 'Spain', 'France', 'England', 'Canada'],
+          ^ (bad-whitespace)
+C:313, 0: No space allowed after bracket
+	dictData5=[ ['Day', 'Ireland', 'America', 'Germany', 'Spain', 'France', 'England', 'Canada'],
+           ^ (bad-whitespace)
+C:314, 0: Exactly one space required after comma
+		[day1,					  data[3][0][0][0]['Ireland'],
+       ^ (bad-whitespace)
+C:321, 0: Exactly one space required after comma
+		[day2,				          data[3][0][1][0]['Ireland'],
+       ^ (bad-whitespace)
+C:328, 0: Exactly one space required after comma
+		[day3,		  	    	 	  data[3][0][2][0]['Ireland'],
+       ^ (bad-whitespace)
+C:329, 0: Trailing whitespace (trailing-whitespace)
+W:335, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:337, 0: Line too long (82/80) (line-too-long)
+C:338, 0: Exactly one space required after comma
+def tweepy_search(q,lang,since,until,country,max_tweets):
+                   ^ (bad-whitespace)
+C:338, 0: Exactly one space required after comma
+def tweepy_search(q,lang,since,until,country,max_tweets):
+                        ^ (bad-whitespace)
+C:338, 0: Exactly one space required after comma
+def tweepy_search(q,lang,since,until,country,max_tweets):
+                              ^ (bad-whitespace)
+C:338, 0: Exactly one space required after comma
+def tweepy_search(q,lang,since,until,country,max_tweets):
+                                    ^ (bad-whitespace)
+C:338, 0: Exactly one space required after comma
+def tweepy_search(q,lang,since,until,country,max_tweets):
+                                            ^ (bad-whitespace)
+W:341, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:342, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:343, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:344, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:346, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:347, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:350, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:351, 0: Trailing whitespace (trailing-whitespace)
+C:352, 0: Trailing whitespace (trailing-whitespace)
+W:352, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:353, 0: Trailing whitespace (trailing-whitespace)
+C:357, 0: Trailing whitespace (trailing-whitespace)
+W:359, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:361, 0: Line too long (82/80) (line-too-long)
+W:364, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:367, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:369, 0: Trailing whitespace (trailing-whitespace)
+W:370, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:372, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:373, 0: Line too long (82/80) (line-too-long)
+W:376, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:379, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:380, 0: Trailing whitespace (trailing-whitespace)
+W:382, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:385, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:388, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:389, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:390, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:392, 0: Trailing whitespace (trailing-whitespace)
+C:393, 0: Trailing whitespace (trailing-whitespace)
+W:393, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:394, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:395, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:396, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:397, 0: Line too long (85/80) (line-too-long)
+W:397, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:398, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:399, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:400, 0: Trailing whitespace (trailing-whitespace)
+W:400, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:400, 0: No space allowed after bracket
+	data = { 'text': tweet.text, 
+        ^ (bad-whitespace)
+C:401, 0: Trailing whitespace (trailing-whitespace)
+C:402, 0: Trailing whitespace (trailing-whitespace)
+C:403, 0: Trailing whitespace (trailing-whitespace)
+C:403, 0: No space allowed before comma
+                 'sentiment': tot , 
+                                  ^ (bad-whitespace)
+C:404, 0: Trailing whitespace (trailing-whitespace)
+C:405, 0: Trailing whitespace (trailing-whitespace)
+W:409, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W:410, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  8, 0: Reimport 'Context' (imported line 4) (reimported)
+W: 13, 0: Reimport 'sys' (imported line 12) (reimported)
+W: 20, 0: Wildcard import django.forms.widgets (wildcard-import)
+C: 25, 0: Missing function docstring (missing-docstring)
+W: 25, 9: Unused argument 'request' (unused-argument)
+C: 28, 0: Missing function docstring (missing-docstring)
+E: 30,13: Class 'TwitterStream' has no 'objects' member (no-member)
+W: 28,11: Unused argument 'request' (unused-argument)
+C: 31, 0: Missing function docstring (missing-docstring)
+W: 31,11: Unused argument 'request' (unused-argument)
+C: 34, 0: Missing function docstring (missing-docstring)
+W: 34,12: Unused argument 'request' (unused-argument)
+C: 37, 0: Missing function docstring (missing-docstring)
+W: 37,16: Unused argument 'request' (unused-argument)
+C: 40, 0: Missing function docstring (missing-docstring)
+W: 40,10: Unused argument 'request' (unused-argument)
+C: 43, 0: Missing function docstring (missing-docstring)
+W: 43,12: Unused argument 'request' (unused-argument)
+C: 46, 0: Missing function docstring (missing-docstring)
+C: 49, 0: Missing function docstring (missing-docstring)
+W: 49,13: Unused argument 'request' (unused-argument)
+W: 59, 1: Redefining name 'scores' from outer scope (line 248) (redefined-outer-name)
+C: 52, 0: Missing function docstring (missing-docstring)
+C: 68, 4: Invalid variable name "dictData" (invalid-name)
+C: 69, 4: Invalid variable name "dictData2" (invalid-name)
+C: 70, 4: Invalid variable name "dictData3" (invalid-name)
+C: 71, 4: Invalid variable name "dictData4" (invalid-name)
+C: 72, 4: Invalid variable name "dictData5" (invalid-name)
+E: 76,13: Class 'TwitterStream' has no 'objects' member (no-member)
+W: 59, 1: Unused variable 'scores' (unused-variable)
+C: 85, 0: Invalid argument name "q" (invalid-name)
+C: 85, 0: Missing function docstring (missing-docstring)
+R: 85, 0: Too many local variables (32/15) (too-many-locals)
+C:193, 2: Invalid variable name "c" (invalid-name)
+C:204, 2: Invalid variable name "d1" (invalid-name)
+R: 85, 0: Too many branches (18/12) (too-many-branches)
+R: 85, 0: Too many statements (64/50) (too-many-statements)
+C:236, 0: Missing function docstring (missing-docstring)
+C:242,42: Invalid variable name "e" (invalid-name)
+C:248, 0: Invalid constant name "scores" (invalid-name)
+C:249, 0: Missing function docstring (missing-docstring)
+C:250, 1: Invalid variable name "BASE_DIR" (invalid-name)
+C:251,71: Invalid variable name "f" (invalid-name)
+C:258, 0: Missing function docstring (missing-docstring)
+C:273, 0: Invalid function name "create_dictData" (invalid-name)
+C:273, 0: Missing function docstring (missing-docstring)
+C:274, 1: Invalid variable name "dictData" (invalid-name)
+C:280, 0: Invalid function name "create_dictData2" (invalid-name)
+C:280, 0: Missing function docstring (missing-docstring)
+C:281, 1: Invalid variable name "dictData2" (invalid-name)
+C:286, 0: Invalid function name "create_dictData3" (invalid-name)
+C:286, 0: Missing function docstring (missing-docstring)
+C:287, 1: Invalid variable name "dictData3" (invalid-name)
+C:297, 0: Invalid function name "create_dictData4" (invalid-name)
+C:297, 0: Missing function docstring (missing-docstring)
+C:298, 1: Invalid variable name "dictData4" (invalid-name)
+C:308, 0: Invalid function name "create_dictData5" (invalid-name)
+C:308, 0: Missing function docstring (missing-docstring)
+C:313, 1: Invalid variable name "dictData5" (invalid-name)
+C:338, 0: Invalid argument name "q" (invalid-name)
+C:338, 0: Missing function docstring (missing-docstring)
+R:338, 0: Too many arguments (6/5) (too-many-arguments)
+C:362, 0: Missing function docstring (missing-docstring)
+C:367, 1: Invalid variable name "db" (invalid-name)
+C:374, 0: Missing function docstring (missing-docstring)
+C:396, 3: Invalid variable name "w" (invalid-name)
+W: 15, 0: Unused import datetime (unused-import)
+W: 20, 0: Unused import CheckboxInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import Widget from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import RequestContext (unused-import)
+W: 20, 0: Unused import MultipleHiddenInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import MediaDefiningClass from wildcard import (unused-wildcard-import)
+W: 19, 0: Unused import forms (unused-import)
+W: 20, 0: Unused import CheckboxSelectMultiple from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import Textarea from wildcard import (unused-wildcard-import)
+W:  3, 0: Unused import get_template (unused-import)
+W: 20, 0: Unused import ClearableFileInput from wildcard import (unused-wildcard-import)
+W:  5, 0: Unused import csrf (unused-import)
+W: 20, 0: Unused import PasswordInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import TimeInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import SelectMultiple from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import NullBooleanSelect from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import DateInput from wildcard import (unused-wildcard-import)
+W: 16, 0: Unused import LancasterStemmer (unused-import)
+W: 20, 0: Unused import HiddenInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import DateTimeInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import Select from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import Media from wildcard import (unused-wildcard-import)
+W: 10, 0: Unused import API (unused-import)
+W: 20, 0: Unused import TextInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import RadioSelect from wildcard import (unused-wildcard-import)
+W: 12, 0: Unused import sys (unused-import)
+W:  4, 0: Unused import Context (unused-import)
+W: 20, 0: Unused import FileInput from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import SplitDateTimeWidget from wildcard import (unused-wildcard-import)
+W: 20, 0: Unused import MultiWidget from wildcard import (unused-wildcard-import)
+
+
+Report
+======
+206 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |22     |22         |=          |0.00        |22.73    |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |263    |76.68 |263      |=          |
++----------+-------+------+---------+-----------+
+|docstring |27     |7.87  |27       |=          |
++----------+-------+------+---------+-----------+
+|comment   |42     |12.24 |42       |=          |
++----------+-------+------+---------+-----------+
+|empty     |11     |3.21  |11       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+External dependencies
+---------------------
+::
+
+    django 
+      \-core 
+      | \-context_processors 
+      | | \-csrf (tweemo.views)
+      | \-mail 
+      |   \-BadHeaderError (tweemo.views)
+      |   \-send_mail (tweemo.views)
+      \-forms (tweemo.views)
+      \-http 
+      | \-HttpResponse (tweemo.views)
+      | \-HttpResponseRedirect (tweemo.views)
+      \-shortcuts 
+      | \-render_to_response (tweemo.views)
+      \-template 
+        \-Context (tweemo.views)
+        \-RequestContext (tweemo.views)
+        \-loader 
+          \-get_template (tweemo.views)
+    nltk 
+      \-WordPunctTokenizer (tweemo.views)
+      \-stem 
+        \-lancaster 
+          \-LancasterStemmer (tweemo.views)
+    pymongo (tweemo.views)
+    tweemo 
+      \-models 
+        \-ContactForm (tweemo.views)
+        \-TwitterStream (tweemo.views)
+    tweepy (tweemo.views)
+      \-API (tweemo.views)
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |221    |221      |=          |
++-----------+-------+---------+-----------+
+|refactor   |4      |4        |=          |
++-----------+-------+---------+-----------+
+|warning    |195    |195      |=          |
++-----------+-------+---------+-----------+
+|error      |2      |2        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------------------+------------+
+|message id             |occurrences |
++=======================+============+
+|mixed-indentation      |152         |
++-----------------------+------------+
+|bad-whitespace         |87          |
++-----------------------+------------+
+|trailing-whitespace    |65          |
++-----------------------+------------+
+|invalid-name           |25          |
++-----------------------+------------+
+|missing-docstring      |23          |
++-----------------------+------------+
+|unused-wildcard-import |21          |
++-----------------------+------------+
+|line-too-long          |21          |
++-----------------------+------------+
+|unused-import          |9           |
++-----------------------+------------+
+|unused-argument        |8           |
++-----------------------+------------+
+|reimported             |2           |
++-----------------------+------------+
+|no-member              |2           |
++-----------------------+------------+
+|wildcard-import        |1           |
++-----------------------+------------+
+|unused-variable        |1           |
++-----------------------+------------+
+|too-many-statements    |1           |
++-----------------------+------------+
+|too-many-locals        |1           |
++-----------------------+------------+
+|too-many-branches      |1           |
++-----------------------+------------+
+|too-many-arguments     |1           |
++-----------------------+------------+
+|redefined-outer-name   |1           |
++-----------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -10.87/10 (previous run: -10.87/10, +0.00)
+

@@ -1,19 +1,14 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.template.loader import get_template # used by temp_test
-from django.template import Context # used by temp_test
+from django.template import Context
 from django.core.context_processors import csrf
 from tweemo.models import TwitterStream
 from django.shortcuts import render_to_response
-from django.template import RequestContext, Context
 import tweepy
-from tweepy import API
 import pymongo
 import sys
-import sys
 import json
-from datetime import date,datetime, timedelta
-from nltk.stem.lancaster import LancasterStemmer
+from datetime import date, timedelta
 from nltk import WordPunctTokenizer
 from tweemo.models import ContactForm
 from django import forms as forms
@@ -55,9 +50,6 @@ def results(request):
 	message = request.GET['query']
         message = message.encode('ascii','ignore')
 	
-	# create dictionary of word-sentiment scores
-	scores = create_lexicon()
-
 	# create data necessary for graphs/analysis
 	data = pull_tweets(message)
 		
@@ -241,13 +233,13 @@ def connect():
 	    print "Connected successfully!!!"
 	except pymongo.errors.ConnectionFailure, e:
 	   print "Could not connect to MongoDB: %s" % e 
-	conn
 
 	return conn
 
 #--------------------------------------------------------------------------------#
-scores = {}
+
 def create_lexicon():
+	scores = {}
 	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/super.txt')) as f:
 		for line in f:
@@ -359,7 +351,7 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 							      ).items(max_tweets)]
 	return searched_tweets
 
-
+#--------------------------------------------------------------------------------#
 def access_mongo_collection():
 	# Connection to MongoLab via pymongo
 	conn = connect()
@@ -378,6 +370,9 @@ def send_processed_tweet_to_db(country, tweet):
 
 	# initialize sentiment score
 	tot = 0
+
+	# create dictionary of word-sentiment scores
+	scores = create_lexicon()
 	
 	# nltk tokenizer
 	word_splitter = WordPunctTokenizer()

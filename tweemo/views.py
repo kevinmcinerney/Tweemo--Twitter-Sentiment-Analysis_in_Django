@@ -84,18 +84,6 @@ def results(request):
 
 def pull_tweets(q):
 
-	# Connection to MongoLab via pymongo
-	conn = connect()
-
-	#Define MongoDB database
-	db = conn.twitter
-
-	# Define MongoDB collection 
-	posts = db.tweemo_twitterstream
-	
-	# Clear any old Tweets from collection
-	posts.remove({})
-	
 	# For the purposes of iterating over the API.search by country
 	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
 			       'Canada': '43.653226,-79.383184,50mi', 
@@ -368,6 +356,18 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 
 #--------------------------------------------------------------------------------#
 def send_processed_tweet_to_db(country, tweet):
+
+	# Connection to MongoLab via pymongo
+	conn = connect()
+
+	#Define MongoDB database
+	db = conn.twitter
+
+	# Define MongoDB collection 
+	posts = db.tweemo_twitterstream
+	
+	# Clear any old Tweets from collection
+	posts.remove({})
 
 	# initialize sentiment score
 	tot = 0

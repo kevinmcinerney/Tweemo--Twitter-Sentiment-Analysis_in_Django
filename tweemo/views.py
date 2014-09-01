@@ -124,11 +124,6 @@ def pull_tweets(q):
 	date_list = []
 
 	matches = []
-	positive_sentiment_total = 0
-	positive_sentiment_count = 0
-	negative_sentiment_total = 0
-	neutral_sentiment_count = 0
-	negative_sentiment_count = 0
 	tot = 0
 
 	stopw = set()

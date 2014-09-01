@@ -161,8 +161,14 @@ def pull_tweets(q):
 
 	for time in time_dictionary:
 		for country in country_dictionary:
-				
+			positive_sentiment_total = 0
+			positive_sentiment_count = 0
+			negative_sentiment_total = 0
+			neutral_sentiment_count = 0
+			negative_sentiment_count = 0	
 			# this doesn'ensure the query is in the text!
+			
+
 			searched_tweets = [status for status in tweepy.Cursor(api.search, 
 									      q=query, 
 									      lang="en",

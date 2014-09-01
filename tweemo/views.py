@@ -227,7 +227,7 @@ def pull_tweets(q):
 
 	for country in c_score:
 		for i in range(0,7):
-		c_score[country][0][i] = c_score[country][0][i][0] + c_score[country][1][i][0] + c_score[country][2][i][0]
+			c_score[country][0][i] = c_score[country][0][i][0] + c_score[country][1][i][0] + c_score[country][2][i][0]
 
 	
 	cursor = posts.find()

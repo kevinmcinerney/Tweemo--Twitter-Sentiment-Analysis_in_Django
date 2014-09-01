@@ -53,8 +53,6 @@ def contactus(request):
 def thankyou(request):
 		return render_to_response('thankyou.html')
 
-
-message = ''
 def results(request):
 
     if 'query' in request.GET:

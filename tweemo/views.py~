@@ -73,11 +73,7 @@ def results(request):
     dictData4 = create_dictData4(data)
     dictData5 = create_dictData5(data)
    
-    day1 = str((date.today() - timedelta(days=2)))
-    day2 = str((date.today() - timedelta(days=1)))
-    day3 = str(date.today())
-    
-				    
+ 				    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),
 				'djangodict': json.dumps(dictData),
@@ -383,6 +379,10 @@ def create_dictData4(data):
 	return dictData4
 
 def create_dictData5(data):
+
+	day1 = str((date.today() - timedelta(days=2)))
+	day2 = str((date.today() - timedelta(days=1)))
+	day3 = str(date.today())
 	dictData5=[ ['Day', 'Ireland', 'America', 'Germany', 'Spain', 'France', 'England', 'Canada'],
 		[day1,					  data[3][0][0][0]['Ireland'],
 				 		 	  data[3][0][0][0]['America'],

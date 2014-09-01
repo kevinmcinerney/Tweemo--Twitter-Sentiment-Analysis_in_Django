@@ -14,7 +14,6 @@ import sys
 import json
 from datetime import date,datetime, timedelta
 from nltk.stem.lancaster import LancasterStemmer
-'from nltk.corpus import stopwords, names'
 from nltk import WordPunctTokenizer
 from tweemo.models import ContactForm
 from django import forms as forms
@@ -33,7 +32,6 @@ def home(request):
 def tweets(request):
 	return render_to_response('tweets.html',
 				{'here': TwitterStream.objects.all()} )
-
 def stream(request):
 	return render_to_response('stream.html')
 
@@ -59,8 +57,6 @@ def thankyou(request):
 message = ''
 def results(request):
 
-    overall_negative_count = 0
-
     if 'query' in request.GET:
 	message = request.GET['query']
         message = message.encode('ascii','ignore')
@@ -71,59 +67,17 @@ def results(request):
     else:
         message = 'You submitted an empty form.'
     
-
-    dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
-					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
-					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
-
-
-    dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
-					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
-
-    dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
-					[ 'United Kingdom', data[2][0]['England'][0][0] ],	
-					[ 'America', data[2][0]['America'][0][0] ],
-					[ 'France', data[2][0]['France'][0][0]  ], 
-					[ 'Germany', data[2][0]['Germany'][0][0] ],
-					[ 'Canada', data[2][0]['Canada'][0][0]  ], 
-					[ 'Spain', data[2][0]['Spain'][0][0]  ] ]
-
-    dictData4=[	[  data[2][0]['Ireland'][0] ],
-		[  data[2][0]['Spain'  ][0] ],
-		[  data[2][0]['Germany'][0] ],
-		[  data[2][0]['America'][0] ],
-		[  data[2][0]['England'][0] ],
-		[  data[2][0]['Canada'][0] ],
-		[  data[2][0]['France'][0] ] ]
+    dictData = create_dictData(data)
+    dictData2 = create_dictData2(data)
+    dictData3 = create_dictData3(data)
+    dictData4 = create_dictData4(data)
+    dictData5 = create_dictData5(data)
    
     day1 = str((date.today() - timedelta(days=2)))
     day2 = str((date.today() - timedelta(days=1)))
     day3 = str(date.today())
-    dictData5=[ ['Day', 'Ireland', 'America', 'Germany', 'Spain', 'France', 'England', 'Canada'],
-		[day1,					  data[3][0][0][0]['Ireland'],
-				 		 	  data[3][0][0][0]['America'],
-						 	  data[3][0][0][0]['Germany'],
-						 	  data[3][0][0][0]['Spain'],
-							  data[3][0][0][0]['France'],
-							  data[3][0][0][0]['England'],
-							  data[3][0][0][0]['Canada']],
-		[day2,				          data[3][0][1][0]['Ireland'],
-							  data[3][0][1][0]['America'],
-							  data[3][0][1][0]['Germany'],
-							  data[3][0][1][0]['Spain'],
-							  data[3][0][1][0]['France'],
-							  data[3][0][1][0]['England'],
-							  data[3][0][1][0]['Canada']],
-		[day3,		  	    	 	  data[3][0][2][0]['Ireland'],
-							  data[3][0][2][0]['America'],			
-							  data[3][0][2][0]['Germany'],
-							  data[3][0][2][0]['Spain'],
-							  data[3][0][2][0]['France'],
-							  data[3][0][2][0]['England'],
-							  data[3][0][2][0]['Canada']]]
-				
-
     
+				    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),
 				'djangodict': json.dumps(dictData),
@@ -397,7 +351,59 @@ def send_message(request):
 	else:
 		return render_to_response('contactus.html', {'form': ContactForm()})
 
+def create_dictData(data):
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
+					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
+	return dictData
 
+def create_dictData2(data):
+	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
+					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
+	return dictData2
 
+def create_dictData3(data):
+	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
+					[ 'United Kingdom', data[2][0]['England'][0][0] ],	
+					[ 'America', data[2][0]['America'][0][0] ],
+					[ 'France', data[2][0]['France'][0][0]  ], 
+					[ 'Germany', data[2][0]['Germany'][0][0] ],
+					[ 'Canada', data[2][0]['Canada'][0][0]  ], 
+					[ 'Spain', data[2][0]['Spain'][0][0]  ] ]
+	return dictData3
 
+def create_dictData4(data):
+	dictData4=[	[  data[2][0]['Ireland'][0] ],
+			[  data[2][0]['Spain'  ][0] ],
+			[  data[2][0]['Germany'][0] ],
+			[  data[2][0]['America'][0] ],
+			[  data[2][0]['England'][0] ],
+			[  data[2][0]['Canada'][0] ],
+			[  data[2][0]['France'][0] ] ]
+	return dictData4
+
+def create_dictData5(data):
+	dictData5=[ ['Day', 'Ireland', 'America', 'Germany', 'Spain', 'France', 'England', 'Canada'],
+		[day1,					  data[3][0][0][0]['Ireland'],
+				 		 	  data[3][0][0][0]['America'],
+						 	  data[3][0][0][0]['Germany'],
+						 	  data[3][0][0][0]['Spain'],
+							  data[3][0][0][0]['France'],
+							  data[3][0][0][0]['England'],
+							  data[3][0][0][0]['Canada']],
+		[day2,				          data[3][0][1][0]['Ireland'],
+							  data[3][0][1][0]['America'],
+							  data[3][0][1][0]['Germany'],
+							  data[3][0][1][0]['Spain'],
+							  data[3][0][1][0]['France'],
+							  data[3][0][1][0]['England'],
+							  data[3][0][1][0]['Canada']],
+		[day3,		  	    	 	  data[3][0][2][0]['Ireland'],
+							  data[3][0][2][0]['America'],			
+							  data[3][0][2][0]['Germany'],
+							  data[3][0][2][0]['Spain'],
+							  data[3][0][2][0]['France'],
+							  data[3][0][2][0]['England'],
+							  data[3][0][2][0]['Canada']]]
+	return dictData5
 

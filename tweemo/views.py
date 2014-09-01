@@ -124,7 +124,6 @@ def pull_tweets(q):
 	date_list = []
 
 	matches = []
-	tot = 0
 
 	stopw = set()
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
@@ -156,6 +155,7 @@ def pull_tweets(q):
 
 	for time in time_dictionary:
 		for country in country_dictionary:
+			tot = 0
 			positive_sentiment_total = 0
 			positive_sentiment_count = 0
 			negative_sentiment_total = 0
@@ -200,9 +200,11 @@ def pull_tweets(q):
 				date_list.append(tweet.created_at)
 	
 				posts.insert(data)	
-				tot = 0
+
+				#Stores matched sentiment words from tweets
 				matches = []
-					
+
+			# Append new Country data for each day 		
 			c_score[country].append(
 					       [[positive_sentiment_total + negative_sentiment_total],
 					       [negative_sentiment_total],
@@ -211,9 +213,8 @@ def pull_tweets(q):
 					       [positive_sentiment_count],
 					       [negative_sentiment_count],
 					       [negative_sentiment_count + positive_sentiment_count + neutral_sentiment_count ]])
-				
-			#print c_score[country][0]
-
+			
+			# Accrue overall values for all three days 	
 			overall_negative_strength += negative_sentiment_total
 			overall_positive_strength += positive_sentiment_total
 			overall_negative_count += negative_sentiment_count

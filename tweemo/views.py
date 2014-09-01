@@ -51,7 +51,7 @@ def contactus(request):
 	return send_message(request)
 
 def thankyou(request):
-		return render_to_response('thankyou.html')
+	return render_to_response('thankyou.html')
 
 def results(request):
 
@@ -134,7 +134,6 @@ def pull_tweets(q):
 	stopw = set()
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	word_splitter = WordPunctTokenizer()
-	st = LancasterStemmer()
 	m_names = '/app/assets/Dictionaries/males.txt'
 	w_names = '/app/assets/Dictionaries/females.txt'
 	c_score = {}

@@ -59,8 +59,6 @@ def thankyou(request):
 message = ''
 def results(request):
 
-    overall_negative_count = 0
-
     if 'query' in request.GET:
 	message = request.GET['query']
         message = message.encode('ascii','ignore')
@@ -71,11 +69,8 @@ def results(request):
     else:
         message = 'You submitted an empty form.'
     
-
-    dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
-					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
-					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
-
+    dictData = create_DictData(data)
+    	
 
     dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
 					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
@@ -393,11 +388,15 @@ def send_message(request):
 			send_mail(subject, message, from_email, ['kevinmcinerney8@gmail.com'])
 		except BadHeaderError:
     			return HttpResponse('Invalid header found.')
-		return HttpResponseRedirect('/home/thankyou')
+		return HttpResponseRedirect('/thankyou')
 	else:
 		return render_to_response('contactus.html', {'form': ContactForm()})
 
-
+def create_DictData(data):
+	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
+					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
+					 ['Positive', data[0][0]['positive_sentiment_count'] ] ]
+	return dictData
 
 
 

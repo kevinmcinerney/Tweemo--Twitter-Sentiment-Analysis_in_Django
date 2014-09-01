@@ -166,7 +166,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 			
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],max_tweets)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],1)
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet 
@@ -345,9 +345,7 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 
 	# initialize tweepy authorization and key search parameters
 	api = tweepy.API(auth)
-	query = q
-	max_tweets = 1
-
+	
 	searched_tweets = [status for status in tweepy.Cursor(api.search, 
 							      q=q, 
 							      lang=lang,

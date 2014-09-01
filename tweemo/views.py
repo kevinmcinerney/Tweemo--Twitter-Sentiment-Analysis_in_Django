@@ -127,11 +127,17 @@ def pull_tweets(q):
 	overall_negative_strength = 0
 	overall_positive_strength = 0
 
-	
-	stopw = set('/app/assets/Dictionaries/stopwords.txt')
+	# nltk tokenizer
 	word_splitter = WordPunctTokenizer()
+
+	# three nltk corpi
+	stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	m_names = '/app/assets/Dictionaries/males.txt'
 	w_names = '/app/assets/Dictionaries/females.txt'
+
+	# c_score contains 7 different sentiment scores for each country
+	# and appends this information three  separate times, once 
+	# for each of three days measured
 	c_score = {}
 	c_score['Canada'] = []
 	c_score['England'] = []
@@ -140,6 +146,7 @@ def pull_tweets(q):
 	c_score['France'] = []
 	c_score['Germany'] = []
 	c_score['Ireland'] = []
+
 	time_sample_1 ={'Ireland': 0, 
 			'Canada': 0, 
                         'America': 0, 
@@ -242,7 +249,7 @@ def pull_tweets(q):
 	for i in time_sample_1:
 		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
 		if d1 != 0:
-			time_sample_1[i] = float(time_sample_1[i] / (c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0]))
+			time_sample_1[i] = float(time_sample_1[i] / d1)
 )
 	for i in time_sample_2:
 		if c_score[i][1][6][0] != 0:

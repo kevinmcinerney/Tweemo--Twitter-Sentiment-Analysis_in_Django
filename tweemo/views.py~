@@ -397,7 +397,6 @@ def send_processed_tweet_to_db(posts,country, tweet):
 	m_names = set('/app/assets/Dictionaries/male.txt')
 	w_names = set('/app/assets/Dictionaries/female.txt')
 
-	
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]

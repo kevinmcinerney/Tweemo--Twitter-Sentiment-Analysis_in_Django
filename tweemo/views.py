@@ -397,7 +397,6 @@ def send_processed_tweet_to_db(posts,country, tweet):
 	m_names = set('/app/assets/Dictionaries/male.txt')
 	w_names = set('/app/assets/Dictionaries/female.txt')
 
-	
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
@@ -405,6 +404,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 		for i in range(0,len(words)):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
+
 			if w in scores and w not in stopw and w not in m_names and w not in w_names and len(w) > 2:
 				print w
 				tot += scores[w]

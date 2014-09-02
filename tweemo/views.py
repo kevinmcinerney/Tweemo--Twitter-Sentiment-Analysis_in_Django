@@ -399,10 +399,11 @@ def send_processed_tweet_to_db(country, tweet):
 	w_names = set('/app/assets/Dictionaries/females.txt')
 	boosterwords = set('/app/assets/Dictionaries/boosterwords.txt')
 
-	consecutive_sentiment_checker = []
-	booster_sentiment_checker = []
+	
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
+		consecutive_sentiment_checker = [0 for x in range(0,len(words)]
+		booster_sentiment_checker = [0 for x in range(0,len(words)]
 		for i in range(0,len(words)):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()

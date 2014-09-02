@@ -254,7 +254,7 @@ def create_booster_lexicon():
 	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/boosterwords.txt')) as f:
 		for line in f:
 	       		(key, val) = line.split('\t')
-	       		scores[key] = int(val)
+	       		boosterwords[key] = int(val)
 	return boosterwords
 
 #--------------------------------------------------------------------------------#

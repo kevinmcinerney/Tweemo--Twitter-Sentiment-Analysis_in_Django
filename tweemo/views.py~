@@ -438,9 +438,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 				booster_sentiment_checker[i] = boosterwords[w]
 			elif squeeze(w) in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[squeeze(w)]
-
-	print tweet.text
-	print booster_sentiment_checker		
+		
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 

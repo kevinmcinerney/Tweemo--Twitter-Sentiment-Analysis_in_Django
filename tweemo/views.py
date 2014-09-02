@@ -153,7 +153,6 @@ def pull_tweets(q):
 					positive_sentiment_total += tot
 				elif tot == 0:
 					neutral_sentiment_count += 1
-				
 
 			# Append new Country data for new day 		
 			c_score[country].append(
@@ -393,6 +392,9 @@ def send_processed_tweet_to_db(country, tweet):
 			if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
 				tot += scores[w]
 				matches.append(w)
+			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
+				tot += scores[w] + 1
+				matches.append(squeeze(w))
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 
@@ -404,4 +406,14 @@ def send_processed_tweet_to_db(country, tweet):
 	# insert tweet data to MongoDB
 	posts.insert(data)
 	return tot
+
+#--------------------------------------------------------------------------------#
+def squeeze(string):
+    word = string
+    n = 1
+    for l in range(0,len(string)-n):
+        while(word[l] == word[(l+1)]):
+            word = str(" ")+word[0:l] + word[(l+1):]
+            n += 1
+    return word.strip(' ')
 

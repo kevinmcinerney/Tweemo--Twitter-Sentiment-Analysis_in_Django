@@ -22,3 +22,5 @@ some	-1
 sometimes	-1
 sum	-1
 total	1
+totally	1
+very	1

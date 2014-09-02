@@ -247,6 +247,17 @@ def create_lexicon():
 	return scores
 
 #--------------------------------------------------------------------------------#
+
+def create_booster_lexicon():
+	boosterwords = {}
+	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/boosterwords.txt')) as f:
+		for line in f:
+	       		(key, val) = line.split('\t')
+	       		scores[key] = int(val)
+	return boosterwords
+
+#--------------------------------------------------------------------------------#
 def send_message(request):
 	subject = request.POST.get('topic', '')
 	message = request.POST.get('message', '')
@@ -373,6 +384,9 @@ def send_processed_tweet_to_db(country, tweet):
 	# create dictionary of word-sentiment scores
 	scores = create_lexicon()
 	
+	# create dictionary of word-sentiment scores
+	boosterwords = create_booster_lexicon()
+	
 	# nltk tokenizer
 	word_splitter = WordPunctTokenizer()
 
@@ -381,15 +395,18 @@ def send_processed_tweet_to_db(country, tweet):
 
 	# three nltk corpi
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
-	m_names = '/app/assets/Dictionaries/males.txt'
-	w_names = '/app/assets/Dictionaries/females.txt'
+	m_names = set('/app/assets/Dictionaries/males.txt')
+	w_names = set('/app/assets/Dictionaries/females.txt')
+	boosterwords = set('/app/assets/Dictionaries/boosterwords.txt')
 
 	consecutive_sentiment_checker = []
+	booster_sentiment_checker = []
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
 		for i in range(0,len(words)):
+			w_prev = words[i-1].lower()
 			w = words[i].lower()
-			if w in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
+			if w in scores and w != stopw and w != m_names and w != w_names and len(w) > 2:
 				tot += scores[w]
 				matches.append(w)
 				consecutive_sentiment_checker.append(scores[w])
@@ -397,6 +414,8 @@ def send_processed_tweet_to_db(country, tweet):
 					tot += 1
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
+				if booster_sentiment_checker[i-1] != 0:
+					tot += boosterwords[w_prev]
 				
 			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
@@ -406,8 +425,15 @@ def send_processed_tweet_to_db(country, tweet):
 					tot += 1
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
+				if booster_sentiment_checker[i-1] != 0:
+					tot += boosterwords[squeeze(w_prev)]
+
+			if w in boosterwords:
+				booster_sentiment_checker[i] == boosterwords[w]:
+			elif squeeze(w) in boosterwords:
+				booster_sentiment_checker[i] == boosterwords[squeeze(w)]:
 			else:
-				consecutive_sentiment_checker.append(0)
+				booster_sentiment_checker[i] == 0
 			
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 

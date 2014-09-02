@@ -431,7 +431,7 @@ def send_processed_tweet_to_db(country, tweet):
 				if booster_sentiment_checker[i-1] != 0:
 					if scores[squeeze(w)] > 0:
 						tot += booster_sentiment_checker[i-1]
-					else
+					else:
 						tot -= booster_sentiment_checker[i-1]
 
 			if w in boosterwords:

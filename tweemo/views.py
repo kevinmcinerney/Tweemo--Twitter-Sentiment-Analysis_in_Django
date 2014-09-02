@@ -144,7 +144,7 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets: 
-				tot = send_processed_tweet_to_db(country,tweet)
+				tot = send_processed_tweet_to_db(posts,country,tweet)
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot
@@ -374,10 +374,9 @@ def access_mongo_collection():
 
 	return posts
 #--------------------------------------------------------------------------------#
-def send_processed_tweet_to_db(country, tweet):
+def send_processed_tweet_to_db(posts,country, tweet):
 
-	posts = access_mongo_collection()
-
+	
 	# initialize sentiment score
 	tot = 0
 
@@ -419,6 +418,7 @@ def send_processed_tweet_to_db(country, tweet):
 						tot += booster_sentiment_checker[i-1]
 					else:
 						tot -= booster_sentiment_checker[i-1]
+			
 				
 			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
@@ -435,12 +435,10 @@ def send_processed_tweet_to_db(country, tweet):
 						tot -= booster_sentiment_checker[i-1]
 
 			if w in boosterwords:
-				booster_sentiment_checker[i] == boosterwords[w]
+				booster_sentiment_checker[i] = boosterwords[w]
 			elif squeeze(w) in boosterwords:
-				booster_sentiment_checker[i] == boosterwords[squeeze(w)]
-			else:
-				booster_sentiment_checker[i] == 0
-			
+				booster_sentiment_checker[i] = boosterwords[squeeze(w)]
+		
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 

@@ -405,7 +405,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
 
-			if w in scores and w not in skip_words and len(w) > 2:
+			if w not in skip_words and len(w) > 2 and w in scores:
 				print w
 				tot += scores[w]
 				matches.append(w)
@@ -421,7 +421,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 						tot -= booster_sentiment_checker[i-1]
 			
 				
-			elif squeeze(w) in scores and w not in skip_words and len(words[i]) > 2:
+			elif squeeze(w) not in skip_words and len(words[i]) > 2 and squeeze(w) in scores:
 				tot += scores[squeeze(w)] + 1
 				matches.append(squeeze(w))
 				consecutive_sentiment_checker.append(scores[squeeze(w)])

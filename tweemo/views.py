@@ -404,9 +404,9 @@ def send_processed_tweet_to_db(posts,country, tweet):
 		for i in range(0,len(words)):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
-
-			if w not in skip_words and len(w) > 2 and w in scores:
-				print w
+			print w
+			if (w not in skip_words and len(w) > 2) and (w in scores):
+				
 				tot += scores[w]
 				matches.append(w)
 				consecutive_sentiment_checker.append(scores[w])

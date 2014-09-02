@@ -405,7 +405,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 		for i in range(0,len(words)):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
-			if w in scores and w != stopw and w != m_names and w != w_names and len(w) > 2:
+			if w in scores and w not in stopw and w not in m_names and w not in w_names and len(w) > 2:
 				tot += scores[w]
 				matches.append(w)
 				consecutive_sentiment_checker.append(scores[w])
@@ -420,7 +420,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 						tot -= booster_sentiment_checker[i-1]
 			
 				
-			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
+			elif squeeze(w) in scores and w not in stopw and w not in m_names and w not in w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
 				matches.append(squeeze(w))
 				consecutive_sentiment_checker.append(scores[squeeze(w)])

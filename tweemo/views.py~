@@ -394,8 +394,8 @@ def send_processed_tweet_to_db(posts,country, tweet):
 
 	# three nltk corpi
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
-	m_names = set('/app/assets/Dictionaries/males.txt')
-	w_names = set('/app/assets/Dictionaries/females.txt')
+	m_names = set('/app/assets/Dictionaries/male.txt')
+	w_names = set('/app/assets/Dictionaries/female.txt')
 
 	
 	if tweet.text:	
@@ -406,6 +406,7 @@ def send_processed_tweet_to_db(posts,country, tweet):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
 			if w in scores and w not in stopw and w not in m_names and w not in w_names and len(w) > 2:
+				print w
 				tot += scores[w]
 				matches.append(w)
 				consecutive_sentiment_checker.append(scores[w])

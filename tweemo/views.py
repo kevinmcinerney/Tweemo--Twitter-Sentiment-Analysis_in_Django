@@ -415,7 +415,10 @@ def send_processed_tweet_to_db(country, tweet):
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
 				if booster_sentiment_checker[i-1] != 0:
-					tot += boosterwords[w_prev]
+					if scores[w] > 0:
+						tot += booster_sentiment_checker[i-1]
+					else
+						tot -= booster_sentiment_checker[i-1]
 				
 			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
@@ -426,7 +429,10 @@ def send_processed_tweet_to_db(country, tweet):
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
 				if booster_sentiment_checker[i-1] != 0:
-					tot += boosterwords[squeeze(w_prev)]
+					if scores[squeeze(w)] > 0:
+						tot += booster_sentiment_checker[i-1]
+					else
+						tot -= booster_sentiment_checker[i-1]
 
 			if w in boosterwords:
 				booster_sentiment_checker[i] == boosterwords[w]

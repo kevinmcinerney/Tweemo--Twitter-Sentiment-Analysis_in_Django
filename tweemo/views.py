@@ -384,17 +384,31 @@ def send_processed_tweet_to_db(country, tweet):
 	m_names = '/app/assets/Dictionaries/males.txt'
 	w_names = '/app/assets/Dictionaries/females.txt'
 
-	
+	consecutive_sentiment_checker = []
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
-		for word in words:
-			w = word.lower()
-			if w in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
+		for i in range(0,len(words)):
+			w = words[i].lower()
+			if w in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[w]
 				matches.append(w)
-			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
+				consecutive_sentiment_checker.append(scores[w])
+				if consecutive_sentiment_checker[i-1] > 0:
+					tot += 1
+				elif consecutive_sentiment_checker[i-1] < 0:
+					tot -= 1
+				
+			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
 				matches.append(squeeze(w))
+				consecutive_sentiment_checker.append(scores[w])
+				if consecutive_sentiment_checker[i-1] > 0:
+					tot += 1
+				elif consecutive_sentiment_checker[i-1] < 0:
+					tot -= 1
+			else
+				consecutive_sentiment_checker.append(0)
+			
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 

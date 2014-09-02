@@ -393,7 +393,7 @@ def send_processed_tweet_to_db(country, tweet):
 				tot += scores[w]
 				matches.append(w)
 			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(word) > 2:
-				tot += scores[w] + 1
+				tot += scores[squeeze(w)] + 1
 				matches.append(squeeze(w))
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 

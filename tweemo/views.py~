@@ -397,7 +397,7 @@ def send_processed_tweet_to_db(country, tweet):
 	stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	m_names = set('/app/assets/Dictionaries/males.txt')
 	w_names = set('/app/assets/Dictionaries/females.txt')
-	boosterwords = set('/app/assets/Dictionaries/boosterwords.txt')
+	boosterwords = '/app/assets/Dictionaries/boosterwords.txt'
 
 	
 	if tweet.text:	

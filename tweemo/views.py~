@@ -393,10 +393,12 @@ def send_processed_tweet_to_db(posts,country, tweet):
 	matches = []
 
 	# three nltk corpi
-	stopw = set('/app/assets/Dictionaries/stopwords.txt')
-	m_names = set('/app/assets/Dictionaries/male.txt')
-	w_names = set('/app/assets/Dictionaries/female.txt')
-	skip_words = (stopw.union(m_names)).union(w_names)
+	#stopw = set('/app/assets/Dictionaries/stopwords.txt')
+	#m_names = set('/app/assets/Dictionaries/male.txt')
+	#w_names = set('/app/assets/Dictionaries/female.txt')
+	stopw = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords','r')
+	m_names = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt','r')
+	w_names = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt','r')
 	if tweet.text:	
 		words = word_splitter.tokenize(tweet.text)
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
@@ -404,9 +406,9 @@ def send_processed_tweet_to_db(posts,country, tweet):
 		for i in range(0,len(words)):
 			w_prev = words[i-1].lower()
 			w = words[i].lower()
-			print str(w)
-			if (w not in skip_words and len(w) > 2) and (w in scores):
-				
+			ws = squeeze(w)
+			if w not in stopw and w not in w_names and w not in m_names and len(w) > 2 and (w in scores):
+				print w
 				tot += scores[w]
 				matches.append(w)
 				consecutive_sentiment_checker.append(scores[w])
@@ -421,24 +423,24 @@ def send_processed_tweet_to_db(posts,country, tweet):
 						tot -= booster_sentiment_checker[i-1]
 			
 				
-			elif squeeze(w) not in skip_words and len(words[i]) > 2 and squeeze(w) in scores:
-				tot += scores[squeeze(w)] + 1
-				matches.append(squeeze(w))
-				consecutive_sentiment_checker.append(scores[squeeze(w)])
+			elif ws not in stopw and ws not in w_names and ws not in m_names  and len(words[i]) > 2 and ws in scores:
+				tot += scores[ws] + 1
+				matches.append(ws)
+				consecutive_sentiment_checker.append(scores[ws])
 				if consecutive_sentiment_checker[i-1] > 0:
 					tot += 1
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
 				if booster_sentiment_checker[i-1] != 0:
-					if scores[squeeze(w)] > 0:
+					if scores[ws] > 0:
 						tot += booster_sentiment_checker[i-1]
 					else:
 						tot -= booster_sentiment_checker[i-1]
 
 			if w in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[w]
-			elif squeeze(w) in boosterwords:
-				booster_sentiment_checker[i] = boosterwords[squeeze(w)]
+			elif ws in boosterwords:
+				booster_sentiment_checker[i] = boosterwords[ws]
 		
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 

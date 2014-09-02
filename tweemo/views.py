@@ -401,7 +401,7 @@ def send_processed_tweet_to_db(country, tweet):
 			elif squeeze(w) in scores and w != stopw and w != m_names and w != w_names and len(words[i]) > 2:
 				tot += scores[squeeze(w)] + 1
 				matches.append(squeeze(w))
-				consecutive_sentiment_checker.append(scores[w])
+				consecutive_sentiment_checker.append(scores[squeeze(w)])
 				if consecutive_sentiment_checker[i-1] > 0:
 					tot += 1
 				elif consecutive_sentiment_checker[i-1] < 0:

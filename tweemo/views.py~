@@ -406,7 +406,7 @@ def send_processed_tweet_to_db(country, tweet):
 					tot += 1
 				elif consecutive_sentiment_checker[i-1] < 0:
 					tot -= 1
-			else
+			else:
 				consecutive_sentiment_checker.append(0)
 			
 	data = { 'text': tweet.text, 

@@ -429,9 +429,9 @@ def send_processed_tweet_to_db(country, tweet):
 					tot += boosterwords[squeeze(w_prev)]
 
 			if w in boosterwords:
-				booster_sentiment_checker[i] == boosterwords[w]:
+				booster_sentiment_checker[i] == boosterwords[w]
 			elif squeeze(w) in boosterwords:
-				booster_sentiment_checker[i] == boosterwords[squeeze(w)]:
+				booster_sentiment_checker[i] == boosterwords[squeeze(w)]
 			else:
 				booster_sentiment_checker[i] == 0
 			

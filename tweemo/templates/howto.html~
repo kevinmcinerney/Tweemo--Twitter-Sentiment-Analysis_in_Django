@@ -5,8 +5,8 @@
 <h2 style="margin-left:200px" id="search" class="featurette-heading">Sentiment Analysis Research<h2>
 <h3 style="margin-left:200px"><span class="text-muted">Did you know?.</span></h3>
 <img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
-<div style="margin-top:20px;margin-left:400px;text-align:center;width:800px">
-<h2> Table of Contents</h2>
+<div style="margin-top:20px;margin-left:100px;text-align:center;width:800px">
+<h2 style="text-align:center"> Table of Contents</h2>
 <p>Review of Twitter Analysis</p>
 <p>The Possibilities</p>
 <p>The Controversy</p>
@@ -20,84 +20,84 @@
 
 
 
-<h1> Review of Twitter Analysis </h1>
+<h1 style="text-align:center">> Review of Twitter Analysis </h1>
 	
 
-<h2>The Possibilities</h2>
+<h2 style="text-align:center">>The Possibilities</h2>
 <p>
 Twitter is a popular microblogging platform where users post short messages of less than 140 characters to a publicly accessible website. These messages, or tweets, can be retweeted by other users who are also free to choose whomever else’s tweets they would like to see appearing on their personal twitter stream. On a daily basis, it is estimated that users generate approximately 3 billion tweets worldwide (DuVander, 2012). Studies investigating the predictive value of these tweets have made impressive claims. For instance, Bollen, Mao, & Zeng (2011) demonstrated that twitter mood can predict financial markets while others have focused on predicting medical events (Abbasi,  Fu,  Zeng,  & Adjeroh, 2013), political outcomes (Tumasjan, Sprenger, Sandner & Welpe, 2010), assessing consumer confidence (Smith, Fischer & Yongjian, 2012) and much more (see Abbasi, Hassan & Dhar, NA). The commercial opportunities made available by such tools are endless and will be indispensable in the near future if they prove to be reliable. The research potential may be equally valuable. However, not everyone is quite so optimistic.
 </p>
 
-<h2>The Controversy</h2>
+<h2 style="text-align:center">>The Controversy</h2>
 <p>
 Whether Twitter data can truly be used to predict large scale events such as nationwide voting patterns is still controversial and some argue that publication bias has played a role in turning the research are into a fad (Gayo-Avello, 2012). There are also methodological concerns. For example, a paper by Tumasjan et al (2010) argued that statistically sophisticated polling methods could be rivalled by measuring "the mere number of tweets mentioning a political party". However, sceptical researchers have since pointed out that if this research had included a lesser known fringe party called the “Pirate Party” they would have won a projected 34.8% of the seats - the real percentage was 2.1% (Jungherr, Jürgens, & Schoen, 2012). Elsewhere, researchers have shown that Twitter users are highly unrepresentative of the population at large (Mislove, et al., 2011). Therefore, wherever demographics are likely to play a part it is unlikely that simple counting metrics such as the volume of tweets / retweets generated about a person or event will yield reliable results. 
 <p>
 
-<h2>Is Sentiment Analysis the Answer?</h2>
+<h2 style="text-align:center">>Is Sentiment Analysis the Answer?</h2>
 <p>
 Authors who are critical of research such as that conducted by Tumasjan et al (2010) agree that sentiment analysis offers improved performance (Gayo-Avello, 2011; Jungherr, et al., 2012). The primary goal of sentiment analysis is to derive the subjective emotion of the author of some piece if text, usually in relation to some thing or person described by them. Sentiment has be measured in terms of polarity (positive or negative), strength (for example ranging from -5 to +5), or even across a number of psychological constructs such as anger, fear and anxiety (Gilbert & Karahalios, 2010). One popular sentiment analysis tool for Twitter, SentiStrength, measures positive and negative in tandem based on the finding by some psychologists that both emotions can be experienced simultaneously (Thelwall, 2013). Sentiment analysis can be applied at different levels: one study for example focuses on Presidential speeches, song lyrics, and blogs (Dodds & Danforth, 2010), but Twitter has been shown to share very little with these more established domains for a variety of reasons.
 <p>
 
-<h2>Challenges of Sentiment Analysis</h2>
+<h2 style="text-align:center">>Challenges of Sentiment Analysis</h2>
 <p>
 Tweets are unlike other forms of text which have been mined for sentiment analysis such as product reviews. Problematic features of tweets include heavy use of slang, poor grammar, emoticons, and bad spelling. In the so-called Twittersphere new phrases, hastags, and words come into being and disappear in an instant. This makes traditional linguistic approaches which rely on revealing context through structure more difficult to apply. Thelwall & Buckley (2011) also point out that Twitter users often express less sentiment than one might expect. They showed that big events usually resulted in a mere 1% change in sentiment across Twitter. Also, for stories such as the alleged adultery of Tiger Woods they found that less than 11% of users who tweeted on the event expressed any opinion on the matter. This is because users often expect their sentiment to be inferred by the context of the event or very often they simply use popular events to exercise pre-existing goals such as expressing wit, humour or analytical skill rather than blankly stating an emotional response to the event. Sarcasm and wit in particular have been extremely difficult to identify and can lead to false positives. A large problem is that much of the Twitter analysis to date has ignored neutral content because of these reasons (Feldman, 2013). It is difficult for algorithms to infer sentiment from a tweet where it is not explicitly stated, but nevertheless clearly intended. For example, consider a tweet such as this: “What a week. First I become a Father and now a promotion!”  A human reader would undoubtedly infer positive emotions from such a tweet, but the feeling is contextual and not explicitly stated. 	
 </p>
 
-<h2>Overview of Techniques</h2>
+<h2 style="text-align:center">>Overview of Techniques</h2>
 <p>
 The majority of the techniques used for sentiment analysis fall into two broad approaches: Lexicon-based and Machine Learning. There have also been studies demonstrating the potential utility of combining the two techniques (Mudinas, Zhang, & Levene, 2012). What follows is a brief overview of each approach.
 </p>
 
-<h2>Lexicon Based Techniques</h2>
+<h2 style="text-align:center">>Lexicon Based Techniques</h2>
 <p>	
 Lexicon-based approaches come in two main varieties: dictionary-based and corpus based (Medhat, Hassan, & Korashy, 2014). These lexicons can be built manually (Tong, 2001) or automatically. In the dictionary-based approach, an initial lexicon of words paired with sentiment scores are used to classify new words and expand the original dictionary (Turney & Littman. 2003). This is done by searching through well-known thesaurus-like tools such as word-net (Kumar & Sebastian, 2012).The aim is to produce a lexicon of word/score pairings that can be compared with individual words belonging to a piece of text. A disadvantage of the dictionary approach is that it isn’t sensitive to context when finding new opinion words (Medhat, 2014). This weakness is addressed in the corpus-based approach by using specific syntactic restraints to narrow the choice of opinion words generated. For example, consider this with a mystery word labelled x “The car is beautiful and x”. The conjunctive ‘and’ makes it likely that the unknown word is also positive. If the conjunctive had been ‘but’, then the opposite would be true. This is the type of information which is exploited in the corpus-based approach.
 </p>
 
-<h2>Design and implementation</h2>
+<h2 style="text-align:center">>Design and implementation</h2>
 <p>
 In the case of Twitter a great deal of pre-processing is required to in order to maximize the utility of the chosen lexicon (Pak & Paroubek, 2010). Tweets must be filtered if the author wishes to remove punctuation, URL’s, hastags, or emoticons. Alternatively, items such as emoticons may be added to the lexicon (Kumar & Sebastian, 2012). Once filtered, the text must be normalized through lowercasing, spellchecking, and lemmatizing or stemming. The effect of negation is also significant and must be accounted for. For the purposes of illustration what follows is a very simple implementation of the lexicon-based approach. In practice it would need to be supplemented by greater pre-processing to increase its efficiency, accuracy and scalability. A corpus containing tab delimited pairs of words and sentiment scores is assigned to a variable ‘afinnfile’. A text document containing raw twitter data is then converted into JSON format line by line. These lines are then iterated over and each word is checked against a dictionary containing predefined pairs of words and sentiment scores. In this code each tweet is given the sum total of any sentiment scores which are matched against the dictionary. In other studies, only the maximum sentiment score within the tweet has also been used, as is the case with SentiStrength (Thelwall, 2013).
-</p>
-<p>
-import sys
-import json
+</p></p>
+<p></p>
+<p>import sys</p>
+<p>import json</p>
 
-afinnfile = open(sys.argv[1])         			 #  Corpus of word / sentiment score pairings
-tweet_file = open(sys.argv[2])      			 # Raw Twitter output saved in text document
+<p>afinnfile = open(sys.argv[1])         	 #  Corpus of word / sentiment score pairings</p>
+<p>tweet_file = open(sys.argv[2])      		# Raw Twitter output saved in text document</p>
 
-scores = {}                                          		 # Create a dictionary  and assign the values from the corpus as Key, Value pairs.
-for line in afinnfile:                                                
-	term, score  = line.split("\t")  	   
-scores[term] = int(score)  
-total = 0
-count = 1
-word_list = []
+<p>scores = {}                                 # Create a dictionary  and assign the values from the corpus as Key, Value pairs.</p>
+<p>for line in afinnfile:    </p>                                            
+<p>	term, score  = line.split("\t")  </p>	   
+<p>scores[term] = int(score)  </p>
+<p>total = 0
+<p>count = 1</p>
+<p>word_list = []</p>
+<p></p>
+<p>for line in tweet_file:                    			    # Separate the twitter metadata from the actual Tweet text</p>
+<p>	twitter_line = json.loads(line)</p>
+<p>	if "text" in twitter_line:</p>
+<p>		word_list.append(twitter_line['text'])</p>
+<p></p>
+<p>for i in range (len(word_list)):</p>
+<p>	text = word_list[i]</p>
+<p>	text = text.split()</p>
+<p>	for word in text:</p>
+<p>		if word in scores:                  	   # Compare the Tweet words against a dictionary </p>
+<p>			total += scores[word]</p>
+<p>	print str(total)
+<p>	total = 0</p>
+<p>	count = count + 1 </p>
 
-for line in tweet_file:                    			    # Separate the twitter metadata from the actual Tweet text
-	twitter_line = json.loads(line)
-	if "text" in twitter_line:
-		word_list.append(twitter_line['text'])
 
-for i in range (len(word_list)):
-	text = word_list[i]
-	text = text.split()
-	for word in text:
-		if word in scores:                  	   # Compare the Tweet words against a dictionary 
-			total += scores[word]
-	print str(total)
-	total = 0
-	count = count + 1
-</p>
-
-<h2>Evaluation</h2>
+<h2 style="text-align:center">>Evaluation</h2>
 <p>
 Despite the high accuracy of Machine Learning algorithms on text they have been trained to analyse there are still good reasons for choosing a lexicon-based approach. Taboada et al., (2011) points out that Machine Learning approaches do not maintain their greater accuracy when exposed to domains dissimilar to their training dataset. As a result of their domain dependency machine learning algorithms can display somewhat prejudicial biases towards certain words that should otherwise be scored as neutral. For example, in one study of movie reviews the words tv and video were rated negatively because on average movies that were inspired by either video games or tv series were reviewed more harshly (Taboada et al., 2011). This means that a robust Lexicon-based design may be a better general purpose solution to sentiment analysis. Furthermore, the implementation is simpler and more straightforward because there are many freely available lexicons in existence and no extensive training period is required which involves substantial computing  power and time depending on how much training is desirable. Also, considering the skewed demographic of Twitter users (Mislove et al., 2011)  as well as the cyclical patterns of happiness shown by its users, which have been shown over days, weeks, months  and even years (Golder & Macy, 2011) it seems likely that a Machine Learning approach might suffer from biases unless trained in a highly sophisticated manner. Therefore, the Lexicon-approach is probably a better pick for a general purpose and easily implementable solution. 
 </p>
-<h2>Applications</h2>
+<h2 style="text-align:center">>Applications</h2>
 <p>
 While the literature shows that machine learning approaches can obtain greater accuracy (Abbasi et al., NA) there are still some advantages to the Lexicon-based approach such as its cross-domain consistency. By contrast, machine earning approaches perform poorly when exposed to domains they weren’t trained for (Pang & Lee, 2008). Other advantages include the lack of training required, the comparative ease of implementation, and the lack of susceptibility to biased training datasets. Lexicon-based approaches are also more efficient in terms of speed and memory with small tasks taking a few seconds rather than minutes (Basiri et al, 2014). For tasks of a larger size considerable computing power is required for some machine-learning algorithms. Thelwall et al, (1012) report that even with 46GB of RAM there machine-learning algorithms ran slowly. Thelwall writes: “For instance, Logistic Regression did not complete a single evaluation (out of 30) on 1000 features within two weeks so it was impractical to run full evaluations on the large data set.”  Based on these findings the Lexicon-based approach seems the better alternative for smaller less ambitious implementations, especially considering the negligible differences which have been found between the two approaches in terms of accuracy in some studies (Basiri et al, 2014). Medhat et al., (2014) show that over the previous four years researchers have increasingly moved towards Lexicon-based approaches for SA because of their simplicity, efficiency and scalability, while ML is preferred for sentiment classification.
 </p>
 
-<h2>Machine Learning Techniques</h2>
+<h2 style="text-align:center">>Machine Learning Techniques</h2>
 <p>
 Three types of supervised Machine Learning techniques are commonly used for classifying text into sentiment categories: Naïve Bayes (NB), Maximum Entropy (ME), and Support Vector Machines (SVM) (Mudinas et al., 2012). 
 NB is the simplest of the Machine Learning techniques. It assumes that the probabilities of words falling into categories are independent of each other (Schrauwen, 2010) and calculates the probability of new words belonging to a category based on the known distribution of words in the document (Medhat, 2011; Prasad, 2010). NB is often used as a baseline to measure other methods because it is computationally efficient compared to both ME and SVM and offers reasonably good results (Jurafsky & Martin, NA).
@@ -105,131 +105,129 @@ ME is also a probabilistic classifier, but it doesn’t treat unigrams as indepe
 SVM belongs to the linear class of algorithms unlike NB and ME which are both probabilistic. This technique represents categories as two sets of points in space and then draws a hyperplane between both these sets such that the line is at a maximal distance from both sets (Medhat, 2011). This line can then be used to predict the category of new words depending on which side of the line they fall. Research by Pang et al., (2002) demonstrated that the SVM method outperformed the other two, but not by a significant margin. Using a basic unigram approach they attained an accuracy rate of 82.9% using the SVM.
 </p>
 
-<h2>Design and Implementation</h2>
+<h2 style="text-align:center">>Design and Implementation</h2>
 <p>
 Machine Learning techniques work by using large datasets which have already been classified by human coders as either positive or negative (Witten & Frank, 2005). Researchers have also used emoticons to automatically train algorithms with some success (Read, 2005) - this technique is also employed by the commercial tool, Sentiment140.  These training datasets allow the algorithm to identify patterns in the text and classify them as either positive or negative. The features used for matching can be unigrams (single words), bigrams, or even phrases (Thelwall et al., 2011). Unigrams have been shown to be more effective than bigrams in at least one study (Pang, Lee & Vaithyanathan, 2002).
 </p>
 
-<h2>Evaluation</h2>
+<h2 style="text-align:center">>Evaluation</h2>
 <p>
 While the ML techniques have been shown to perform poorly across different domains they do perform well when working on data similar to that they were trained with. Also, creating large training datasets doesn’t necessarily have to be done through human coding. Filtering twitter data for smiley-face emoticons has yielded satisfactory results in the past for twitter analysis (Read, 2005). In the study evaluating the accuracy of available twitter analysis tools the best performing tools was SentiStrength which is in fact a Lexicon-based approach. However, it was closely followed by Sentiment140 which uses machine learning techniques.
 <p>
-<h2>Applications</h2>
+<h2 style="text-align:center">>Applications</h2>
 <p>
 Machine Learning algorithms for sentiment analysis have been used to good effect at the document, sentence, and entity level. A trend has been identified by Medhat (2011) whereby Machine-Learning approaches are increasingly being used for sentiment classification, and lexicon-based approaches are increasingly being used for sentiment analysis. For twitter analysis a major disadvantage of the learning approach is that it often requires human-coded training data which is both labour intensive and time consuming. Zhang et al., (2011) also argue that learning approaches are not scalable or well suited to twitter data because they do best on data with a clear style or domain specific character such as movie reviews. Machine learning is therefore best applied to sentiment analysis where the domain has a clear singular style, and the implementation is likely to be sophisticated in nature.
 </p>
 
-<h1>Review Chosen Technique</h1>
+<h1 style="text-align:center">>Review Chosen Technique</h1>
 
-<h2>Description of Technique & Motivation</h2>
+<h2 style="text-align:center">>Description of Technique & Motivation</h2>
 <p>
 The goal of the current study is to explore the quality of sentiment analysis that can be achieved in a short space of time (6 weeks) by one person using little resources – a single laptop with 4GB of RAM and an i7 processor.  Based on the findings in this review, the present author privileges the lexicon-based approach. The benefits described in the review can summarized thus:
-1.	Efficiency (in terms of memory and processing)
-2.	Ease of implementation
-3.	Even performance across domains
-4.	Scalability
-5.	High performance (as evidenced by SentiStrength)
-6.	Immunity from skewed demographics and biased training datasets
-Implementation Outline
+<p>1.	Efficiency (in terms of memory and processing)</p>
+<p>2.	Ease of implementation</p>
+<p>3.	Even performance across domains</p>
+<p>4.	Scalability</p>
+<p>5.	High performance (as evidenced by SentiStrength)</p>
+<p>6.	Immunity from skewed demographics and biased training datasets</p>
+
+<h2>Implementation Outline<h2>
+<p>
 The project will be developed using the Django framework which allows for quick development of webpages using Python and also integrates well with other technologies being used in the project. The website will be back-ended with a NoSQL database called MongoDb which communicates easily with Django using the Djano-MongoDB-Engine. The total storage will be limited to 500MB’s because this is the upper limit offered as part of MongoLab’s free hosting service. However, each new query will have full access to this 500MB’s by overwriting previous data. This shouldn’t be problematic as high traffic is not anticipated and this is merely a beta version of the final website. MongoDb is perfect for working with Twitter data because it stores data in JSON, the same format as outputted by the Twitter API. With MongoDb we can therefore store whichever elements of the Twitter API output we are interested in such as text and other metadata directly into the database in its raw form. 
 When a user enters a search word/s they will be passed to a python script that will return a collection of tweets from the Twitter API using a python library called Tweepy. The data will be filtered for useful text and metadata which will be inserted into a map-like data structure called a dictionary in Python. This data structure will then be inserted directly into MongoDb using Pymongo, a distribution of tools for Python that allow interaction with MongoDb. Every time the user conducts a search they will create a new table in our database containing twitter text and relevant metadata. The sentiment analysis will also be conducted at this point also and inserted into the database along with the twitter data. The following code is a simplified working example of the python script that has already been described. Notice that only the text is being extracted from the twitter data (no meta-data) and that no pre-processing has yet taken place with NLTK. However, these features will be included in the final project. Using the methods described the entire project can be conducted using Python from front end to backend.
-import tweepy
-from tweepy import API
-import pymongo
-import sys
+</p></p>
+<p>import tweepy</p>
+<p>from tweepy import API</p>
+<p>import pymongo</p>
+<p>import sys</p>
 
-ckey = "UJpisXUidLEdjEMVQhNOw"
-csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"
-atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"
-asecret = "prwsP2dSD6UqlC2Pmaer0Vt5EyJTInGgOClOqT00c"
+<p>ckey = "UJpisXUidLEdjEMVQhNOw"</p>
+<p>csecret = "VoBehORY0X1NhNe1QaaUSiak2rqAQpV5Hiz7N4QueeY"</p>
+<p>atoken = "93476811-dCDo7Kic1RcRoVub33p2pMycnflvrj5qyegq682yB"</p>
+<p>asecret = "prwsP2dSD6UqlC2Pmaer0Vt5EyJTInGgOClOqT00c"</p>
 
-auth = tweepy.OAuthHandler(ckey, csecret)
-auth.set_access_token(atoken, asecret)
+<p>auth = tweepy.OAuthHandler(ckey, csecret)</p>
+<p>auth.set_access_token(atoken, asecret)</p>
 
-# Connection to Mongo DB
-try:
-    conn=pymongo.MongoClient()
-    print "Connected successfully!!!"
-except pymongo.errors.ConnectionFailure, e:
-   print "Could not connect to MongoDB: %s" % e 
-conn
+<p># Connection to Mongo DB</p>
+<p>try:</p>
+<p>    conn=pymongo.MongoClient()</p>
+<p>    print "Connected successfully!!!"</p>
+<p>except pymongo.errors.ConnectionFailure, e:</p>
+<p>   print "Could not connect to MongoDB: %s" % e </p>
+<p></p>
+<p></p>
+<p>#Define my mongoDB database</p>
+<p>db = conn.storage</p>
+<p># Define my collection where I'll insert my search</p>
+<p>posts = db.tweemo_twitterstream</p>
 
-#Define my mongoDB database
-db = conn.storage
-# Define my collection where I'll insert my search
-posts = db.tweemo_twitterstream
+<p>api = tweepy.API(auth)</p>
 
-api = tweepy.API(auth)
+<p>search = []</p>
 
-search = []
+<p># Argument to script defines query word</p>
+<p>query = str(sys.argv[1])</p>
+<p>max_tweets = 10</p>
+<p>searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]</p>
 
-# Argument to script defines query word
-query = str(sys.argv[1])
-max_tweets = 10
-searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
-
-for tweet in searched_tweets:
-	search.append(tweet)
-	
-# loop through search and insert dictionary into mongoDB
-for tweet in search:
-    data ={}
-    data['text'] = tweet.text
-    # Insert process
-    posts.insert(data)
-
+<p>for tweet in searched_tweets:</p>
+<p>	search.append(tweet)</p>
+<p>	</p>
+<p># loop through search and insert dictionary into mongoDB</p>
+<p>for tweet in search:</p>
+<p>    data ={}</p>
+<p>    data['text'] = tweet.text</p>
+<p>    # Insert process</p>
+<p>    posts.insert(data)</p>
+<p></p>
+<p>
 For data wrangling and textual analysis the excellent Natural Language Toolkit (NLTK) package, also available for Python, will be used. This is the most popular package of its type and it comes with a collection of corpora. It is also well documented both online and in textbooks. A key factor is the final performance of the project will be the choice of corpora as Lexicon based methods rely heavily on having a suitable dictionary of words for the text being analysed. This project will therefore be using the sentiment dictionary known as AFFIN-111 that was manually labelled by Finn Årup Nielsen. The AFFIN-111 contains 2477 unique words, including offensive slang words obtained from the Urban Dictionary, giving it a clear advantage over its competitors such as ANEW, General Inquirer, and OpinionFinder (Nielsen, 2011). The lexicon is sufficient in its range that it should yield good accuracy when combined with adequate pre-processing.
-The pre-processing steps will include spell-checking to maximize the number of matches with the dictionary and also the detection of booster words such as ‘very’ which increase the valence of subsequent words. These two steps alone have been described as: “The   main   reason   for   SentiStrength’s   relative   success” (Thelwall et al., 2010). Lemmatizing will not be used as the AFINN-111 contains each word in several forms: for example, ‘like’, ’liked’, and ‘likes’. A stop-word dictionary that comes with NLTK will be used to avoid wasteful processing of words that will not ultimately yield sentiment scores. If time permits, additional pre-processing steps will be implemented akin to those used in SentiStrength (Thelwall, 2013). 
-•	Negation involves reversing the valence of words which follow such words as ‘not’.
-•	 Replacing  vowels that are repeated three or more times with just two vowels accounts for language such as: I looove pie”. 
-•	Boosting the valence of consecutive emotive words as in the case of: It’s a beautiful, glorious day”.
-The website’s appearance will be modelled on the simplistic design of Sentiment 140, returning a list of tweets containing the search word/s entered and an overall sentiment score which will be illustrated using the Google Charts API. The django project will be hosted using  heroku.
-
+The pre-processing steps will include spell-checking to maximize the number of matches with the dictionary and also the detection of booster words such as ‘very’ which increase the valence of subsequent words. These two steps alone have been described as: “The   main   reason   for   SentiStrength’s   relative   success” (Thelwall et al., 2010). Lemmatizing will not be used as the AFINN-111 contains each word in several forms: for example, ‘like’, ’liked’, and ‘likes’. A stop-word dictionary that comes with NLTK will be used to avoid wasteful processing of words that will not ultimately yield sentiment scores. If time permits, additional pre-processing steps will be implemented akin to those used in SentiStrength (Thelwall, 2013). </p>
+<p>•	Negation involves reversing the valence of words which follow such words as ‘not’.</p>
+<p>•	 Replacing  vowels that are repeated three or more times with just two vowels accounts for language such as: I looove pie”. </p>
+<p>•	Boosting the valence of consecutive emotive words as in the case of: It’s a beautiful, glorious day”.</p>
+<p>The website’s appearance will be modelled on the simplistic design of Sentiment 140, returning a list of tweets containing the search word/s entered and an overall sentiment score which will be illustrated using the Google Charts API. The django project will be hosted using  heroku.
 </p>
 
 
-<h2>References</h2>
-<p>
-Abbasi, A., Hassan, A., & Dhar, M.(NA). Benchmarking Twitter Sentiment Analysis Tools.
-Abbasi,  A.,  Fu,  T.,  Zeng,  D.,  and  Adjeroh,  D.  (2013). Crawling  Credible  Online  Medical  Sentiments  for Social  Intelligence.  Proceedings  of  the  ASE/IEEE International Conference on Social Computing.
-Basiri, M. E., Naghsh-Nilchi, A. R., & Ghasem-Aghaee, N. (2014). Sentiment Prediction Based on Dempster-Shafer Theory of Evidence. Mathematical Problems in Engineering, 2014.
-Bollen, J., Mao, H., & Zeng, X. (2011). Twitter mood predicts the stock market. arXiv, 2(1). doi:10.1016/j.jocs.2010.12.
-Dodds, P. S., & Danforth, C. M. (2010). Measuring the happiness of large-scale written expression: Songs, blogs, and presidents. Journal of Happiness Studies, 11(4), 441-456.
-DuV ander, A. (2012). Which APIs are Handling Billions of Requests Per Day? Programmable Web, May.
-Feldman, R. (2013). Techniques and applications for sentiment analysis. doi:10.1145/2436256.2436274
-
-Gayo-Avello, D. (2011). Don't turn social media into another'Literary Digest'poll.Communications of the ACM, 54(10), 121-128
-
-Gayo-Avello, D. (2012). " I Wanted to Predict Elections with Twitter and all I got was this Lousy Paper"--A Balanced Survey on Election Prediction using Twitter Data. arXiv preprint arXiv:1204.6441
-
-Gilbert, E., & Karahalios, K. (2010, May). Widespread Worry and the Stock Market. In ICWSM (pp. 59-65).
-Golder, S. A., & Macy, M. W. (2011). Diurnal and seasonal mood vary with work, sleep, and daylength across diverse cultures. Science, 333(6051), 1878-1881.
-Jurafsky, D., & Martin, J. H. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition.
-Jungherr, A., Jürgens, P., & Schoen, H. (2012). Why the pirate party won the german election of 2009 or the trouble with predictions: A response to tumasjan, a., sprenger, to, sander, pg, & welpe, im “predicting elections with twitter: What 140 characters reveal about political sentiment”. Social Science Computer Review, 30(2), 229-234.
-Kumar, A., & Sebastian, T. M. (2012). Sentiment analysis on twitter. IJCSI International Journal of Computer Science Issues, 9(3), 372-378.
-Nielsen, F. Å. (2011). A new ANEW: Evaluation of a word list for sentiment analysis in microblogs. arXiv preprint arXiv:1103.2903.
-Medhat, W., Hassan, A., & Korashy, H. (2014). Sentiment analysis algorithms and applications: A survey. Retrieved from http://www.sciencedirect.com/science/article/pii/S2090447914000550
-Mudinas, A., Zhang, D., & Levene, M. (2012, August). Combining lexicon and learning based approaches for concept-level sentiment analysis. In Proceedings of the First International Workshop on Issues of Sentiment Discovery and Opinion Mining (p. 5). ACM.
-Mislove, A., Lehmann, S., Ahn, Y. Y., Onnela, J. P., & Rosenquist, J. N. (2011). Understanding the Demographics of Twitter Users. ICWSM, 11, 5th.
-Nigam, K., Lafferty, J., & McCallum, A. (1999, August). Using maximum entropy for text classification. In IJCAI-99 workshop on machine learning for information filtering (Vol. 1, pp. 61-67).
-Pak, A., & Paroubek, P. (2010). Twitter as a Corpus for Sentiment Analysis and Opinion Mining. Retrieved from http://incc-tps.googlecode.com/svn/trunk/TPFinal/bibliografia/Pak%20and%20Paroubek%20(2010).%20Twitter%20as%20a%20Corpus%20for%20Sentiment%20Analysis%20and%20Opinion%20Mining.pdf
-Pang, B., Lee, L., & Vaithyanathan, S. (2002, July). Thumbs up?: sentiment classification using machine learning techniques. In Proceedings of the ACL-02 conference on Empirical methods in natural language processing-Volume 10 (pp. 79-86). Association for Computational Linguistics.
-Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. Foundations and trends in information retrieval, 2(1-2), 1-135.
-Prasad, S. (2010). Micro-blogging Sentiment Analysis Using Bayesian Classification Methods. Technical Report.
-Read, J. (2005, June). Using emoticons to reduce dependency in machine learning techniques for sentiment classification. In Proceedings of the ACL Student Research Workshop (pp. 43-48). Association for Computational Linguistics.
-Schrauwen, S. (2010). Machine learning approaches to sentiment analysis using the dutch netlog corpus. Machine Learning Approaches to Sentiment Analysis Using the Dutch Netlog Corpus (Antwerp, Belgium, 2010), CLiPS Technical Report Series, Computational Linguistics & Psycholinguistics.
-Smith, A. N., Fischer, E., and Yongjian, C. (2012). How does brand-related user-generated content differ across YouTube, Facebook, and Twitter? Journal of Interactive Marketing 26(2), pp. 102--113.
-Taboada, M., Brooke, J., Tofiloski, M., Voll, K., & Stede, M. (2011). Lexicon-based methods for sentiment analysis. Computational linguistics, 37(2), 267-307.
-Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. Journal of the American Society for Information Science and Technology, 61(12), 2544–2558. doi:10.1002/asi.21416
-Thelwall, M., & Buckley…, K. (2011). Sentiment in Twitter events. doi:10.1002/asi.21462
-Thelwall, M., Buckley, K., & Paltoglou, G. (2012). Sentiment strength detection for the social web. Journal of the American Society for Information Science and Technology, 63(1), 163-173.
-Thelwall, M. (2013). Heart and soul: Sentiment strength detection in the social web with sentistrength. Cyberemotions, 1-14.
-Tong, Richard M. (2001). An operational system for detecting and tracking opinions in on-line discussions. In Working Notes of the ACM SIGIR 2001 Workshop on Operational Text Classiﬁcation, pages 1–6,New York,  NY.
-Tumasjan, A., Sprenger, T. O., Sandner, P. G., & Welpe, I. M. (2010). Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment. ICWSM, 10, 178-185.
-Turney, P., & Littman., M (2003). Measuring praise and criticism: Inference of semantic orientation from association. ACM Transactions on Information Systems, 21(4):315–346
-Witten, I. H., & Frank, E. (2005). Data Mining: Practical machine learning tools and techniques. Morgan Kaufmann.
-Zhang, L., Ghosh, R., Dekhil, M., Hsu, M., & Liu, B. (2011). Combining lexicon-based and learning-based methods for Twitter sentiment analysis. HP Laboratories, Technical Report HPL-2011, 89.
- </p>
+<h2 style="text-align:center">References</h2>
+<p>Abbasi, A., Hassan, A., & Dhar, M.(NA). Benchmarking Twitter Sentiment Analysis Tools.</p>
+<p>Abbasi,  A.,  Fu,  T.,  Zeng,  D.,  and  Adjeroh,  D.  (2013). Crawling  Credible  Online  Medical  Sentiments  for Social  Intelligence. Proceedings  of  the  ASE/IEEE International Conference on Social Computing.</p>
+<p>Basiri, M. E., Naghsh-Nilchi, A. R., & Ghasem-Aghaee, N. (2014). Sentiment Prediction Based on Dempster-Shafer Theory of Evidence. Mathematical Problems in Engineering, 2014.</p>
+<p>Bollen, J., Mao, H., & Zeng, X. (2011). Twitter mood predicts the stock market. arXiv, 2(1). doi:10.1016/j.jocs.2010.12.</p>
+<p>Dodds, P. S., & Danforth, C. M. (2010). Measuring the happiness of large-scale written expression: Songs, blogs, and presidents. Journal of Happiness Studies, 11(4), 441-456.</p>
+<p>DuV ander, A. (2012). Which APIs are Handling Billions of Requests Per Day? Programmable Web, May.</p>
+<p>Feldman, R. (2013). Techniques and applications for sentiment analysis. doi:10.1145/2436256.2436274</p>
+<p>Gayo-Avello, D. (2011). Don't turn social media into another'Literary Digest'poll.Communications of the ACM, 54(10), 121-128</p>
+<p>Gayo-Avello, D. (2012). " I Wanted to Predict Elections with Twitter and all I got was this Lousy Paper"--A Balanced Survey on Election Prediction using Twitter Data. arXiv preprint arXiv:1204.6441</p>
+<p>Gilbert, E., & Karahalios, K. (2010, May). Widespread Worry and the Stock Market. In ICWSM (pp. 59-65).</p>
+<p>Golder, S. A., & Macy, M. W. (2011). Diurnal and seasonal mood vary with work, sleep, and daylength across diverse cultures. Science, 333(6051), 1878-1881.</p>
+<p>Jurafsky, D., & Martin, J. H. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition.</p>
+<p>Jungherr, A., Jürgens, P., & Schoen, H. (2012). Why the pirate party won the german election of 2009 or the trouble with predictions: A response to tumasjan, a., sprenger, to, sander, pg, & welpe, im “predicting elections with twitter: What 140 characters reveal about political sentiment”. Social Science Computer Review, 30(2), 229-234.</p>
+<p>Kumar, A., & Sebastian, T. M. (2012). Sentiment analysis on twitter. IJCSI International Journal of Computer Science Issues, 9(3), 372-378.
+Nielsen, F. Å. (2011). A new ANEW: Evaluation of a word list for sentiment analysis in microblogs. arXiv preprint arXiv:1103.2903.</p>
+<p>Medhat, W., Hassan, A., & Korashy, H. (2014). Sentiment analysis algorithms and applications: A survey. Retrieved from http://www.sciencedirect.com/science/article/pii/S2090447914000550</p>
+<p>Mudinas, A., Zhang, D., & Levene, M. (2012, August). Combining lexicon and learning based approaches for concept-level sentiment analysis. In Proceedings of the First International Workshop on Issues of Sentiment Discovery and Opinion Mining (p. 5). ACM.</p>
+<p>Mislove, A., Lehmann, S., Ahn, Y. Y., Onnela, J. P., & Rosenquist, J. N. (2011). Understanding the Demographics of Twitter Users. ICWSM, 11, 5th.</p>
+<p>Nigam, K., Lafferty, J., & McCallum, A. (1999, August). Using maximum entropy for text classification. In IJCAI-99 workshop on machine learning for information filtering (Vol. 1, pp. 61-67).</p>
+<p>Pak, A., & Paroubek, P. (2010). Twitter as a Corpus for Sentiment Analysis and Opinion Mining. Retrieved from http://incc-tps.googlecode.com/svn/trunk/TPFinal/bibliografia/Pak%20and%20Paroubek%20(2010).%20Twitter%20as%20a%20Corpus%20for%20Sentiment%20Analysis%20and%20Opinion%20Mining.pdf</p>
+<p>Pang, B., Lee, L., & Vaithyanathan, S. (2002, July). Thumbs up?: sentiment classification using machine learning techniques. In Proceedings of the ACL-02 conference on Empirical methods in natural language processing-Volume 10 (pp. 79-86). Association for Computational Linguistics.</p>
+<p>Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. Foundations and trends in information retrieval, 2(1-2), 1-135.</p>
+<p>Prasad, S. (2010). Micro-blogging Sentiment Analysis Using Bayesian Classification Methods. Technical Report.</p>
+<p>Read, J. (2005, June). Using emoticons to reduce dependency in machine learning techniques for sentiment classification. In Proceedings of the ACL Student Research Workshop (pp. 43-48). Association for Computational Linguistics.</p>
+<p>Schrauwen, S. (2010). Machine learning approaches to sentiment analysis using the dutch netlog corpus. Machine Learning Approaches to Sentiment Analysis Using the Dutch Netlog Corpus (Antwerp, Belgium, 2010), CLiPS Technical Report Series, Computational Linguistics & Psycholinguistics.</p>
+<p>Smith, A. N., Fischer, E., and Yongjian, C. (2012). How does brand-related user-generated content differ across YouTube, Facebook, and Twitter? Journal of Interactive Marketing 26(2), pp. 102--113.</p>
+<p>Taboada, M., Brooke, J., Tofiloski, M., Voll, K., & Stede, M. (2011). Lexicon-based methods for sentiment analysis. Computational linguistics, 37(2), 267-307.</p>
+<p>Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. Journal of the American Society for Information Science and Technology, 61(12), 2544–2558. doi:10.1002/asi.21416</p>
+<p>Thelwall, M., & Buckley…, K. (2011). Sentiment in Twitter events. doi:10.1002/asi.21462</p>
+<p>Thelwall, M., Buckley, K., & Paltoglou, G. (2012). Sentiment strength detection for the social web. Journal of the American Society for Information Science and Technology, 63(1), 163-173.</p>
+<p>Thelwall, M. (2013). Heart and soul: Sentiment strength detection in the social web with sentistrength. Cyberemotions, 1-14.</p>
+<p>Tong, Richard M. (2001). An operational system for detecting and tracking opinions in on-line discussions. In Working Notes of the ACM SIGIR 2001 Workshop on Operational Text Classiﬁcation, pages 1–6,New York,  NY.</p>
+<p>Tumasjan, A., Sprenger, T. O., Sandner, P. G., & Welpe, I. M. (2010). Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment. ICWSM, 10, 178-185.</p>
+<p>Turney, P., & Littman., M (2003). Measuring praise and criticism: Inference of semantic orientation from association. ACM Transactions on Information Systems, 21(4):315–346</p>
+<p>Witten, I. H., & Frank, E. (2005). Data Mining: Practical machine learning tools and techniques. Morgan Kaufmann.
+Zhang, L., Ghosh, R., Dekhil, M., Hsu, M., & Liu, B. (2011). Combining lexicon-based and learning-based methods for Twitter sentiment analysis. HP Laboratories, Technical Report HPL-2011, 89.</p>
 </div>	
 {% endblock %}
 

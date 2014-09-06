@@ -63,7 +63,7 @@
                     <li class="divider"></li>
                     <li class="dropdown-header">Support</li>
                     <li><a href="/usingtweemo">Using Tweemo</a></li>
-                    <li><a href="/howto">How To make your own</a></li>
+                    <li><a href="/research">Research</a></li>
                   </ul>
                 </li>
               </ul>
@@ -154,20 +154,20 @@
           <img  src="{% static 'assets/images/pie.JPG' %}" alt="Generic placeholder image" style="width: 170px; height: 170px;">
           <h2>Sentiment Polarity</h2>
           <p>Sentiment Polarity reveals the basic sentiment-orientation of the tweet(s) being measured. In the results, figures and graphs descrivbe the number of tweets that fall into each of the three categories: positive, negative, and neutral. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/research"" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           
           <img  src="{% static 'assets/images/pie2.JPG' %}" alt="Generic placeholder image" style="width: 170px; height: 170px;">
           <h2>Sentiment Strength</h2>
           <p>Sentiment Strength is measure of the stregnth of the sentiment expressed and so it provides more information than mere sentiment polarity (negative, neutral, positive). Sentiment Strength scores are given for each tweet, and also each country for each of the previous three days.  </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/research"" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img  src="{% static 'assets/images/g_chart.JPG' %}" alt="Generic placeholder image" style="width: 300px; height: 170px;">
           <h2>Sentiment Maps</h2>
           <p>Geo-Sentiment maps are loaded for each result allowing you to easily visualize how sentiment varys across the globe in relation to your chosen search terms. The depth of the colors onthe map reflect the strength of the sentiments measuredin that country.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/research"" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 

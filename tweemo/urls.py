@@ -10,6 +10,6 @@ urlpatterns = patterns('',
     url(r'^gallary/$', 'tweemo.views.gallary'),
     url(r'^stream/$', 'tweemo.views.stream'),
     url(r'^usingtweemo/$', 'tweemo.views.usingtweemo'),
-    url(r'^howto/$', 'tweemo.views.howto'),
+    url(r'^research/$', 'tweemo.views.research'),
     
 )

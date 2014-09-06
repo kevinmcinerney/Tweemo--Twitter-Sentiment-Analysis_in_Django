@@ -33,8 +33,8 @@ def aboutus(request):
 def usingtweemo(request):
 	return render_to_response('usingtweemo.html')
 
-def howto(request):
-	return render_to_response('howto.html')
+def research(request):
+	return render_to_response('research.html')
 
 def gallary(request):
 	return render_to_response('gallary.html')

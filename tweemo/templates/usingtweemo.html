@@ -2,17 +2,16 @@
 {% load static %}
 
 {% block search %}
-<div style="float:left;margin-left:200px">
+<div>
 <h2 style="margin-left:400px" id="search" class="featurette-heading">Tweemo Tips.<h2>
 <h3 style="margin-left:400px"><span class="text-muted">Search Smart.</span></h3>
-</div>
 <img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
 <div style="margin-top:20px;margin-left:200px;width:800px">
 <p> 1.) To search for phrases like "bread and butter" use quotes to identify the phrase.</p>
 <p> 1.) To search for tweets containing two words use the capitalized 'AND' AS SO: 'cats AND dogs'.</p>
 <p> 2.) To search for one of two words use the capitalized 'OR' word as so: 'happy OR great'</p>
 <p> 3.) To search for two words in any partof a tweet just list the terms: bread butter</p>
-</div>	
+
 <h2 <span class="text-muted">What will the results look like?<span></h2>
 <p>Your query will return a number of different graphs and figures such as 
 a geosentiment map which is coloured according to sentiment strenth. There will
@@ -20,9 +19,11 @@ also be pie charts, a table of some basic descriptive statistics, and a long
 scrolling window where you can observe the tweets on which your analysis was
 performed. If you look closely you will see that each tweet also contains metadata
 relating to how tweemo scored it's sentiment value.</p>
+<div style="float:right">
 <h2>That's it.</h2>
 <h3><span class="text-muted">Get stuck in and enjoy<span></h3>
-
+</div>
+</div>	
 {% endblock %}
 
 {% block footer %}

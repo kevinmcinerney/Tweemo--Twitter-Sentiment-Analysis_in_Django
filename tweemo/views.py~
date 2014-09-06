@@ -142,9 +142,9 @@ def pull_tweets(q):
 	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))"""
 
-	stopw = set(line.strip() for line in open('app/assets/Dictionaries/stopwords'))
-	negation = set(line.strip() for line in open('app/assets/Dictionaries/negation.txt'))
-	eng = set(line.strip() for line in open('app/assets/Dictionaries/english.txt'))
+	stopw = set(line.strip() for line in open('/app/assets/Dictionaries/stopwords'))
+	negation = set(line.strip() for line in open('/app/assets/Dictionaries/negation.txt'))
+	eng = set(line.strip() for line in open('/app/assets/Dictionaries/english.txt'))
 
 
 	for time in time_list:
@@ -518,7 +518,7 @@ def squeeze(string):
 #with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
 def expand_slang():
     d = {}
-    with open('app/assets/Dictionaries/slang.txt')as f:
+    with open('/app/assets/Dictionaries/slang.txt')as f:
         for line in f:
             s = ''
             (a,b) = line.split('\t')

@@ -1,21 +1,15 @@
 {% extends "bootstrap_small.html" %}
 {% load static %}
 
-
-{% block carousel %}
-{% endblock %}
-
-{% block features %}
-{% endblock %}
-
 {% block search %}
 <h2 style="margin-left:400px" id="search" class="featurette-heading">Tweemo Tips.<h2>
 <h3 style="margin-left:400px"><span class="text-muted">Search Smart.</span></h3>
 <img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
 <div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
-<p> 1.) To search for phrases like 'bread and butter' use quotes to identify the phrase.</p>
-<p> 2.) To search for one of two words use the 'or' word as so: happy or :-)</p>
-<p> 3.) To search fortwo words in any partof a tweet justlist the terms: bread butter</p>
+<p> 1.) To search for phrases like "bread and butter" use quotes to identify the phrase.</p>
+<p> 1.) To search for tweets containing two words use the capitalized 'AND' AS SO: 'cats AND dogs'.</p>
+<p> 2.) To search for one of two words use the capitalized 'OR' word as so: 'happy OR great'</p>
+<p> 3.) To search for two words in any partof a tweet just list the terms: bread butter</p>
 </div>	
 {% endblock %}
 

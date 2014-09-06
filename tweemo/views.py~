@@ -605,7 +605,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
             continue
         elif hashtag[0:].lower() in scores:
-            extracted_words.append(hashtag[1:].lower())
+            extracted_words.append(hashtag[0:].lower())
             continue
         word_count = 0
         remainder_list = []

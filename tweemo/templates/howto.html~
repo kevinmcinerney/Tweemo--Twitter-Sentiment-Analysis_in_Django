@@ -5,20 +5,18 @@
 <h2 style="margin-left:200px" id="search" class="featurette-heading">Sentiment Analysis Research<h2>
 <h3 style="margin-left:200px"><span class="text-muted">Did you know?.</span></h3>
 <img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
-<div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
+<div style="margin-top:20px;margin-left:400px;text-align:center;width:800px">
 <h2> Table of Contents</h2>
-<p>
-Review of Twitter Analysis	2
-The Possibilities	2
-The Controversy	2
-Is Sentiment Analysis the Answer?	2
-Challenges of Sentiment Analysis	2
-Overview of Techniques	3
-Review Chosen Technique	6
-Description of Technique & Motivation	6
-Implementation Outline	6
-References	9
-</p>
+<p>Review of Twitter Analysis</p>
+<p>The Possibilities</p>
+<p>The Controversy</p>
+<p>Is Sentiment Analysis the Answer?</p>
+<p>Challenges of Sentiment Analysis</p>
+<p>Overview of Techniques</p>
+<p>Review Chosen Technique</p>
+<p>Description of Technique & Motivation</p>
+<p>Implementation Outline</p>
+<p>References</p>
 
 
 
@@ -55,7 +53,7 @@ The majority of the techniques used for sentiment analysis fall into two broad a
 Lexicon-based approaches come in two main varieties: dictionary-based and corpus based (Medhat, Hassan, & Korashy, 2014). These lexicons can be built manually (Tong, 2001) or automatically. In the dictionary-based approach, an initial lexicon of words paired with sentiment scores are used to classify new words and expand the original dictionary (Turney & Littman. 2003). This is done by searching through well-known thesaurus-like tools such as word-net (Kumar & Sebastian, 2012).The aim is to produce a lexicon of word/score pairings that can be compared with individual words belonging to a piece of text. A disadvantage of the dictionary approach is that it isn’t sensitive to context when finding new opinion words (Medhat, 2014). This weakness is addressed in the corpus-based approach by using specific syntactic restraints to narrow the choice of opinion words generated. For example, consider this with a mystery word labelled x “The car is beautiful and x”. The conjunctive ‘and’ makes it likely that the unknown word is also positive. If the conjunctive had been ‘but’, then the opposite would be true. This is the type of information which is exploited in the corpus-based approach.
 </p>
 
-<h2>Design and implementation</2>
+<h2>Design and implementation</h2>
 <p>
 In the case of Twitter a great deal of pre-processing is required to in order to maximize the utility of the chosen lexicon (Pak & Paroubek, 2010). Tweets must be filtered if the author wishes to remove punctuation, URL’s, hastags, or emoticons. Alternatively, items such as emoticons may be added to the lexicon (Kumar & Sebastian, 2012). Once filtered, the text must be normalized through lowercasing, spellchecking, and lemmatizing or stemming. The effect of negation is also significant and must be accounted for. For the purposes of illustration what follows is a very simple implementation of the lexicon-based approach. In practice it would need to be supplemented by greater pre-processing to increase its efficiency, accuracy and scalability. A corpus containing tab delimited pairs of words and sentiment scores is assigned to a variable ‘afinnfile’. A text document containing raw twitter data is then converted into JSON format line by line. These lines are then iterated over and each word is checked against a dictionary containing predefined pairs of words and sentiment scores. In this code each tweet is given the sum total of any sentiment scores which are matched against the dictionary. In other studies, only the maximum sentiment score within the tweet has also been used, as is the case with SentiStrength (Thelwall, 2013).
 </p>

@@ -5,20 +5,18 @@
 <h2 style="margin-left:200px" id="search" class="featurette-heading">Sentiment Analysis Research<h2>
 <h3 style="margin-left:200px"><span class="text-muted">Did you know?.</span></h3>
 <img  src="{% static 'assets/images/oie_transparent.png' %}" alt="Generic placeholder image" style="margin-top:-100px;float:right;margin-right:150px;width: 200px; height: 200px;">
-<div style="margin-top:20px;margin-left:400px;text-align:center;width:400px">
+<div style="margin-top:20px;margin-left:400px;text-align:center;width:800px">
 <h2> Table of Contents</h2>
-<p>
-Review of Twitter Analysis	2
-The Possibilities	2
-The Controversy	2
-Is Sentiment Analysis the Answer?	2
-Challenges of Sentiment Analysis	2
-Overview of Techniques	3
-Review Chosen Technique	6
-Description of Technique & Motivation	6
-Implementation Outline	6
-References	9
-</p>
+<p>Review of Twitter Analysis</p>
+<p>The Possibilities</p>
+<p>The Controversy</p>
+<p>Is Sentiment Analysis the Answer?</p>
+<p>Challenges of Sentiment Analysis</p>
+<p>Overview of Techniques</p>
+<p>Review Chosen Technique</p>
+<p>Description of Technique & Motivation</p>
+<p>Implementation Outline</p>
+<p>References</p>
 
 
 
@@ -55,7 +53,7 @@ The majority of the techniques used for sentiment analysis fall into two broad a
 Lexicon-based approaches come in two main varieties: dictionary-based and corpus based (Medhat, Hassan, & Korashy, 2014). These lexicons can be built manually (Tong, 2001) or automatically. In the dictionary-based approach, an initial lexicon of words paired with sentiment scores are used to classify new words and expand the original dictionary (Turney & Littman. 2003). This is done by searching through well-known thesaurus-like tools such as word-net (Kumar & Sebastian, 2012).The aim is to produce a lexicon of word/score pairings that can be compared with individual words belonging to a piece of text. A disadvantage of the dictionary approach is that it isn’t sensitive to context when finding new opinion words (Medhat, 2014). This weakness is addressed in the corpus-based approach by using specific syntactic restraints to narrow the choice of opinion words generated. For example, consider this with a mystery word labelled x “The car is beautiful and x”. The conjunctive ‘and’ makes it likely that the unknown word is also positive. If the conjunctive had been ‘but’, then the opposite would be true. This is the type of information which is exploited in the corpus-based approach.
 </p>
 
-<h2>Design and implementation</2>
+<h2>Design and implementation</h2>
 <p>
 In the case of Twitter a great deal of pre-processing is required to in order to maximize the utility of the chosen lexicon (Pak & Paroubek, 2010). Tweets must be filtered if the author wishes to remove punctuation, URL’s, hastags, or emoticons. Alternatively, items such as emoticons may be added to the lexicon (Kumar & Sebastian, 2012). Once filtered, the text must be normalized through lowercasing, spellchecking, and lemmatizing or stemming. The effect of negation is also significant and must be accounted for. For the purposes of illustration what follows is a very simple implementation of the lexicon-based approach. In practice it would need to be supplemented by greater pre-processing to increase its efficiency, accuracy and scalability. A corpus containing tab delimited pairs of words and sentiment scores is assigned to a variable ‘afinnfile’. A text document containing raw twitter data is then converted into JSON format line by line. These lines are then iterated over and each word is checked against a dictionary containing predefined pairs of words and sentiment scores. In this code each tweet is given the sum total of any sentiment scores which are matched against the dictionary. In other studies, only the maximum sentiment score within the tweet has also been used, as is the case with SentiStrength (Thelwall, 2013).
 </p>
@@ -191,47 +189,42 @@ The website’s appearance will be modelled on the simplistic design of Sentimen
 
 
 <h2>References</h2>
-<p>
-Abbasi, A., Hassan, A., & Dhar, M.(NA). Benchmarking Twitter Sentiment Analysis Tools.
-Abbasi,  A.,  Fu,  T.,  Zeng,  D.,  and  Adjeroh,  D.  (2013). Crawling  Credible  Online  Medical  Sentiments  for Social  Intelligence.  Proceedings  of  the  ASE/IEEE International Conference on Social Computing.
-Basiri, M. E., Naghsh-Nilchi, A. R., & Ghasem-Aghaee, N. (2014). Sentiment Prediction Based on Dempster-Shafer Theory of Evidence. Mathematical Problems in Engineering, 2014.
-Bollen, J., Mao, H., & Zeng, X. (2011). Twitter mood predicts the stock market. arXiv, 2(1). doi:10.1016/j.jocs.2010.12.
-Dodds, P. S., & Danforth, C. M. (2010). Measuring the happiness of large-scale written expression: Songs, blogs, and presidents. Journal of Happiness Studies, 11(4), 441-456.
-DuV ander, A. (2012). Which APIs are Handling Billions of Requests Per Day? Programmable Web, May.
-Feldman, R. (2013). Techniques and applications for sentiment analysis. doi:10.1145/2436256.2436274
-
-Gayo-Avello, D. (2011). Don't turn social media into another'Literary Digest'poll.Communications of the ACM, 54(10), 121-128
-
-Gayo-Avello, D. (2012). " I Wanted to Predict Elections with Twitter and all I got was this Lousy Paper"--A Balanced Survey on Election Prediction using Twitter Data. arXiv preprint arXiv:1204.6441
-
-Gilbert, E., & Karahalios, K. (2010, May). Widespread Worry and the Stock Market. In ICWSM (pp. 59-65).
-Golder, S. A., & Macy, M. W. (2011). Diurnal and seasonal mood vary with work, sleep, and daylength across diverse cultures. Science, 333(6051), 1878-1881.
-Jurafsky, D., & Martin, J. H. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition.
-Jungherr, A., Jürgens, P., & Schoen, H. (2012). Why the pirate party won the german election of 2009 or the trouble with predictions: A response to tumasjan, a., sprenger, to, sander, pg, & welpe, im “predicting elections with twitter: What 140 characters reveal about political sentiment”. Social Science Computer Review, 30(2), 229-234.
-Kumar, A., & Sebastian, T. M. (2012). Sentiment analysis on twitter. IJCSI International Journal of Computer Science Issues, 9(3), 372-378.
-Nielsen, F. Å. (2011). A new ANEW: Evaluation of a word list for sentiment analysis in microblogs. arXiv preprint arXiv:1103.2903.
-Medhat, W., Hassan, A., & Korashy, H. (2014). Sentiment analysis algorithms and applications: A survey. Retrieved from http://www.sciencedirect.com/science/article/pii/S2090447914000550
-Mudinas, A., Zhang, D., & Levene, M. (2012, August). Combining lexicon and learning based approaches for concept-level sentiment analysis. In Proceedings of the First International Workshop on Issues of Sentiment Discovery and Opinion Mining (p. 5). ACM.
-Mislove, A., Lehmann, S., Ahn, Y. Y., Onnela, J. P., & Rosenquist, J. N. (2011). Understanding the Demographics of Twitter Users. ICWSM, 11, 5th.
-Nigam, K., Lafferty, J., & McCallum, A. (1999, August). Using maximum entropy for text classification. In IJCAI-99 workshop on machine learning for information filtering (Vol. 1, pp. 61-67).
-Pak, A., & Paroubek, P. (2010). Twitter as a Corpus for Sentiment Analysis and Opinion Mining. Retrieved from http://incc-tps.googlecode.com/svn/trunk/TPFinal/bibliografia/Pak%20and%20Paroubek%20(2010).%20Twitter%20as%20a%20Corpus%20for%20Sentiment%20Analysis%20and%20Opinion%20Mining.pdf
-Pang, B., Lee, L., & Vaithyanathan, S. (2002, July). Thumbs up?: sentiment classification using machine learning techniques. In Proceedings of the ACL-02 conference on Empirical methods in natural language processing-Volume 10 (pp. 79-86). Association for Computational Linguistics.
-Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. Foundations and trends in information retrieval, 2(1-2), 1-135.
-Prasad, S. (2010). Micro-blogging Sentiment Analysis Using Bayesian Classification Methods. Technical Report.
-Read, J. (2005, June). Using emoticons to reduce dependency in machine learning techniques for sentiment classification. In Proceedings of the ACL Student Research Workshop (pp. 43-48). Association for Computational Linguistics.
-Schrauwen, S. (2010). Machine learning approaches to sentiment analysis using the dutch netlog corpus. Machine Learning Approaches to Sentiment Analysis Using the Dutch Netlog Corpus (Antwerp, Belgium, 2010), CLiPS Technical Report Series, Computational Linguistics & Psycholinguistics.
-Smith, A. N., Fischer, E., and Yongjian, C. (2012). How does brand-related user-generated content differ across YouTube, Facebook, and Twitter? Journal of Interactive Marketing 26(2), pp. 102--113.
-Taboada, M., Brooke, J., Tofiloski, M., Voll, K., & Stede, M. (2011). Lexicon-based methods for sentiment analysis. Computational linguistics, 37(2), 267-307.
-Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. Journal of the American Society for Information Science and Technology, 61(12), 2544–2558. doi:10.1002/asi.21416
-Thelwall, M., & Buckley…, K. (2011). Sentiment in Twitter events. doi:10.1002/asi.21462
-Thelwall, M., Buckley, K., & Paltoglou, G. (2012). Sentiment strength detection for the social web. Journal of the American Society for Information Science and Technology, 63(1), 163-173.
-Thelwall, M. (2013). Heart and soul: Sentiment strength detection in the social web with sentistrength. Cyberemotions, 1-14.
-Tong, Richard M. (2001). An operational system for detecting and tracking opinions in on-line discussions. In Working Notes of the ACM SIGIR 2001 Workshop on Operational Text Classiﬁcation, pages 1–6,New York,  NY.
-Tumasjan, A., Sprenger, T. O., Sandner, P. G., & Welpe, I. M. (2010). Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment. ICWSM, 10, 178-185.
-Turney, P., & Littman., M (2003). Measuring praise and criticism: Inference of semantic orientation from association. ACM Transactions on Information Systems, 21(4):315–346
-Witten, I. H., & Frank, E. (2005). Data Mining: Practical machine learning tools and techniques. Morgan Kaufmann.
-Zhang, L., Ghosh, R., Dekhil, M., Hsu, M., & Liu, B. (2011). Combining lexicon-based and learning-based methods for Twitter sentiment analysis. HP Laboratories, Technical Report HPL-2011, 89.
- </p>
+<p>Abbasi, A., Hassan, A., & Dhar, M.(NA). Benchmarking Twitter Sentiment Analysis Tools.</p>
+<p>Abbasi,  A.,  Fu,  T.,  Zeng,  D.,  and  Adjeroh,  D.  (2013). Crawling  Credible  Online  Medical  Sentiments  for Social  Intelligence. Proceedings  of  the  ASE/IEEE International Conference on Social Computing.</p>
+<p>Basiri, M. E., Naghsh-Nilchi, A. R., & Ghasem-Aghaee, N. (2014). Sentiment Prediction Based on Dempster-Shafer Theory of Evidence. Mathematical Problems in Engineering, 2014.</p>
+<p>Bollen, J., Mao, H., & Zeng, X. (2011). Twitter mood predicts the stock market. arXiv, 2(1). doi:10.1016/j.jocs.2010.12.</p>
+<p>Dodds, P. S., & Danforth, C. M. (2010). Measuring the happiness of large-scale written expression: Songs, blogs, and presidents. Journal of Happiness Studies, 11(4), 441-456.</p>
+<p>DuV ander, A. (2012). Which APIs are Handling Billions of Requests Per Day? Programmable Web, May.</p>
+<p>Feldman, R. (2013). Techniques and applications for sentiment analysis. doi:10.1145/2436256.2436274</p>
+<p>Gayo-Avello, D. (2011). Don't turn social media into another'Literary Digest'poll.Communications of the ACM, 54(10), 121-128</p>
+<p>Gayo-Avello, D. (2012). " I Wanted to Predict Elections with Twitter and all I got was this Lousy Paper"--A Balanced Survey on Election Prediction using Twitter Data. arXiv preprint arXiv:1204.6441</p>
+<p>Gilbert, E., & Karahalios, K. (2010, May). Widespread Worry and the Stock Market. In ICWSM (pp. 59-65).</p>
+<p>Golder, S. A., & Macy, M. W. (2011). Diurnal and seasonal mood vary with work, sleep, and daylength across diverse cultures. Science, 333(6051), 1878-1881.</p>
+<p>Jurafsky, D., & Martin, J. H. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition.</p>
+<p>Jungherr, A., Jürgens, P., & Schoen, H. (2012). Why the pirate party won the german election of 2009 or the trouble with predictions: A response to tumasjan, a., sprenger, to, sander, pg, & welpe, im “predicting elections with twitter: What 140 characters reveal about political sentiment”. Social Science Computer Review, 30(2), 229-234.</p>
+<p>Kumar, A., & Sebastian, T. M. (2012). Sentiment analysis on twitter. IJCSI International Journal of Computer Science Issues, 9(3), 372-378.
+Nielsen, F. Å. (2011). A new ANEW: Evaluation of a word list for sentiment analysis in microblogs. arXiv preprint arXiv:1103.2903.</p>
+<p>Medhat, W., Hassan, A., & Korashy, H. (2014). Sentiment analysis algorithms and applications: A survey. Retrieved from http://www.sciencedirect.com/science/article/pii/S2090447914000550</p>
+<p>Mudinas, A., Zhang, D., & Levene, M. (2012, August). Combining lexicon and learning based approaches for concept-level sentiment analysis. In Proceedings of the First International Workshop on Issues of Sentiment Discovery and Opinion Mining (p. 5). ACM.</p>
+<p>Mislove, A., Lehmann, S., Ahn, Y. Y., Onnela, J. P., & Rosenquist, J. N. (2011). Understanding the Demographics of Twitter Users. ICWSM, 11, 5th.</p>
+<p>Nigam, K., Lafferty, J., & McCallum, A. (1999, August). Using maximum entropy for text classification. In IJCAI-99 workshop on machine learning for information filtering (Vol. 1, pp. 61-67).</p>
+<p>Pak, A., & Paroubek, P. (2010). Twitter as a Corpus for Sentiment Analysis and Opinion Mining. Retrieved from http://incc-tps.googlecode.com/svn/trunk/TPFinal/bibliografia/Pak%20and%20Paroubek%20(2010).%20Twitter%20as%20a%20Corpus%20for%20Sentiment%20Analysis%20and%20Opinion%20Mining.pdf</p>
+<p>Pang, B., Lee, L., & Vaithyanathan, S. (2002, July). Thumbs up?: sentiment classification using machine learning techniques. In Proceedings of the ACL-02 conference on Empirical methods in natural language processing-Volume 10 (pp. 79-86). Association for Computational Linguistics.</p>
+<p>Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. Foundations and trends in information retrieval, 2(1-2), 1-135.</p>
+<p>Prasad, S. (2010). Micro-blogging Sentiment Analysis Using Bayesian Classification Methods. Technical Report.</p>
+<p>Read, J. (2005, June). Using emoticons to reduce dependency in machine learning techniques for sentiment classification. In Proceedings of the ACL Student Research Workshop (pp. 43-48). Association for Computational Linguistics.</p>
+<p>Schrauwen, S. (2010). Machine learning approaches to sentiment analysis using the dutch netlog corpus. Machine Learning Approaches to Sentiment Analysis Using the Dutch Netlog Corpus (Antwerp, Belgium, 2010), CLiPS Technical Report Series, Computational Linguistics & Psycholinguistics.</p>
+<p>Smith, A. N., Fischer, E., and Yongjian, C. (2012). How does brand-related user-generated content differ across YouTube, Facebook, and Twitter? Journal of Interactive Marketing 26(2), pp. 102--113.</p>
+<p>Taboada, M., Brooke, J., Tofiloski, M., Voll, K., & Stede, M. (2011). Lexicon-based methods for sentiment analysis. Computational linguistics, 37(2), 267-307.</p>
+<p>Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. Journal of the American Society for Information Science and Technology, 61(12), 2544–2558. doi:10.1002/asi.21416</p>
+<p>Thelwall, M., & Buckley…, K. (2011). Sentiment in Twitter events. doi:10.1002/asi.21462</p>
+<p>Thelwall, M., Buckley, K., & Paltoglou, G. (2012). Sentiment strength detection for the social web. Journal of the American Society for Information Science and Technology, 63(1), 163-173.</p>
+<p>Thelwall, M. (2013). Heart and soul: Sentiment strength detection in the social web with sentistrength. Cyberemotions, 1-14.</p>
+<p>Tong, Richard M. (2001). An operational system for detecting and tracking opinions in on-line discussions. In Working Notes of the ACM SIGIR 2001 Workshop on Operational Text Classiﬁcation, pages 1–6,New York,  NY.</p>
+<p>Tumasjan, A., Sprenger, T. O., Sandner, P. G., & Welpe, I. M. (2010). Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment. ICWSM, 10, 178-185.</p>
+<p>Turney, P., & Littman., M (2003). Measuring praise and criticism: Inference of semantic orientation from association. ACM Transactions on Information Systems, 21(4):315–346</p>
+<p>Witten, I. H., & Frank, E. (2005). Data Mining: Practical machine learning tools and techniques. Morgan Kaufmann.
+Zhang, L., Ghosh, R., Dekhil, M., Hsu, M., & Liu, B. (2011). Combining lexicon-based and learning-based methods for Twitter sentiment analysis. HP Laboratories, Technical Report HPL-2011, 89.</p>
 </div>	
 {% endblock %}
 

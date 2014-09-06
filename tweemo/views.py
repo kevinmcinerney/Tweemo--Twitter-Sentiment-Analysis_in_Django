@@ -544,7 +544,7 @@ def replace_abbrevs(tweet):
             else:
                 replacement = slang_abbrev[word].split(' ')
             new_tweet = new_tweet[0:(i+dif)] + replacement + new_tweet[((i+dif)+1):]
-	if word == '#':
+	if word == '#' and i < len(tweet):
 		tweet[(i+1)] = '_hashtag_'
     return new_tweet
 

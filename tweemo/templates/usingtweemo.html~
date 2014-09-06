@@ -19,7 +19,7 @@ also be pie charts, a table of some basic descriptive statistics, and a long
 scrolling window where you can observe the tweets on which your analysis was
 performed. If you look closely you will see that each tweet also contains metadata
 relating to how tweemo scored it's sentiment value.</p>
-<div style="float:left">
+<div style="float:right">
 <h2>That's it.</h2>
 <h3><span class="text-muted">Get stuck in and enjoy<span></h3>
 </div>

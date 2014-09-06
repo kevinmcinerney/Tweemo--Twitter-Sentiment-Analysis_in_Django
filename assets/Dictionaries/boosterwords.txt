@@ -17,7 +17,11 @@ ought	-1
 overwhelmingly	2
 really	1
 should	-1
-slightly	1
+slightly	-1
+kinda	-1
+sorta	-1
+bit	-1
+little	-1
 some	-1
 sometimes	1
 sum	-1

@@ -111,6 +111,7 @@ significance	1
 winslow	1
 dignified	2
 fanaticism	-2
+fancy	2
 uselessness	-2
 beauty	3
 aches	-2
@@ -2178,7 +2179,6 @@ bailing	-2
 oppression	-3
 missouri	-2
 crystallizing	-4
-chance	2
 hard-hearted	2
 best-preserved	2
 nicest	2
@@ -5050,6 +5050,7 @@ supervisors	2
 trapper's	-2
 supervisory	2
 dreams	1
+dreamz	1
 vanity	-2
 coarseness	-2
 dignity	2
@@ -8228,6 +8229,7 @@ weakening	-2
 fun-filled	2
 bumped	-2
 grabbing	-2
+refreshing	1
 stutter	-2
 unintelligent	-2
 domination	-2
@@ -8429,7 +8431,6 @@ half-dressed	2
 haying	2
 grandparents	2
 cherishes	2
-amaz	3
 lows	-2
 strikebreakers	-2
 windows	1
@@ -9023,7 +9024,6 @@ neatness	1
 inane	-2
 burnet	-2
 inspirations	3
-chances	2
 sceptical	-2
 burners	-2
 superimposes	2

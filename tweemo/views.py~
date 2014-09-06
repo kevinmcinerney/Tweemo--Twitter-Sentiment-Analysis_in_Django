@@ -15,6 +15,7 @@ from django import forms as forms
 from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
 import os
+import string
 
 
 def home(request):
@@ -128,6 +129,20 @@ def pull_tweets(q):
 	# Clear any old Tweets from collection
 	posts.remove({})
 
+	# create dictionary of word-sentiment scores
+	scores = create_lexicon()
+	
+	# create dictionary of booster-sentiment scores
+	boosterwords = create_booster_lexicon()
+	
+	# create dictionary of emoticon-sentiment scores
+	emoticons = create_emoticon_lexicon()
+
+	stopw = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords'))
+	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
+	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))
+
+
 	for time in time_list:
 		for country in country_dictionary:
 
@@ -144,7 +159,7 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets: 
-				tot = send_processed_tweet_to_db(posts,country,tweet)
+				tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng)
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot
@@ -256,6 +271,17 @@ def create_booster_lexicon():
 	       		(key, val) = line.split('\t')
 	       		boosterwords[key] = int(val)
 	return boosterwords
+
+#--------------------------------------------------------------------------------#
+
+def create_emoticon_lexicon():
+	scores = {}
+	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+	with open(os.path.join(BASE_DIR, 'assets/Dictionaries/emoticons.txt')) as f:
+		for line in f:
+	       		(key, val) = line.split('\t')
+	       		scores[key] = int(val)
+	return scores
 
 #--------------------------------------------------------------------------------#
 def send_message(request):
@@ -374,74 +400,94 @@ def access_mongo_collection():
 
 	return posts
 #--------------------------------------------------------------------------------#
-def send_processed_tweet_to_db(posts,country, tweet):
+def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwords, scores, emoticons, eng):
 
-	
 	# initialize sentiment score
 	tot = 0
 
-	# create dictionary of word-sentiment scores
-	scores = create_lexicon()
-	
-	# create dictionary of word-sentiment scores
-	boosterwords = create_booster_lexicon()
-	
-	# nltk tokenizer
-	word_splitter = WordPunctTokenizer()
-
 	# Stores matched sentiment words from tweets (must be reset)
 	matches = []
+	hash_words = []
+	slang_abbrev = expand_slang()
 
 	# three nltk corpi
 	#stopw = set('/app/assets/Dictionaries/stopwords.txt')
 	#m_names = set('/app/assets/Dictionaries/male.txt')
 	#w_names = set('/app/assets/Dictionaries/female.txt')
-	stopw = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords','r')
-	m_names = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt','r')
-	w_names = open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt','r')
-	if tweet.text:	
-		words = word_splitter.tokenize(tweet.text)
+	#m_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt'))
+	#w_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt'))
+	if tweet.text:
+		hashtags = hashtag_finder(tweet.text)
+		if len(hashtags) > 0:
+			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
+		emo_dict = emoticon_score(tweet.text,emoticons)
+		matches += [i for i in emo_dict]
+		tot += sum([emo_dict[i] for i in emo_dict])	
+		words = replace_abbrevs(tweet.text)
+		words += hash_words
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
 		booster_sentiment_checker = [0 for x in range(0,len(words))]
+		negation_checker = create_negation_vector(words,negation)
+		num = 0
+		w_score = 0
+		ws_score = 0
+		print words
 		for i in range(0,len(words)):
-			w_prev = words[i-1].lower()
+			if i > 0:
+				num = 1
 			w = words[i].lower()
 			ws = squeeze(w)
-			if w not in stopw and w not in w_names and w not in m_names and len(w) > 2 and (w in scores):
-				print w
-				tot += scores[w]
-				matches.append(w)
-				consecutive_sentiment_checker.append(scores[w])
-				if consecutive_sentiment_checker[i-1] > 0:
-					tot += 1
-				elif consecutive_sentiment_checker[i-1] < 0:
-					tot -= 1
-				if booster_sentiment_checker[i-1] != 0:
-					if scores[w] > 0:
-						tot += booster_sentiment_checker[i-1]
-					else:
-						tot -= booster_sentiment_checker[i-1]
-			
-				
-			elif ws not in stopw and ws not in w_names and ws not in m_names  and len(words[i]) > 2 and ws in scores:
-				tot += scores[ws] + 1
-				matches.append(ws)
-				consecutive_sentiment_checker.append(scores[ws])
-				if consecutive_sentiment_checker[i-1] > 0:
-					tot += 1
-				elif consecutive_sentiment_checker[i-1] < 0:
-					tot -= 1
-				if booster_sentiment_checker[i-1] != 0:
-					if scores[ws] > 0:
-						tot += booster_sentiment_checker[i-1]
-					else:
-						tot -= booster_sentiment_checker[i-1]
-
+			all_caps = is_all_caps(words[i])
 			if w in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[w]
 			elif ws in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[ws]
-		
+			if w not in stopw and negation_checker[(i-num)] != 1:
+				if  w in scores:
+					w_score = scores[w]
+					tot += w_score
+					matches.append(w)
+					consecutive_sentiment_checker[i] = w_score
+					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
+						tot += 1
+					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
+						tot -= 1
+					if i >= 1 and booster_sentiment_checker[i-1] != 0:
+						if w_score > 0:
+							tot += booster_sentiment_checker[i-1]
+						else:
+							tot -= booster_sentiment_checker[i-1]
+					if all_caps == True:
+						if w_score > 0:
+							tot += 1
+						elif w_score < 0:
+							tot -= 1
+			
+			elif ws not in stopw and negation_checker[(i-num)] != 1:	
+				if ws in scores:
+					ws_score = scores[ws]
+					tot += ws_score + 1
+					matches.append(ws)
+					consecutive_sentiment_checker[i] = ws_score
+					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
+						tot += 1
+					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
+						tot -= 1
+					if i >= 1 and booster_sentiment_checker[i-1] != 0:
+						if ws_score > 0:
+							tot += booster_sentiment_checker[i-1]
+						else:
+							tot -= booster_sentiment_checker[i-1]
+					if all_caps == True:
+						if ws_score > 0:
+							tot += 1
+						elif ws_score < 0:
+							tot -= 1
+			if i < (len(words)-1) and squeeze(words[i]) == '!':
+				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot)
+			elif i < (len(words)-1) and squeeze(words[i]) == '!':
+				tot = exclamation_boost(consecutive_sentiment_checker,ws_score,i,tot)
+						
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 
@@ -464,3 +510,151 @@ def squeeze(string):
             n += 1
     return word.strip(' ')
 
+#--------------------------------------------------------------------------------#
+def expand_slang():
+    d = {}
+    with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
+        for line in f:
+            s = ''
+            (a,b) = line.split('\t')
+            b = WordPunctTokenizer().tokenize(b)
+            for i in range(0,len(b)):
+                s += str(b[i]) + str(' ')
+            d[a] = s
+    return d
+
+#--------------------------------------------------------------------------------#
+def replace_abbrevs(tweet):
+    tweet = WordPunctTokenizer().tokenize(tweet)
+    slang_abbrev = expand_slang()
+    new_tweet = tweet
+    replacement = []
+    for i in range(0,len(tweet)):
+        dif = abs(len(tweet) - len(new_tweet))
+        word = tweet[i].lower()
+        all_caps = is_all_caps(tweet[i])
+        if word in slang_abbrev:
+            if all_caps:
+                replacement = map(lambda x: x.upper(), slang_abbrev[word].split(' '))
+            else:
+                replacement = slang_abbrev[word].split(' ')
+            new_tweet = new_tweet[0:(i+dif)] + replacement + new_tweet[((i+dif)+1):]
+	if word == '#':
+		tweet[(i+1)] = '_hashtag_'
+    return new_tweet
+
+#--------------------------------------------------------------------------------#
+def is_all_caps(word):
+	return word.isupper()
+
+#--------------------------------------------------------------------------------#
+def emoticon_score(tweet, emoticons):
+	d = {}
+	for emo in tweet.split():
+		es = squeeze(emo)
+		if emo in emoticons:
+			d[emo] = emoticons[emo]
+		elif es in emoticons:
+			d[es] = emoticons[es]
+	return d
+
+#--------------------------------------------------------------------------------#
+def create_negation_vector(tweet,negation):
+	vector = [0 for x in range(0,len(tweet))]
+	for i in range(0,len(tweet)):
+		if tweet[i].lower() == 't':
+			if tweet[(i-2)].lower() in negation:
+				vector[i] = 1
+		elif tweet[i] in negation:
+			vector[i] = 1
+	return vector
+
+#--------------------------------------------------------------------------------#
+def exclamation_boost(vector,w_score,index,tot):
+	for i in vector[0:index][::-1]:
+		if i != 0 and w_score > 0:
+			tot += 1
+			break
+		elif i != 0 and w_score < 0:
+			tot -= 1
+			break
+	return tot
+
+#--------------------------------------------------------------------------------#
+def hashtag_finder(words):
+	l = []
+	words = words.split()
+	for word in words:
+		if word[0] == '#':
+		    l.append(word)
+	return l
+
+#--------------------------------------------------------------------------------#
+def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
+    extracted_words = []
+    exclude = []
+    between_words = []
+    end_words = []
+    for hashtag in hashtags:
+        hashtag = hashtag.encode('ascii','ignore').translate(None, string.punctuation)
+        if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
+            continue
+        elif hashtag[0:].lower() in scores:
+            extracted_words.append(hashtag[1:].lower())
+            continue
+        word_count = 0
+        remainder_list = []
+        remainder = hashtag
+        for x in range(0,len(hashtag)+1):
+            for y in range(x,len(hashtag)+1):
+                if hashtag[x:y].lower() in scores:
+		    if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
+                        print hashtag[0:x].lower()
+                        continue
+                    if validate_hashtag_gap(hashtag[y:-1].lower(),eng) == False:
+                        print hashtag[0:x].lower()
+                        continue
+                    idx = y
+                    for k in xrange(1,len(hashtag)):
+                        if hashtag[x:y+k].lower() in scores:
+                            idx = y + k
+                    extracted_word = hashtag[x:idx]
+                    word_count += 1
+                    exclude += [i for i in range(x,idx)]
+                    remainder = [hashtag[i] for i in range(1,len(hashtag)) if i not in exclude]
+                    if word_count > 1:
+                        between_words = ([hashtag[i] for i in range(1,y) if i not in exclude])
+                        if validate_hashtag_gap(between_words,eng) == False:
+                            continue
+                    extracted_words.append(extracted_word)
+                    x = y
+        remainder = ''.join(remainder)
+        remainder_list.append(remainder)
+        extracted_words += hashtag_expander(remainder_list,slang_abbrev)
+    return extracted_words
+#--------------------------------------------------------------------------------#
+
+def hashtag_expander(hashtags,slang_abbrev):
+	extracted_words = []
+	for hashtag in hashtags:
+		for x in range(0,len(hashtag)+1):
+			for y in range(0,len(hashtag)+1):
+				if str(hashtag[x:y].lower()) in slang_abbrev:
+					if is_all_caps(str(hashtag[x:y])) == True:
+						extracted_words = (map(lambda x: x.upper(), slang_abbrev[str(hashtag[x:y].lower())]))
+					else:
+						extracted_words = (map(lambda x: x, slang_abbrev[str(hashtag[x:y].lower())]))
+	return  extracted_words
+
+#--------------------------------------------------------------------------------#
+def validate_hashtag_gap(gap,eng):
+    gap = ''.join(gap)
+    gap_checker = [0 for i in range(0,len(gap))]
+    for x in range(0,len(gap)+1):
+        for y in range(x,len(gap)+1):
+            if str(gap[x:(y+1)]).lower() in eng:
+                gap_checker[x:(y+1)] = [1 for i in range(0,len(gap_checker[x:(y+1)]))]
+    for i in gap_checker:
+        if i == 0:
+            return False
+    return True

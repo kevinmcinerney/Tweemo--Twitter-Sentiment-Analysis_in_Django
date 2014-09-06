@@ -631,6 +631,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                             continue
                     extracted_words.append(extracted_word)
                     x = y
+		    break
         remainder = ''.join(remainder)
         remainder_list.append(remainder)
         extracted_words += hashtag_expander(remainder_list,slang_abbrev)

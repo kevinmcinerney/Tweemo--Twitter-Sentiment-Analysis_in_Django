@@ -613,11 +613,9 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         for x in range(0,len(hashtag)+1):
             for y in range(x,len(hashtag)+1):
                 if hashtag[x:y].lower() in scores:
-		    if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
-                        print hashtag[0:x].lower()
+                    if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
                         continue
-                    if validate_hashtag_gap(hashtag[y:-1].lower(),eng) == False:
-                        print hashtag[0:x].lower()
+                    if validate_hashtag_gap(hashtag[y:].lower(),eng) == False:
                         continue
                     idx = y
                     for k in xrange(1,len(hashtag)):
@@ -633,6 +631,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                             continue
                     extracted_words.append(extracted_word)
                     x = y
+		    break
         remainder = ''.join(remainder)
         remainder_list.append(remainder)
         extracted_words += hashtag_expander(remainder_list,slang_abbrev)

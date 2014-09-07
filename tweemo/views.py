@@ -480,7 +480,10 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				elif ws in scores:
 					squeezed_matches.append(ws)
 					ws_score = scores[ws]
-					tot += ws_score + 1
+					if ws_score > 0:
+						tot += ws_score + 1
+					elif ws_score < 0:
+						tot += ws_score - 1
 					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
 					matches.append(word_combo)
 					consecutive_sentiment_checker[i] = ws_score
@@ -515,7 +518,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 
-                 'sentiment': tot , 
+                 'sentiment': tot, 
                  'country': country, 
                  'matches': matches,
 		 'emoticons': emoticon_matches,

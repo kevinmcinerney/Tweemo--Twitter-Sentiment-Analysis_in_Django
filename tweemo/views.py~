@@ -516,7 +516,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
                  'retweet_count': tweet.retweet_count, 
                  'sentiment': tot , 
                  'country': country, 
-                 'matches': matches
+                 'matches': matches,
 		 'negated_words': negation_matches,
 		 'exclamated_words': exclamation_matches,
 		 'boosted': boost_matches,

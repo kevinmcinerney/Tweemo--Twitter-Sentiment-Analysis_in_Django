@@ -12,6 +12,7 @@ class TwitterStream(models.Model):
 	sentiment = models.CharField(max_length=200)
 	country = models.CharField(max_length=200)
 	matches = models.CharField(max_length=200)
+	emoticons = models.CharField(max_length=200)
 	negated_words = models.CharField(max_length=200)
 	exclamated_words = models.CharField(max_length=200)
 	boosted = models.CharField(max_length=200)

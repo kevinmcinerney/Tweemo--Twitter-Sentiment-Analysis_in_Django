@@ -137,15 +137,15 @@ def pull_tweets(q):
 	
 	# create dictionary of emoticon-sentiment scores
 	emoticons = create_emoticon_lexicon()
-	"""
+	
 	stopw = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
-	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))"""
-
+	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))
+	"""
 	stopw = set(line.strip() for line in open('/app/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/app/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/app/assets/Dictionaries/english.txt'))
-
+	"""
 
 	for time in time_list:
 		for country in country_dictionary:
@@ -411,7 +411,14 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 
 	# Stores matched sentiment words from tweets (must be reset)
 	matches = []
+	emoticon_matches = []
 	hash_words = []
+	negation_matches = []
+	exclamation_matches = []
+	boost_matches = []
+	consecutive_matches = []
+	squeezed_matches = []
+	all_caps_matches = []
 	slang_abbrev = expand_slang()
 
 	# three nltk corpi
@@ -421,18 +428,12 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	#m_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt'))
 	#w_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt'))
 	if tweet.text:
-		negation_matches = []
-		exclamation_matches = []
-		boost_matches = []
-		consecutive_matches = []
-		squeezed_matches = []
-		all_caps_matches = []
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
 		emo_dict = emoticon_score(tweet.text,emoticons)
-		matches += [i for i in emo_dict]
-		tot += sum([emo_dict[i] for i in emo_dict])	
+		emoticon_matches = [i for i in emo_dict]
+		tot = sum([emo_dict[i] for i in emo_dict])	
 		words = replace_abbrevs(tweet.text)
 		words += hash_words
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
@@ -441,7 +442,6 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		num = 0
 		w_score = 0
 		ws_score = 0
-		print words
 		for i in range(0,len(words)):
 			if i > 0:
 				num = 1
@@ -475,10 +475,8 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						if w_score > 0:
 							tot += 1
 						elif w_score < 0:
-							tot -= 1
-			
-			elif ws not in stopw and negation_checker[(i-num)] != 1:	
-				if ws in scores:
+							tot -= 1	
+				elif ws in scores:
 					squeezed_matches.append(ws)
 					ws_score = scores[ws]
 					tot += ws_score + 1
@@ -505,6 +503,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				for i in reversed(range(0,i+1)):
     					if consecutive_sentiment_checker[i] != 0:
 						exclamation_matches.append(squeeze(words[i]))
+						break
 			
 			if w in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(w)
@@ -517,6 +516,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
                  'sentiment': tot , 
                  'country': country, 
                  'matches': matches,
+		 'emoticons': emoticon_matches,
 		 'negated_words': negation_matches,
 		 'exclamated_words': exclamation_matches,
 		 'boosted': boost_matches,
@@ -541,9 +541,10 @@ def squeeze(string):
 
 #--------------------------------------------------------------------------------#
 #with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
+#with open('/app/assets/Dictionaries/slang.txt')as f:
 def expand_slang():
     d = {}
-    with open('/app/assets/Dictionaries/slang.txt')as f:
+    with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
         for line in f:
             s = ''
             (a,b) = line.split('\t')
@@ -555,7 +556,7 @@ def expand_slang():
 
 #--------------------------------------------------------------------------------#
 def replace_abbrevs(tweet):
-    tweet = WordPunctTokenizer().tokenize(tweet)
+    tweet = tweet.split(' ')
     slang_abbrev = expand_slang()
     new_tweet = tweet
     replacement = []
@@ -570,7 +571,9 @@ def replace_abbrevs(tweet):
                 replacement = slang_abbrev[word].split(' ')
             new_tweet = new_tweet[0:(i+dif)] + replacement + new_tweet[((i+dif)+1):]
 	if word == '#' and i < (len(tweet)-1):
-		tweet[(i+1)] = '_hashtag_'
+		new_tweet[(i+1)] = '_hashtag_'
+	if word[:7] == 'http://':
+		new_tweet[i] = '_url_'
     return new_tweet
 
 #--------------------------------------------------------------------------------#

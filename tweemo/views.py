@@ -456,7 +456,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				if  w in scores:
 					w_score = scores[w]
 					tot += w_score
-					matches.append(str(w) + str(: ) + str(s_score))
+					matches.append((str(w) + str(: ) + str(s_score)))
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						consecutive_matches.append(w)

@@ -421,6 +421,12 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	#m_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt'))
 	#w_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt'))
 	if tweet.text:
+		negation_matches = []
+		exclamation_matches = []
+		boost_matches = []
+		consecutive_matches = []
+		squeezed_matches = []
+		all_caps_matches = []
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
@@ -453,15 +459,19 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					matches.append(w)
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
+						consecutive_matches.append(w)
 						tot += 1
 					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
+						consecutive_matches.append(w)
 						tot -= 1
 					if i >= 1 and booster_sentiment_checker[i-1] != 0:
+						boost_matches.append(w)
 						if w_score > 0:
 							tot += booster_sentiment_checker[i-1]
 						else:
 							tot -= booster_sentiment_checker[i-1]
 					if all_caps == True:
+						all_caps_matches.append(w)
 						if w_score > 0:
 							tot += 1
 						elif w_score < 0:
@@ -469,6 +479,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 			
 			elif ws not in stopw and negation_checker[(i-num)] != 1:	
 				if ws in scores:
+					squeezed_matches.append(ws)
 					ws_score = scores[ws]
 					tot += ws_score + 1
 					matches.append(ws)
@@ -478,26 +489,40 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
 						tot -= 1
 					if i >= 1 and booster_sentiment_checker[i-1] != 0:
+						boost_matches.append(ws)
 						if ws_score > 0:
 							tot += booster_sentiment_checker[i-1]
 						else:
 							tot -= booster_sentiment_checker[i-1]
 					if all_caps == True:
+						all_caps_matches.append(ws)
 						if ws_score > 0:
 							tot += 1
 						elif ws_score < 0:
 							tot -= 1
 			if i < (len(words)-1) and squeeze(words[i]) == '!':
 				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot)
-			elif i < (len(words)-1) and squeeze(words[i]) == '!':
-				tot = exclamation_boost(consecutive_sentiment_checker,ws_score,i,tot)
+				for i in reversed(range(0,index+1)):
+    					if i != 0:
+						exclamation_matches.append(squeeze(words[i])
+			
+			if w in scores and negation_checker[(i-num)] == 1:
+				negation_matches.append(w)
+			elif ws in scores and negation_checker[(i-num)] == 1:
+				negation_matches.append(ws)
 						
 	data = { 'text': tweet.text, 
                  'created_at': tweet.created_at, 
                  'retweet_count': tweet.retweet_count, 
                  'sentiment': tot , 
                  'country': country, 
-                 'matches': matches 
+                 'matches': matches
+		 'negated_words': negation_matches,
+		 'exclamated_words': exclamation_matches,
+		 'boosted': boost_matches,
+		 'consecutive_words': consecutive_matches,
+		 'repeated_letter_words':squeezed_matches,
+		 'capitalized_words': all_caps_matches,
                 }
 
 	# insert tweet data to MongoDB

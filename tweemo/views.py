@@ -506,9 +506,9 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
     					if i != 0:
 						exclamation_matches.append(squeeze(words[i])
 			
-			if w in scores and negation_checker[(i-num)] == 1:
+			if w in scores and (negation_checker[(i-num)] == 1):
 				negation_matches.append(w)
-			elif ws in scores and negation_checker[(i-num)] == 1:
+			elif ws in scores and (negation_checker[(i-num)] == 1):
 				negation_matches.append(ws)
 						
 	data = { 'text': tweet.text, 

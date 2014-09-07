@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms as forms
-from django.newforms.widgets import *
+from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
 
 # Create your models here.

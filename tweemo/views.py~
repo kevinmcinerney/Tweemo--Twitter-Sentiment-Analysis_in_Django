@@ -548,28 +548,28 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					negation_matches.append(ws)
 	
 				
-	data = { 'text': tweet_list, 
-                 'created_at': tweet.created_at, 
-                 'retweet_count': tweet.retweet_count, 
-                 'sentiment': tot, 
-                 'country': country, 
-                 'matches': matches,
-		 'emoticons': emoticon_matches,
-		 'hashtags': hash_matches,
-		 'negated_words': negation_matches,
-		 'exclamated_words': exclamation_matches,
-		 'boosted': boost_matches,
-		 'consecutive_words': consecutive_matches,
-		 'repeated_letter_words':squeezed_matches,
-		 'capitalized_words': all_caps_matches,
-		 'search_term': q.lower().strip('"'),
-		 'search_list': search_list
-                }
+			data = { 'text': tweet_list, 
+				 'created_at': tweet.created_at, 
+				 'retweet_count': tweet.retweet_count, 
+				 'sentiment': tot, 
+				 'country': country, 
+				 'matches': matches,
+				 'emoticons': emoticon_matches,
+				 'hashtags': hash_matches,
+				 'negated_words': negation_matches,
+				 'exclamated_words': exclamation_matches,
+				 'boosted': boost_matches,
+				 'consecutive_words': consecutive_matches,
+				 'repeated_letter_words':squeezed_matches,
+				 'capitalized_words': all_caps_matches,
+				 'search_term': q.lower().strip('"'),
+				 'search_list': search_list
+				}
 	
 				
 
-	# insert tweet data to MongoDB
-	posts.insert(data)
+			# insert tweet data to MongoDB
+			posts.insert(data)
 	return tot
 
 

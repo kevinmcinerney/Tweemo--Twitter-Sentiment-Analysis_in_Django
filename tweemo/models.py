@@ -20,6 +20,9 @@ class TwitterStream(models.Model):
 	consecutive_words = models.CharField(max_length=200)
 	repeated_letter_words = models.CharField(max_length=200)
 	capitalized_words = models.CharField(max_length=200)
+	search_term = models.CharField(max_length=200)
+	search_list = models.CharField(max_length=200)
+
 	
 class ContactForm(forms.Form):
         name = forms.CharField()

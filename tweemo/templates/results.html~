@@ -79,7 +79,7 @@
 	    	<div style="margin-top:5px;border:1px solid black; width: 380px; height: 280px;float:left" id="piechart2"></div>
 
 	  	<div style="float:left;margin-left:5px;margin-top:5px">
-	      		<iframe src='/home/stream' id="info" name="info" width="600px" height="160px" seamless="">
+	      		<iframe src='/stream' id="info" name="info" width="600px" height="160px" seamless="">
 	     		</iframe>
     		</div>
 		<table style="margin-top:5px; border:1px solid black; width: 985px; height: 280px;float:left;border-collapse:collapse;width:985px">
@@ -181,7 +181,7 @@
 		</table>
 		<div style="float:left;margin-top:5px;border:1px solid black;width: 985px; height: 400px;" id="chart_div2"></div>
 		<div>
-	      		<iframe src='/home/tweets' id="info" name="info" width="985px" height="400px" seamless="">
+	      		<iframe src='/tweets' id="info" name="info" width="985px" height="400px" seamless="">
 	     		</iframe>
     		</div>
 		

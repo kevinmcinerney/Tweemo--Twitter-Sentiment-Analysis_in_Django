@@ -2,9 +2,21 @@
 {% for tweet in here %}
 {% if tweet.country == 'Ireland' %}
 {% if tweet.sentiment < 0 %}
-<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">c
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{%  elif word|lower|slice:"1:"  == tweet.search_term %}}
+<strong> {{ word }} </strong>
+{%  elif word|lower in tweet.search_list  %}}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p>
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -24,8 +36,16 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag">         Country: {{ tweet.country }}  Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
 <details>
@@ -44,7 +64,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -69,7 +97,15 @@
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -89,7 +125,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -109,7 +153,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -133,10 +185,18 @@
 
 {% if tweet.country == 'Spain' %}
 {% if tweet.sentiment < 0 %}
-<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">c
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}  <img  src="{% static 'assets/images/spain.JPG' %}" Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}  <img  src="{% static 'assets/images/spain.JPG' %}"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
 <details>
@@ -155,7 +215,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}   <img  src="{% static 'assets/images/spain.JPG' %}"Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -175,7 +243,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}   <img  src="{% static 'assets/images/spain.JPG' %}"Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -196,14 +272,19 @@
 {% endif %}
 
 
-
-
-
 {% if tweet.country == 'Germany' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
@@ -223,7 +304,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -243,7 +332,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -269,7 +366,15 @@
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
@@ -289,7 +394,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -309,7 +422,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
@@ -334,7 +455,15 @@
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -354,7 +483,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
@@ -374,7 +511,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
@@ -399,8 +544,16 @@
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}  Matched Word(s): </p>
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>
 <details>
@@ -419,7 +572,15 @@
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
 <div>
 </summary>
@@ -439,7 +600,15 @@
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
 <summary>
-<p>Tweet: {{ tweet.text }}</p> 
+<p> Tweet: 
+{% for word in tweet.text %}
+{% if word|lower == tweet.search_term %}
+<strong> {{ word }} </strong>
+{% else %}
+{{ word }} 
+{% endif %} 
+{% endfor %}
+</p> 
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
 <div>
 </summary>

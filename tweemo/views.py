@@ -10,6 +10,7 @@ import sys
 import json
 from datetime import date, timedelta
 from nltk import WordPunctTokenizer
+from nltk import WhitespaceTokenizer
 from tweemo.models import ContactForm
 from django import forms as forms
 from django.forms.widgets import *
@@ -137,7 +138,7 @@ def pull_tweets(q):
 	
 	# create dictionary of emoticon-sentiment scores
 	emoticons = create_emoticon_lexicon()
-	"""
+	
 	stopw = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))
@@ -145,7 +146,7 @@ def pull_tweets(q):
 	stopw = set(line.strip() for line in open('/app/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/app/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/app/assets/Dictionaries/english.txt'))
-	
+	"""
 
 	for time in time_list:
 		for country in country_dictionary:
@@ -163,7 +164,7 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets:
-				tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng)
+				tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng,q)
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot
@@ -403,8 +404,21 @@ def access_mongo_collection():
 	posts = db.tweemo_twitterstream
 
 	return posts
+
 #--------------------------------------------------------------------------------#
-def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwords, scores, emoticons, eng):
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+#--------------------------------------------------------------------------------#
+def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwords, scores, emoticons, eng,q):
 
 	# initialize sentiment score
 	tot = 0
@@ -420,22 +434,36 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	squeezed_matches = []
 	all_caps_matches = []
 	hash_matches = []
+	tweet_list = []
+	search_list = []
 	slang_abbrev = expand_slang()
+	query_in_text = False
 
-	# three nltk corpi
-	#stopw = set('/app/assets/Dictionaries/stopwords.txt')
-	#m_names = set('/app/assets/Dictionaries/male.txt')
-	#w_names = set('/app/assets/Dictionaries/female.txt')
-	#m_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/male.txt'))
-	#w_names = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/female.txt'))
+	
+	terms = WhitespaceTokenizer().tokenize(q)
+	if len(terms) > 1:
+		for word in terms:
+			if word != 'and' or word != 'or' or word != '"':
+				search_list.append(word)
 	if tweet.text:
+		
+		temp_tweet = WhitespaceTokenizer().tokenize(tweet.text)
+		for i in range(0,len(temp_tweet)):
+			word = temp_tweet[i].lower()
+			tweet_list.append(word)
+		for q in terms:
+			if q in tweet_list:
+				query_in_text = True
+		
+		print query_in_text
+		print tweet.text	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
 			hash_matches = hash_words
 		emo_dict = emoticon_score(tweet.text,emoticons)
 		emoticon_matches = [i for i in emo_dict]
-		tot = sum([emo_dict[i] for i in emo_dict])	
+		tot = sum([emo_dict[i] for i in emo_dict])
 		words = replace_abbrevs(tweet.text)
 		words += hash_words
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
@@ -444,101 +472,107 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		num = 0
 		w_score = 0
 		ws_score = 0
-		for i in range(0,len(words)):
-			if i > 0:
-				num = 1
-			w = words[i].lower()
-			ws = squeeze(w)
-			all_caps = is_all_caps(words[i])
-			if w in boosterwords:
-				booster_sentiment_checker[i] = boosterwords[w]
-			elif ws in boosterwords:
-				booster_sentiment_checker[i] = boosterwords[ws]
-			if w not in stopw and negation_checker[(i-num)] != 1:
-				if  w in scores:
-					w_score = scores[w]
-					tot += w_score
-					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
-					matches.append(word_combo)
-					consecutive_sentiment_checker[i] = w_score
-					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
-						consecutive_matches.append(w)
-						tot += 1
-					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
-						consecutive_matches.append(w)
-						tot -= 1
-					if i >= 1 and booster_sentiment_checker[i-1] != 0:
-						boost_matches.append(w)
-						if w_score > 0:
-							tot += booster_sentiment_checker[i-1]
-						else:
-							tot -= booster_sentiment_checker[i-1]
-					if all_caps == True:
-						all_caps_matches.append(w)
-						if w_score > 0:
+		if query_in_text:
+			for i in range(0,len(words)):
+				if i > 0:
+					num = 1
+				w = words[i].lower()
+				ws = squeeze(w)
+				all_caps = is_all_caps(words[i])
+				if w in boosterwords:
+					booster_sentiment_checker[i] = boosterwords[w]
+				elif ws in boosterwords:
+					booster_sentiment_checker[i] = boosterwords[ws]
+				if w not in stopw and negation_checker[(i-num)] != 1:
+					if  w in scores:
+						w_score = scores[w]
+						tot += w_score
+						word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
+						matches.append(word_combo)
+						consecutive_sentiment_checker[i] = w_score
+						if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
+							consecutive_matches.append(w)
 							tot += 1
-						elif w_score < 0:
-							tot -= 1	
-				elif ws in scores:
-					squeezed_matches.append(ws)
-					ws_score = scores[ws]
-					if ws_score > 0:
-						tot += ws_score + 1
-					elif ws_score < 0:
-						tot += ws_score - 1
-					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
-					matches.append(word_combo)
-					consecutive_sentiment_checker[i] = ws_score
-					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
-						tot += 1
-					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
-						tot -= 1
-					if i >= 1 and booster_sentiment_checker[i-1] != 0:
-						boost_matches.append(ws)
-						if ws_score > 0:
-							tot += booster_sentiment_checker[i-1]
-						else:
-							tot -= booster_sentiment_checker[i-1]
-					if all_caps == True:
-						all_caps_matches.append(ws)
-						if ws_score > 0:
-							tot += 1
-						elif ws_score < 0:
+						elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
+							consecutive_matches.append(w)
 							tot -= 1
+						if i >= 1 and booster_sentiment_checker[i-1] != 0:
+							boost_matches.append(w)
+							if w_score > 0:
+								tot += booster_sentiment_checker[i-1]
+							else:
+								tot -= booster_sentiment_checker[i-1]
+						if all_caps == True:
+							all_caps_matches.append(w)
+							if w_score > 0:
+								tot += 1
+							elif w_score < 0:
+								tot -= 1	
+					elif ws in scores:
+						squeezed_matches.append(ws)
+						ws_score = scores[ws]
+						if ws_score > 0:
+							tot += ws_score + 1
+						elif ws_score < 0:
+							tot += ws_score - 1
+						word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
+						matches.append(word_combo)
+						consecutive_sentiment_checker[i] = ws_score
+						if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
+							tot += 1
+						elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
+							tot -= 1
+						if i >= 1 and booster_sentiment_checker[i-1] != 0:
+							boost_matches.append(ws)
+							if ws_score > 0:
+								tot += booster_sentiment_checker[i-1]
+							else:
+								tot -= booster_sentiment_checker[i-1]
+						if all_caps == True:
+							all_caps_matches.append(ws)
+							if ws_score > 0:
+								tot += 1
+							elif ws_score < 0:
+								tot -= 1
 			
-			if i < len(words) and '!' in words[i]:
-				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot,sum([x=='!' for x in words])) 
-				for i in reversed(range(0,i+1)):
-    					if consecutive_sentiment_checker[i] != 0:
-						exclamation_matches.append(words[i])
-						break
+				if i < len(words) and '!' in words[i]:
+					tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot,sum([x=='!' for x in words])) 
+					for i in reversed(range(0,i+1)):
+	    					if consecutive_sentiment_checker[i] != 0:
+							exclamation_matches.append(words[i])
+							break
 			
-			if w in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(w)
-			elif ws in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(ws)
-						
-	data = { 'text': tweet.text, 
-                 'created_at': tweet.created_at, 
-                 'retweet_count': tweet.retweet_count, 
-                 'sentiment': tot, 
-                 'country': country, 
-                 'matches': matches,
-		 'emoticons': emoticon_matches,
-		 'hashtags': hash_matches,
-		 'negated_words': negation_matches,
-		 'exclamated_words': exclamation_matches,
-		 'boosted': boost_matches,
-		 'consecutive_words': consecutive_matches,
-		 'repeated_letter_words':squeezed_matches,
-		 'capitalized_words': all_caps_matches,
-                }
+				if w in scores and negation_checker[(i-num)] == 1:
+					negation_matches.append(w)
+				elif ws in scores and negation_checker[(i-num)] == 1:
+					negation_matches.append(ws)
+	
+				
+			data = { 'text': tweet_list, 
+				 'created_at': tweet.created_at, 
+				 'retweet_count': tweet.retweet_count, 
+				 'sentiment': tot, 
+				 'country': country, 
+				 'matches': matches,
+				 'emoticons': emoticon_matches,
+				 'hashtags': hash_matches,
+				 'negated_words': negation_matches,
+				 'exclamated_words': exclamation_matches,
+				 'boosted': boost_matches,
+				 'consecutive_words': consecutive_matches,
+				 'repeated_letter_words':squeezed_matches,
+				 'capitalized_words': all_caps_matches,
+				 'search_term': q.lower().strip('"'),
+				 'search_list': search_list
+				}
 	
 				
 
-	# insert tweet data to MongoDB
-	posts.insert(data)
+			# insert tweet data to MongoDB
+			posts.insert(data)
 	return tot
+
+
 
 #--------------------------------------------------------------------------------#
 def squeeze(string):
@@ -555,7 +589,7 @@ def squeeze(string):
 #with open('/app/assets/Dictionaries/slang.txt')as f:
 def expand_slang():
     d = {}
-    with open('/app/assets/Dictionaries/slang.txt')as f:
+    with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
         for line in f:
             s = ''
             (a,b) = line.split('\t')
@@ -571,7 +605,7 @@ def replace_abbrevs(tweet):
     slang_abbrev = expand_slang()
     new_tweet = tweet
     replacement = []
-    for i in range(0,len(tweet)-1):
+    for i in range(0,len(tweet)):
         dif = abs(len(tweet) - len(new_tweet))
         word = tweet[i].lower()
         all_caps = is_all_caps(tweet[i])
@@ -579,13 +613,13 @@ def replace_abbrevs(tweet):
 		new_tweet[(i+1)] = '_hashtag_'
 	if i > 0 and tweet[(i-1)] == 'http':
 		new_tweet[i] = '_url_'
+	
         if word in slang_abbrev:
             if all_caps:
                 replacement = map(lambda x: x.upper(), slang_abbrev[word].split(' '))
             else:
                 replacement = slang_abbrev[word].split(' ')
             new_tweet = new_tweet[0:(i+dif)] + replacement + new_tweet[((i+dif)+1):]
-	
     return new_tweet
 
 #--------------------------------------------------------------------------------#
@@ -696,7 +730,6 @@ def hashtag_expander(hashtags,slang_abbrev,eng):
 						if hashtag[x:y+k].lower() in slang_abbrev:
 							idx = y + k
 					extracted_word = hashtag[x:idx]
-					print hashtag[x:idx]
 					if is_all_caps(str(hashtag[x:y])) == True:
 						extracted_words = (map(lambda x: x.upper(), slang_abbrev[str(hashtag[x:y].lower())]))
 					else:

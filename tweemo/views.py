@@ -453,10 +453,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 			tweet_list.append(word)
 		for q in terms:
 			if q in tweet_list:
-				query_in_text = True
-		
-		print query_in_text
-		print tweet.text	
+				query_in_text = True	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)

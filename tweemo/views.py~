@@ -138,7 +138,7 @@ def pull_tweets(q):
 	
 	# create dictionary of emoticon-sentiment scores
 	emoticons = create_emoticon_lexicon()
-	
+	"""
 	stopw = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))
@@ -146,7 +146,7 @@ def pull_tweets(q):
 	stopw = set(line.strip() for line in open('/app/assets/Dictionaries/stopwords'))
 	negation = set(line.strip() for line in open('/app/assets/Dictionaries/negation.txt'))
 	eng = set(line.strip() for line in open('/app/assets/Dictionaries/english.txt'))
-	"""
+	
 
 	for time in time_list:
 		for country in country_dictionary:
@@ -589,7 +589,7 @@ def squeeze(string):
 #with open('/app/assets/Dictionaries/slang.txt')as f:
 def expand_slang():
     d = {}
-    with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
+    with open('/app/assets/Dictionaries/slang.txt')as f:
         for line in f:
             s = ''
             (a,b) = line.split('\t')

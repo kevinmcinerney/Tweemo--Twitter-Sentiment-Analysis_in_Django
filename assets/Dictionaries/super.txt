@@ -3345,7 +3345,6 @@ supervising	2
 criss-crossing	-2
 exonerated	2
 retching	-3
-lol	2
 stealth	-3
 low	-2
 gratef	2
@@ -4935,7 +4934,6 @@ insinuated	-2
 warrior	-3
 lazy	-2
 rotflol	4
-omg	2
 kindred	2
 restricting	-2
 ignorance	-3

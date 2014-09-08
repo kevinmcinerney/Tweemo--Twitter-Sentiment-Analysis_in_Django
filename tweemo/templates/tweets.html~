@@ -2,12 +2,16 @@
 {% for tweet in here %}
 {% if tweet.country == 'Ireland' %}
 {% if tweet.sentiment < 0 %}
-<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">c
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -16,13 +20,18 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
-{% elif tweet.sentiment == 0 %}
+</div>
+{% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -30,15 +39,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -46,6 +59,7 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {%  endif %}
 {% endif %}
@@ -54,11 +68,15 @@
 {% if tweet.country == 'America' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -66,15 +84,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -83,14 +105,18 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+</div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}  </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/america.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -98,6 +124,7 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {%  endif %}
 {% endif %}
@@ -106,13 +133,16 @@
 
 {% if tweet.country == 'Spain' %}
 {% if tweet.sentiment < 0 %}
-<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">c
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}  <img  src="{% static 'assets/images/spain.JPG' %}" Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -120,15 +150,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}  </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}   <img  src="{% static 'assets/images/spain.JPG' %}"Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -137,14 +171,18 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+</div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/spain.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }}   <img  src="{% static 'assets/images/spain.JPG' %}"Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -152,21 +190,27 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {%  endif %}
 {% endif %}
 
 
 
+
+
 {% if tweet.country == 'Germany' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -174,15 +218,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -191,14 +239,18 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+</div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/germany.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
 <p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
-<details><summary>see more</summary>		
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -206,6 +258,7 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% endif %}
 {% endif %}
@@ -215,12 +268,15 @@
 {% if tweet.country == 'Canada' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -228,15 +284,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -244,15 +304,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/canada.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -261,6 +325,7 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+<div>
 {% endif %}
 {% endif %}
 
@@ -268,12 +333,15 @@
 {% if tweet.country == 'England' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -281,15 +349,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -298,14 +370,18 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+</div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/uk.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
 <p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
-<details><summary>see more</summary>		
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -313,6 +389,7 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% endif %}
 {% endif %}
@@ -321,12 +398,15 @@
 {% if tweet.country == 'France' %}
 {% if tweet.sentiment < 0 %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:FFCACA">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}  Matched Word(s): </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -334,15 +414,19 @@
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% elif tweet.sentiment == 0%}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:DFDFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
 <p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
@@ -351,21 +435,26 @@
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
 </div>
+</div>
 {% else %}
 <div style="padding:15px;border-radius:25px;border:1px solid blue;background-color:CAFFDF">
+<summary>
 <p>Tweet: {{ tweet.text }}</p> 
-<p style="font-size:75%">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>
-
+<p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }}          Country: {{ tweet.country }} <img  src="{% static 'assets/images/france.JPG' %}" alt="flag"> Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }}</p>
+<div>
+</summary>
+<details>
 <p style="font-size:75%">Matched Word(s): {{ tweet.matches }}</p>
-<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>	
-<details><summary>see more</summary>	
-<p style="font-size:75%;">Negated Word(s): {{ tweet.negated_words }}</p>
+<p style="font-size:75%">Emoticon(s): {{ tweet.emoticons }}</p>
+<p style="font-size:75%">Hashtag(s) {{ tweet.hashtags }}</p>	
+<p style="font-size:75%">Negated Word(s): {{ tweet.negated_words }}</p>
 <p style="font-size:75%">Exclamation Boost(s): {{tweet.exclamated_words}}</p>
 <p style="font-size:75%">Adverb Boost(s): {{ tweet.boosted }}</p>
 <p style="font-size:75%">Consecutive Sentiment Word(s): {{ tweet.consecutive_words }}</p>
 <p style="font-size:75%">Repeated_Letter_Word(s): {{ tweet.repeated_letter_words }}</p>
 <p style="font-size:75%">Capitalized Word(s): {{ tweet.capitalized_words }}</p>
 </details>
+</div>
 </div>
 {% endif %}
 {% endif %}

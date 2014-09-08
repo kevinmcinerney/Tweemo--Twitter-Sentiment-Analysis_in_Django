@@ -1039,7 +1039,6 @@ afterthought
 afterthoughts
 afterward
 afterwards
-aga
 again
 against
 agakhan
@@ -30375,7 +30374,6 @@ maelstrom
 maestro
 mafia
 mafiosi
-mag
 magazine
 magazines
 magenta

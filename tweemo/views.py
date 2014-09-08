@@ -162,7 +162,7 @@ def pull_tweets(q):
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
-			for tweet in searched_tweets: 
+			for tweet in searched_tweets:
 				tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng)
 				if tot < 0:
 					negative_sentiment_count += 1
@@ -419,6 +419,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	consecutive_matches = []
 	squeezed_matches = []
 	all_caps_matches = []
+	hash_matches = []
 	slang_abbrev = expand_slang()
 
 	# three nltk corpi
@@ -431,6 +432,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
+			hash_matches = hash_words
 		emo_dict = emoticon_score(tweet.text,emoticons)
 		emoticon_matches = [i for i in emo_dict]
 		tot = sum([emo_dict[i] for i in emo_dict])	
@@ -503,11 +505,12 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 							tot += 1
 						elif ws_score < 0:
 							tot -= 1
-			if i < (len(words)-1) and squeeze(words[i]) == '!':
-				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot)
+			
+			if i < len(words) and '!' in words[i]:
+				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot,sum([x=='!' for x in words])) 
 				for i in reversed(range(0,i+1)):
     					if consecutive_sentiment_checker[i] != 0:
-						exclamation_matches.append(squeeze(words[i]))
+						exclamation_matches.append(words[i])
 						break
 			
 			if w in scores and negation_checker[(i-num)] == 1:
@@ -522,6 +525,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
                  'country': country, 
                  'matches': matches,
 		 'emoticons': emoticon_matches,
+		 'hashtags': hash_matches,
 		 'negated_words': negation_matches,
 		 'exclamated_words': exclamation_matches,
 		 'boosted': boost_matches,
@@ -529,6 +533,8 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		 'repeated_letter_words':squeezed_matches,
 		 'capitalized_words': all_caps_matches,
                 }
+	
+				
 
 	# insert tweet data to MongoDB
 	posts.insert(data)
@@ -561,24 +567,25 @@ def expand_slang():
 
 #--------------------------------------------------------------------------------#
 def replace_abbrevs(tweet):
-    tweet = tweet.split(' ')
+    tweet = WordPunctTokenizer().tokenize(tweet)
     slang_abbrev = expand_slang()
     new_tweet = tweet
     replacement = []
-    for i in range(0,len(tweet)):
+    for i in range(0,len(tweet)-1):
         dif = abs(len(tweet) - len(new_tweet))
         word = tweet[i].lower()
         all_caps = is_all_caps(tweet[i])
+	if word == '#' and i < (len(tweet)-1):
+		new_tweet[(i+1)] = '_hashtag_'
+	if i > 0 and tweet[(i-1)] == 'http':
+		new_tweet[i] = '_url_'
         if word in slang_abbrev:
             if all_caps:
                 replacement = map(lambda x: x.upper(), slang_abbrev[word].split(' '))
             else:
                 replacement = slang_abbrev[word].split(' ')
             new_tweet = new_tweet[0:(i+dif)] + replacement + new_tweet[((i+dif)+1):]
-	if word == '#' and i < (len(tweet)-1):
-		new_tweet[(i+1)] = '_hashtag_'
-	if word[:7] == 'http://':
-		new_tweet[i] = '_url_'
+	
     return new_tweet
 
 #--------------------------------------------------------------------------------#
@@ -608,13 +615,15 @@ def create_negation_vector(tweet,negation):
 	return vector
 
 #--------------------------------------------------------------------------------#
-def exclamation_boost(vector,w_score,index,tot):
+def exclamation_boost(vector,w_score,index,tot,exclam_num):
 	for i in vector[0:index][::-1]:
 		if i != 0 and w_score > 0:
-			tot += 1
+			
+			tot += (1 * exclam_num)
 			break
 		elif i != 0 and w_score < 0:
-			tot -= 1
+			
+			tot -= (1 * exclam_num)
 			break
 	return tot
 
@@ -662,25 +671,37 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                         between_words = ([hashtag[i] for i in range(1,y) if i not in exclude])
                         if validate_hashtag_gap(between_words,eng) == False:
                             continue
-                    extracted_words.append(extracted_word)
+                    extracted_words.append(extracted_word) 
                     x = y
 		    break
         remainder = ''.join(remainder)
         remainder_list.append(remainder)
-        extracted_words += hashtag_expander(remainder_list,slang_abbrev)
+        extracted_words += hashtag_expander(remainder_list,slang_abbrev,eng)
     return extracted_words
 #--------------------------------------------------------------------------------#
 
-def hashtag_expander(hashtags,slang_abbrev):
+def hashtag_expander(hashtags,slang_abbrev,eng):
 	extracted_words = []
+	idx = 0
 	for hashtag in hashtags:
 		for x in range(0,len(hashtag)+1):
 			for y in range(0,len(hashtag)+1):
 				if str(hashtag[x:y].lower()) in slang_abbrev:
+					if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
+						continue
+					if validate_hashtag_gap(hashtag[y:].lower(),eng) == False:
+						continue
+					idx = y
+					for k in xrange(1,len(hashtag)):
+						if hashtag[x:y+k].lower() in slang_abbrev:
+							idx = y + k
+					extracted_word = hashtag[x:idx]
+					print hashtag[x:idx]
 					if is_all_caps(str(hashtag[x:y])) == True:
 						extracted_words = (map(lambda x: x.upper(), slang_abbrev[str(hashtag[x:y].lower())]))
 					else:
 						extracted_words = (map(lambda x: x, slang_abbrev[str(hashtag[x:y].lower())]))
+	
 	return  extracted_words
 
 #--------------------------------------------------------------------------------#

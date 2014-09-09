@@ -42,7 +42,9 @@
 {% else %} 
 {% endif %} 
 {% endfor %}
+{%  if word|lower != term %}
 {{ word }}
+{% endif %}
 {% endfor %}
 </p>
 <p style="font-size:75%;text-align:center">Sentiment: {{ tweet.sentiment }} <img  src="{% static 'assets/images/ireland.JPG' %}" alt="flag">         Country: {{ tweet.country }}  Time: {{ tweet.created_at }}  Retweets: {{ tweet.retweet_count }} </p>

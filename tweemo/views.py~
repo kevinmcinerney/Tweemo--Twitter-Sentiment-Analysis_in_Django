@@ -8,6 +8,7 @@ import tweepy
 import pymongo
 import sys
 import json
+from nltk.probability import FreqDist
 from datetime import date, timedelta
 from nltk import WordPunctTokenizer
 from nltk import WhitespaceTokenizer
@@ -64,6 +65,11 @@ def results(request):
     dictData3 = create_dictData3(data)
     dictData4 = create_dictData4(data)
     dictData5 = create_dictData5(data)
+    dictData6 = create_dictData6(data)
+
+    print dictData6
+
+    print dictData3
    
  				    
     return render_to_response('results.html',
@@ -73,6 +79,7 @@ def results(request):
 				'djangodict3': json.dumps(dictData3),
 				'djangodict4': dictData4, 
 				'djangodict5': json.dumps(dictData5),
+				'djangodict6': json.dumps(dictData6),
 				'query': message } )
 
 
@@ -125,6 +132,9 @@ def pull_tweets(q):
 	# initialize list to store all three time samples
 	master_samples = []
 
+	# for passing all tweet words to fdist
+	tweet_words = []
+
 	# access mongo collection
 	posts = access_mongo_collection()
 	# Clear any old Tweets from collection
@@ -157,7 +167,6 @@ def pull_tweets(q):
 		
 		if word == 'or' or word == 'OR':
 			or_check = True
-		print str(or_check) + str(' or checker.....')
 		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"':
 			search_list.append(word.lower())
 
@@ -179,25 +188,25 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets:
-				print tweet.text
 				temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
 				for word in temp_tweet:
 					tweet_list.append(word)
-				tweet_list_lower = [i.lower() for i in tweet_list]		
+				tweet_list_lower = [i.lower() for i in tweet_list]
+				tweet_words += tweet_list_lower		
 				for search_term in search_list:
 					if search_term not in tweet_list_lower and or_check == False:
-						#print str(search_term) + str(' is absent')
+						
 						query_in_text = False
 						break
 					elif or_check == True:
 						if search_term in tweet_list_lower:
-							print 'working or here mate'
+							
 							query_in_text = True
 							break
 						else:
 							query_in_text = False
 						
-				print str(query_in_text) + str(' tweet ^^')
+				
 				if query_in_text:
 					tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng,q,search_list)
 				else:
@@ -227,6 +236,15 @@ def pull_tweets(q):
 			overall_negative_count += negative_sentiment_count
 			overall_positive_count += positive_sentiment_count
 			overall_neutral_count += neutral_sentiment_count
+	
+	fdist1 = FreqDist(tweet_words)
+	vocab = fdist1.keys()
+
+	tweet_words_dic = {}
+	for word in vocab:
+	    if word not in stopw and word in scores and word not in terms:
+		tweet_words_dic[word] = fdist1[word]
+	print len(tweet_words_dic)
 
 	# To get total scores just by country (and not also by day) we must add the data together from the three days.
 	for country in c_score:
@@ -276,7 +294,7 @@ def pull_tweets(q):
                          'positive_sentiment_total': overall_positive_strength
                         }
 	
-	data_list = [[data_count],[data_strength],[c_score],[master_samples]]	
+	data_list = [[data_count],[data_strength],[c_score],[master_samples],[tweet_words_dic]]	
 			
 	return data_list
 
@@ -404,6 +422,20 @@ def create_dictData5(data):
 							  data[3][0][2][0]['England'],
 							  data[3][0][2][0]['Canada']]]
 	return dictData5
+
+#--------------------------------------------------------------------------------#
+
+def create_dictData6(data):
+    print data
+    print len(data[4][0])+1
+    dictData6 = [0 for i in xrange(0,len(data[4][0])+1)]
+    count = 1
+    dictData6[0] = ['Words', 'Frequency']
+    for key in data[4][0]:
+        dictData6[count] = [key, data[4][0][key]]
+        count += 1
+	print count
+    return dictData6
 
 #--------------------------------------------------------------------------------#
 def tweepy_search(q,lang,since,until,country,max_tweets):

@@ -119,7 +119,7 @@
           <div class="container">
             <div class="carousel-caption">
 	      
-              <img  src="{% static 'assets/images/timeline2.JPG' %}" alt="Generic placeholder image" style="margin-bottom:10px;margin-top:10px;width: 700px; height: 220px;">
+              <img  src="{% static 'assets/images/timeline2.JPG' %}" alt="Generic placeholder image" style="margin-bottom:10px;margin-top:10px;width: 640px; height: 200px;">
 	      <h2>Sentiment Timelines</h2>
               <p><a class="btn btn-lg btn-primary" href="#search" role="button">Search</a><div style="float:left" class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></p>
             </div>
@@ -129,7 +129,7 @@
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <img  src="{% static 'assets/images/feed4.jpg' %}" alt="Generic placeholder image" style="margin-bottom:10px;margin-top:10px;width: 700px; height: 220px;">
+              <img  src="{% static 'assets/images/feed4.jpg' %}" alt="Generic placeholder image" style="margin-bottom:10px;margin-top:10px;width: 640px; height: 200px;">
               <h2> Tweets are Colour Coded with Metadata </h2>
               <p><a class="btn btn-lg btn-primary" href="#search" role="button">Search</a><div style="float:left" class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></p>
             </div>

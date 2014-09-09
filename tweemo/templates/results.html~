@@ -206,7 +206,7 @@
 		</br> 
 		
 
-		<div id="chart_div3" style="width: 1000px; height: 700px;"></div>
+		<div id="chart_div3" style="width: 1000px; height: 1500px;"></div>
 		{% endblock %}
 
 		

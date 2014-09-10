@@ -181,7 +181,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],2)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
@@ -494,7 +494,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
-			tweet_list.append(i)	
+			tweet_list.append(convert_unicode_to_string(i))	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)

@@ -75,12 +75,12 @@
 		      google.setOnLoadCallback(drawChart);
 		      function drawChart() {
 			var data = {{ djangodict6|safe }};
-			var data = google.visualization.arrayToDataTable(data);
+					var data = google.visualization.arrayToDataTable(data);
 
 			var options = {
-			  title: 'Word Frequencies',
-			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}};
-			  
+			  title: 'Word Distributions',
+			  vAxis: {title: 'Year',  titleTextStyle: {color: 'blue'}}
+			};
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
 

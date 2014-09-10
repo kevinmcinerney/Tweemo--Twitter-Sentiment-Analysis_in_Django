@@ -433,6 +433,8 @@ def create_dictData6(data):
     for item in sorted_dic:
         dictData6[count] = [item[0], item[1]]
         count += 1
+	if count >= 50:
+		break
     return dictData6
 
 #--------------------------------------------------------------------------------#

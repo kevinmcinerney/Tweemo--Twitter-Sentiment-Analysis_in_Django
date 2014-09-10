@@ -68,10 +68,6 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
 
-    print dictData6
-
-    print dictData3
-   
  				    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),
@@ -245,7 +241,7 @@ def pull_tweets(q):
 	for word in vocab:
 	    if word not in stopw and word in scores and word not in terms:
 		tweet_words_dic[word] = fdist1[word]
-	print len(tweet_words_dic)
+	
 
 	# To get total scores just by country (and not also by day) we must add the data together from the three days.
 	for country in c_score:
@@ -497,6 +493,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
+			if 
 			tweet_list.append(i)	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
@@ -525,7 +522,6 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				booster_sentiment_checker[i] = boosterwords[ws]
 			if w not in stopw and negation_checker[(i-num)] != 1:
 				if  w in scores:
-					print 'inside'
 					w_score = scores[w]
 					tot += w_score
 					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
@@ -606,7 +602,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 			 'search_list': search_list
 			}
 
-			
+		#print data
 
 		# insert tweet data to MongoDB
 		posts.insert(data)

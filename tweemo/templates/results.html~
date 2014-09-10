@@ -203,17 +203,14 @@
 	     		</iframe>
     		</div>
 		
-		</br> 
-		
-
-		<div id="chart_div3" style="width: 850px; height: 500px;"></div>
+		<div id="chart_div3" style="margin-top:-30px; margin-left:40px; width: 850px; height: 1200px;"></div>
 		{% endblock %}
 
 		
 
 		{% block footer %}
 	        <!-- FOOTER -->
-	        <footer style="float:left; margin-top:200px;" >
+	        <footer style="float:left; margin-top:20px;" >
 		<p style="margin-left:700px;" class="pull-right"><a href="#">Back to top</a></p>
 		<p style="margin-left:100px;float:left;">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 	        </footer>

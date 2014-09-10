@@ -80,6 +80,7 @@
 			var options = {
 			  title: 'Word Frequencies',
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
+			  hAxis: {viewWindow: {min: 0,max: 100},ticks: [0, 20, 40, 60, 80, 100]}
 			};
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
@@ -203,14 +204,14 @@
 	     		</iframe>
     		</div>
 		
-		<div id="chart_div3" style="width: 850px; height: 1200px;"></div>
+		<div id="chart_div3" style="margin-top:-30px; margin-left:40px; width: 850px; height: 1200px;"></div>
 		{% endblock %}
 
 		
 
 		{% block footer %}
 	        <!-- FOOTER -->
-	        <footer style="float:left; margin-top:200px;" >
+	        <footer style="float:left; margin-top:20px;" >
 		<p style="margin-left:700px;" class="pull-right"><a href="#">Back to top</a></p>
 		<p style="margin-left:100px;float:left;">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 	        </footer>

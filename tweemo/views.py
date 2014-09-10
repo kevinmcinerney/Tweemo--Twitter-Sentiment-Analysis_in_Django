@@ -426,15 +426,15 @@ def create_dictData5(data):
 #--------------------------------------------------------------------------------#
 
 def create_dictData6(data):
-    print data
-    print len(data[4][0])+1
-    dictData6 = [0 for i in xrange(0,len(data[4][0])+1)]
+    dictData6 = [0 for i in xrange(0,len(data)+1)]
     count = 1
+    sorted_dic = iter(sorted(data[4][0].iteritems(), key=operator.itemgetter(1)))
     dictData6[0] = ['Words', 'Frequency']
-    for key in data[4][0]:
-        dictData6[count] = [key, data[4][0][key]]
+    for item in sorted_dic:
+        dictData6[count] = [item[0], item[1]]
         count += 1
-	print count
+	if count >= 50:
+		break
     return dictData6
 
 #--------------------------------------------------------------------------------#

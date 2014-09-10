@@ -80,8 +80,7 @@
 			var options = {
 			  title: 'Word Frequencies',
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
-			  hAxis: {viewWindow: {min: 0,max: 100},ticks: [0, 20, 40, 60, 80, 100]}
-			};
+			  
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
 

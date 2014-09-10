@@ -494,7 +494,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
-			tweet_list.append(convert_unicode_to_string(i))	
+			tweet_list.append(i)	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)

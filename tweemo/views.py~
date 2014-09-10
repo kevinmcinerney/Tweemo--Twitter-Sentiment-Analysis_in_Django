@@ -427,7 +427,7 @@ def create_dictData5(data):
 #--------------------------------------------------------------------------------#
 
 def create_dictData6(data):
-    dictData6 = [0 for i in xrange(0,len(data)+1)]
+    dictData6 = [0 for i in xrange(0,len(data[4][0])+1)]
     count = 1
     sorted_dic = iter(sorted(data[4][0].iteritems(), key=operator.itemgetter(1)))
     dictData6[0] = ['Words', 'Frequency']

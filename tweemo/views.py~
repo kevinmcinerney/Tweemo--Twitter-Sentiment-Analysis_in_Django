@@ -18,6 +18,7 @@ from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
 import os
 import string
+import operator
 
 
 def home(request):

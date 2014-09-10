@@ -493,7 +493,6 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
-			if 
 			tweet_list.append(i)	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:

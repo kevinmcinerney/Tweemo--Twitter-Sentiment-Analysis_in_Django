@@ -8,6 +8,7 @@ import tweepy
 import pymongo
 import sys
 import json
+from django.utils import encoding
 from nltk.probability import FreqDist
 from datetime import date, timedelta
 from nltk import WordPunctTokenizer
@@ -493,7 +494,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
-			tweet_list.append(i)	
+			tweet_list.append(i.encode('ascii','ignore'))	
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)

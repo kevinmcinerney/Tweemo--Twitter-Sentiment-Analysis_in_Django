@@ -8,6 +8,7 @@ import tweepy
 import pymongo
 import sys
 import json
+import unicodedata
 from django.utils import encoding
 from nltk.probability import FreqDist
 from datetime import date, timedelta
@@ -793,4 +794,4 @@ def convert_unicode_to_string(x):
     >>> convert_unicode_to_string(u'ni\xf1era')
     'niera'
     """
-    return encoding.smart_str(x, encoding='ascii', errors='ignore')
+    return unicodedata.normalize('NFKD', x).encode('ascii','ignore')

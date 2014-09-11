@@ -514,8 +514,8 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		for i in range(0,len(words)):
 			if i > 0:
 				num = 1
-			w = words[i].lower()
-			ws = squeeze(w)
+			w = convert_unicode_to_string(words[i].lower())
+			ws = convert_unicode_to_string(squeeze(w))
 			all_caps = is_all_caps(words[i])
 			if w in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[w]
@@ -526,7 +526,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					w_score = scores[w]
 					tot += w_score
 					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
-					matches.append(convert_unicode_to_string(word_combo))
+					matches.append(word_combo)
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						consecutive_matches.append(w)
@@ -541,20 +541,20 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						else:
 							tot -= booster_sentiment_checker[i-1]
 					if all_caps == True:
-						all_caps_matches.append(convert_unicode_to_string(w))
+						all_caps_matches.append(w)
 						if w_score > 0:
 							tot += 1
 						elif w_score < 0:
 							tot -= 1	
 				elif ws in scores:
-					squeezed_matches.append(convert_unicode_to_string(ws))
+					squeezed_matches.append(ws)
 					ws_score = scores[ws]
 					if ws_score > 0:
 						tot += ws_score + 1
 					elif ws_score < 0:
 						tot += ws_score - 1
 					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
-					matches.append(convert_unicode_to_string(word_combo))
+					matches.append(word_combo)
 					consecutive_sentiment_checker[i] = ws_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						tot += 1
@@ -567,7 +567,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						else:
 							tot -= booster_sentiment_checker[i-1]
 					if all_caps == True:
-						all_caps_matches.append(convert_unicode_to_string(ws))
+						all_caps_matches.append(ws)
 						if ws_score > 0:
 							tot += 1
 						elif ws_score < 0:
@@ -577,13 +577,13 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot,sum([x=='!' for x in words])) 
 				for i in reversed(range(0,i+1)):
     					if consecutive_sentiment_checker[i] != 0:
-						exclamation_matches.append(convert_unicode_to_string(words[i]))
+						exclamation_matches.append(words[i])
 						break
 		
 			if w in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(convert_unicode_to_string(i))
+				negation_matches.append(i)
 			elif ws in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(convert_unicode_to_string(ws))
+				negation_matches.append(ws)
 
 			
 		data = { 'text': tweet_list, 

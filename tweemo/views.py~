@@ -529,13 +529,13 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					matches.append(convert_unicode_to_string(word_combo))
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
-						consecutive_matches.append(convert_unicode_to_string(w))
+						consecutive_matches.append(w)
 						tot += 1
 					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
-						consecutive_matches.append(convert_unicode_to_string(w))
+						consecutive_matches.append(w)
 						tot -= 1
 					if i >= 1 and booster_sentiment_checker[i-1] != 0:
-						boost_matches.append(convert_unicode_to_string(w))
+						boost_matches.append(w)
 						if w_score > 0:
 							tot += booster_sentiment_checker[i-1]
 						else:
@@ -561,7 +561,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					elif i >= 1 and consecutive_sentiment_checker[i-1] < 0:
 						tot -= 1
 					if i >= 1 and booster_sentiment_checker[i-1] != 0:
-						boost_matches.append(convert_unicode_to_string(ws))
+						boost_matches.append(ws)
 						if ws_score > 0:
 							tot += booster_sentiment_checker[i-1]
 						else:

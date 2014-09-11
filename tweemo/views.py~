@@ -791,4 +791,4 @@ def validate_hashtag_gap(gap,eng):
 
 def convert_unicode_to_string(x):
     
-    return "".join(i for i in tweet_text if ord(i)<128)
+    return "".join(i for i in x if ord(i)<128)

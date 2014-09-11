@@ -184,7 +184,6 @@ def pull_tweets(q):
 			# Tweepy query for collecting tweets
 			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
 
-			searched_tweets = convert_unicode_to_string(searched_tweets)
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet

@@ -526,7 +526,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					w_score = scores[w]
 					tot += w_score
 					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
-					matches.append(word_combo)
+					matches.append(convert_unicode_to_string(word_combo))
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						consecutive_matches.append(w)
@@ -554,7 +554,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					elif ws_score < 0:
 						tot += ws_score - 1
 					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
-					matches.append(word_combo)
+					matches.append(convert_unicode_to_string(word_combo))
 					consecutive_sentiment_checker[i] = ws_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						tot += 1
@@ -581,7 +581,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						break
 		
 			if w in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(i)
+				negation_matches.append(i)#=============================
 			elif ws in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(ws)
 

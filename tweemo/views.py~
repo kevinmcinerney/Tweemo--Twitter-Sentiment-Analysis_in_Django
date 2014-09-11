@@ -577,7 +577,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				tot = exclamation_boost(consecutive_sentiment_checker,w_score,i,tot,sum([x=='!' for x in words])) 
 				for i in reversed(range(0,i+1)):
     					if consecutive_sentiment_checker[i] != 0:
-						exclamation_matches.append(words[i])
+						exclamation_matches.append(convert_unicode_to_string(words[i]))
 						break
 		
 			if w in scores and negation_checker[(i-num)] == 1:

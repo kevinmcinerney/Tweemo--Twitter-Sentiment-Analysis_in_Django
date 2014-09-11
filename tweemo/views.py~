@@ -167,7 +167,7 @@ def pull_tweets(q):
 		if word == 'or' or word == 'OR':
 			or_check = True
 		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"':
-			search_list.append(word.lower().encode('ascii','ignore'))
+			search_list.append(convert_unicode_to_string(word.lower()))
 
 	for time in time_list:
 		for country in country_dictionary:

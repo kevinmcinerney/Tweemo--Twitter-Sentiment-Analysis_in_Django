@@ -189,7 +189,7 @@ def pull_tweets(q):
 			for tweet in searched_tweets:
 				temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
 				for word in temp_tweet:
-					tweet_list.append(word)
+					tweet_list.append(convert_unicode_to_string(word))
 				tweet_list_lower = [i.lower() for i in tweet_list]
 				tweet_words += tweet_list_lower		
 				for search_term in search_list:

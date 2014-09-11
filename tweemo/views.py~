@@ -526,7 +526,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					w_score = scores[w]
 					tot += w_score
 					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
-					matches.append(word_combo)
+					matches.append(convert_unicode_to_string(word_combo))
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						consecutive_matches.append(w)
@@ -554,7 +554,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					elif ws_score < 0:
 						tot += ws_score - 1
 					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
-					matches.append(word_combo)
+					matches.append(convert_unicode_to_string(word_combo))
 					consecutive_sentiment_checker[i] = ws_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						tot += 1
@@ -581,7 +581,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						break
 		
 			if w in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(i)
+				negation_matches.append(i)#=============================
 			elif ws in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(ws)
 
@@ -644,7 +644,7 @@ def replace_abbrevs(tweet):
     replacement = []
     for i in range(0,len(tweet)):
         dif = abs(len(tweet) - len(new_tweet))
-        word = tweet[i].lower()
+        word = convert_unicode_to_string(tweet[i].lower())
         all_caps = is_all_caps(tweet[i])
 	if word == '#' and i < (len(tweet)-1):
 		new_tweet[(i+1)] = '_hashtag_'
@@ -669,9 +669,9 @@ def emoticon_score(tweet, emoticons):
 	for emo in tweet.split():
 		es = squeeze(emo)
 		if emo in emoticons:
-			d[emo] = emoticons[emo]
+			d[emo] = convert_unicode_to_string(emoticons[emo])
 		elif es in emoticons:
-			d[es] = emoticons[es]
+			d[es] = convert_unicode_to_string(emoticons[es])
 	return d
 
 #--------------------------------------------------------------------------------#
@@ -714,7 +714,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
     between_words = []
     end_words = []
     for hashtag in hashtags:
-        hashtag = hashtag.encode('ascii','ignore').translate(None, string.punctuation)
+        hashtag = convert_unicode_to_string(hashtag)
         if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
             continue
         elif hashtag[0:].lower() in scores:

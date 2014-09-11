@@ -189,7 +189,7 @@ def pull_tweets(q):
 			for tweet in searched_tweets:
 				temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
 				for word in temp_tweet:
-					tweet_list.append(word)
+					tweet_list.append(convert_unicode_to_string(word))
 				tweet_list_lower = [i.lower() for i in tweet_list]
 				tweet_words += tweet_list_lower		
 				for search_term in search_list:
@@ -644,7 +644,7 @@ def replace_abbrevs(tweet):
     replacement = []
     for i in range(0,len(tweet)):
         dif = abs(len(tweet) - len(new_tweet))
-        word = tweet[i].lower()
+        word = convert_unicode_to_string(tweet[i].lower())
         all_caps = is_all_caps(tweet[i])
 	if word == '#' and i < (len(tweet)-1):
 		new_tweet[(i+1)] = '_hashtag_'
@@ -669,9 +669,9 @@ def emoticon_score(tweet, emoticons):
 	for emo in tweet.split():
 		es = squeeze(emo)
 		if emo in emoticons:
-			d[emo] = emoticons[emo]
+			d[emo] = convert_unicode_to_string(emoticons[emo])
 		elif es in emoticons:
-			d[es] = emoticons[es]
+			d[es] = convert_unicode_to_string(emoticons[es])
 	return d
 
 #--------------------------------------------------------------------------------#
@@ -714,7 +714,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
     between_words = []
     end_words = []
     for hashtag in hashtags:
-        hashtag = hashtag.encode('ascii','ignore').translate(None, string.punctuation)
+        hashtag = convert_unicode_to_string(hashtag)
         if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
             continue
         elif hashtag[0:].lower() in scores:

@@ -8,7 +8,6 @@ import tweepy
 import pymongo
 import sys
 import json
-import unicodedata
 from django.utils import encoding
 from nltk.probability import FreqDist
 from datetime import date, timedelta

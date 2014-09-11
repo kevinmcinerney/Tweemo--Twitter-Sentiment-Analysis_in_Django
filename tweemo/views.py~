@@ -670,9 +670,9 @@ def emoticon_score(tweet, emoticons):
 	for emo in tweet.split():
 		es = squeeze(emo)
 		if emo in emoticons:
-			d[emo] = convert_unicode_to_string(emoticons[emo])
+			d[emo] = emoticons[emo]
 		elif es in emoticons:
-			d[es] = convert_unicode_to_string(emoticons[es])
+			d[es] = emoticons[es]
 	return d
 
 #--------------------------------------------------------------------------------#

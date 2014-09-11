@@ -790,8 +790,5 @@ def validate_hashtag_gap(gap,eng):
 #--------------------------------------------------------------------------------#
 
 def convert_unicode_to_string(x):
-    """
-    >>> convert_unicode_to_string(u'ni\xf1era')
-    'niera'
-    """
-    return unicodedata.normalize('NFKD', x).encode('ascii','ignore')
+    
+    return join(i for i in tweet_text if ord(i)<128)

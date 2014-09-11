@@ -188,10 +188,9 @@ def pull_tweets(q):
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
 			for tweet in searched_tweets:
-				ascii_tweet = convert_unicode_to_string(tweet)
-				temp_tweet = WordPunctTokenizer().tokenize(ascii_tweet)	
+				temp_tweet = WordPunctTokenizer().tokenize(tweet)	
 				for word in temp_tweet:
-					tweet_list.append(word)
+					tweet_list.append(convert_unicode_to_string(word).encode('ascii','ignore'))
 				tweet_list_lower = [i.lower() for i in tweet_list]
 				tweet_words += tweet_list_lower		
 				for search_term in search_list:

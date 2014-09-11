@@ -582,7 +582,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 						break
 		
 			if w in scores and negation_checker[(i-num)] == 1:
-				negation_matches.append(i)#=============================
+				negation_matches.append(w)#=============================
 			elif ws in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(ws)
 

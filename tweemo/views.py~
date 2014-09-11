@@ -8,7 +8,6 @@ import tweepy
 import pymongo
 import sys
 import json
-import unicodedata
 from django.utils import encoding
 from nltk.probability import FreqDist
 from datetime import date, timedelta
@@ -147,14 +146,12 @@ def pull_tweets(q):
 	
 	# create dictionary of emoticon-sentiment scores
 	emoticons = create_emoticon_lexicon()
-	"""
-	stopw = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/stopwords'))
-	negation = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/negation.txt'))
-	eng = set(line.strip() for line in open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/english.txt'))
-	"""
-	stopw = set(line.strip() for line in open('/app/assets/Dictionaries/stopwords'))
-	negation = set(line.strip() for line in open('/app/assets/Dictionaries/negation.txt'))
-	eng = set(line.strip() for line in open('/app/assets/Dictionaries/english.txt'))
+
+ 	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+	
+	stopw = set(line.strip() for line in open(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords')))
+	negation = set(line.strip() for line in open(os.path.join(BASE_DIR,'assets/Dictionaries/negation.txt')))
+	eng = set(line.strip() for line in open(os.path.join(BASE_DIR,'assets/Dictionaries/english.txt')))
 	
 	search_list = []
 	
@@ -182,7 +179,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],2)
 
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
@@ -493,10 +490,10 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	slang_abbrev = expand_slang()
 
 	if tweet.text:
-		
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
 			tweet_list.append(convert_unicode_to_string(i))	
+		#print tweet_list
 		hashtags = hashtag_finder(tweet.text)
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
@@ -504,6 +501,9 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 		emo_dict = emoticon_score(tweet.text,emoticons)
 		emoticon_matches = [i for i in emo_dict]
 		tot = sum([emo_dict[i] for i in emo_dict])
+		
+		print '444444444'
+		print replace_abbrevs(tweet.text)
 		words = replace_abbrevs(tweet.text)
 		words += hash_words
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
@@ -527,7 +527,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					w_score = scores[w]
 					tot += w_score
 					word_combo = (str(w) + str(': ') + str(w_score) + str('   '))
-					matches.append(convert_unicode_to_string(word_combo))
+					matches.append(word_combo)
 					consecutive_sentiment_checker[i] = w_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						consecutive_matches.append(w)
@@ -555,7 +555,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 					elif ws_score < 0:
 						tot += ws_score - 1
 					word_combo = (str(ws) + str(': ') + str(ws_score) + str('   '))
-					matches.append(convert_unicode_to_string(word_combo))
+					matches.append(word_combo)
 					consecutive_sentiment_checker[i] = ws_score
 					if i >= 1 and consecutive_sentiment_checker[i-1] > 0:
 						tot += 1
@@ -623,11 +623,11 @@ def squeeze(string):
     return word.strip(' ')
 
 #--------------------------------------------------------------------------------#
-#with open('/home/kevin/django-kevin/bin/b_twitter/assets/Dictionaries/slang.txt')as f:
-#with open('/app/assets/Dictionaries/slang.txt')as f:
+
 def expand_slang():
     d = {}
-    with open('/app/assets/Dictionaries/slang.txt')as f:
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    with open(os.path.join(BASE_DIR, 'assets/Dictionaries/slang.txt')) as f:
         for line in f:
             s = ''
             (a,b) = line.split('\t')
@@ -639,13 +639,17 @@ def expand_slang():
 
 #--------------------------------------------------------------------------------#
 def replace_abbrevs(tweet):
+    
     tweet = WordPunctTokenizer().tokenize(tweet)
     slang_abbrev = expand_slang()
+    
     new_tweet = tweet
     replacement = []
     for i in range(0,len(tweet)):
         dif = abs(len(tweet) - len(new_tweet))
+	
         word = convert_unicode_to_string(tweet[i].lower())
+	
         all_caps = is_all_caps(tweet[i])
 	if word == '#' and i < (len(tweet)-1):
 		new_tweet[(i+1)] = '_hashtag_'
@@ -705,7 +709,7 @@ def hashtag_finder(words):
 	words = words.split()
 	for word in words:
 		if word[0] == '#':
-		    l.append(word)
+		    l.append(word[1:])
 	return l
 
 #--------------------------------------------------------------------------------#
@@ -714,12 +718,17 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
     exclude = []
     between_words = []
     end_words = []
+    #print '......'
     for hashtag in hashtags:
+	#print str('Evaluate this hashtag: ') + str(convert_unicode_to_string(hashtag))
         hashtag = convert_unicode_to_string(hashtag)
         if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
+	    #print str(hashtag[0:].lower()) + str(' is a whole word, but not a sentiment word ')
             continue
         elif hashtag[0:].lower() in scores:
+	    #print str(hashtag[0:].lower()) + str(' is a whole sentiment word ')
             extracted_words.append(hashtag[0:].lower())
+	    #print str('proof of whole extracted word: ') + str(extracted_words)
             continue
         word_count = 0
         remainder_list = []
@@ -727,6 +736,9 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         for x in range(0,len(hashtag)+1):
             for y in range(x,len(hashtag)+1):
                 if hashtag[x:y].lower() in scores:
+		    #print str('Sentiment Word Detected: ') + str(convert_unicode_to_string(hashtag[x:y]).lower())
+		    #print str('Front gap: ') + str(hashtag[0:x].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[0:x].lower(),eng))
+		    #print str('End gap: ') + str(hashtag[y:].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[y:].lower(),eng))
                     if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
                         continue
                     if validate_hashtag_gap(hashtag[y:].lower(),eng) == False:
@@ -736,6 +748,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                         if hashtag[x:y+k].lower() in scores:
                             idx = y + k
                     extracted_word = hashtag[x:idx]
+		    #print str('===========> Successful ID: ') + str(convert_unicode_to_string(extracted_word))
                     word_count += 1
                     exclude += [i for i in range(x,idx)]
                     remainder = [hashtag[i] for i in range(1,len(hashtag)) if i not in exclude]
@@ -782,6 +795,7 @@ def validate_hashtag_gap(gap,eng):
     for x in range(0,len(gap)+1):
         for y in range(x,len(gap)+1):
             if str(gap[x:(y+1)]).lower() in eng:
+		#print str('This is a valid gap') + str(gap[x:(y+1)].lower())
                 gap_checker[x:(y+1)] = [1 for i in range(0,len(gap_checker[x:(y+1)]))]
     for i in gap_checker:
         if i == 0:

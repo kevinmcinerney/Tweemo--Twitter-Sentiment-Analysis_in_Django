@@ -247,9 +247,8 @@ def pull_tweets(q):
 	punctuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','\""','co','rt',
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','','']
 	context_words_dic = {}
-	exclude = list(stopw + scores + terms + punctuation)
 	for word in vocab:
-	    if word not in exclude and squeeze(word) not in exclude and word != '#':
+	    if word not in stopw and word not in scores and word not in terms and word not in punctuation and squeeze(word) not in punctuation and word != '#':
 		context_words_dic[word] = fdist1[word]
 	
 

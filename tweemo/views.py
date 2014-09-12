@@ -249,7 +249,7 @@ def pull_tweets(q):
 	context_words_dic = {}
 	exclude = list(stopw + scores + terms + punctuation)
 	for word in vocab:
-	    if word not exclude and squeeze(word) not in exclude and word != '#':
+	    if word not in exclude and squeeze(word) not in exclude and word != '#':
 		context_words_dic[word] = fdist1[word]
 	
 

@@ -263,11 +263,11 @@ def pull_tweets(q):
 	# divide the tweet sentiment scores into three samples based on day
 	for i in cursor:
 		c = str(i['country'])
-		if i['created_at'].date() == time_list[2][0]:		
+		if i['created_at'].date() == time_list[0][0]:		
 			time_sample_1[c] += i['sentiment'] 
 		elif i['created_at'].date() == time_list[1][0]:	
 			time_sample_2[c] += i['sentiment'] 
-		elif i['created_at'].date() == time_list[0][0]:
+		elif i['created_at'].date() == time_list[2][0]:
 			time_sample_3[c] += i['sentiment'] 
        	
 	# find AVERAGE scores for each country-day combination 

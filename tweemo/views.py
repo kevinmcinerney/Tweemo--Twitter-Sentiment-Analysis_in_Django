@@ -244,7 +244,7 @@ def pull_tweets(q):
 	    if word not in stopw and word in scores and word not in terms:
 		tweet_words_dic[word] = fdist1[word]
 
-	puntuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','\""','|','`','~','!','@','%','^','&','*','(',')','-','_','+']
+	punctuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','\""','|','`','~','!','@','%','^','&','*','(',')','-','_','+']
 	context_words_dic = {}
 	for word in vocab:
 	    if word not in stopw and word not in scores and word not in terms and word not in punctuation and word != '#':

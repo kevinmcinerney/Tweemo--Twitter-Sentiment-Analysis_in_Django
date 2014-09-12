@@ -75,7 +75,7 @@
 		      google.setOnLoadCallback(drawChart);
 		      function drawChart() {
 			var data = {{ djangodict6|safe }};
-					var data = google.visualization.arrayToDataTable(data);
+			var data = google.visualization.arrayToDataTable(data);
 
 			var options = {
 			  title: 'Word Distributions',
@@ -93,11 +93,11 @@
 		      google.setOnLoadCallback(drawChart);
 		      function drawChart() {
 			var data = {{ djangodict7|safe }};
-					var data = google.visualization.arrayToDataTable(data);
+			var data = google.visualization.arrayToDataTable(data);
 
 			var options = {
 			  title: 'Word Distributions',
-			  vAxis: {title: 'Year',  titleTextStyle: {color: 'pink'}}
+			  vAxis: {title: 'Year',  titleTextStyle: {color: 'blue'}}
 			};
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
@@ -221,7 +221,8 @@
 	     		</iframe>
     		</div>
 		
-		<div id="chart_div3" style="width: 450px; height: 1200px;"><div id="chart_div4" style="width: 450px; height: 1200px;"></div></div>
+		<div id="chart_div3" style="width: 450px; height: 1200px;"></div>
+		<div id="chart_div4" style="width: 450px; height: 1200px;"></div>
 		{% endblock %}
 
 		

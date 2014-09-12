@@ -68,7 +68,7 @@ def results(request):
     dictData4 = create_dictData4(data)
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
-    dictData6 = create_dictData7(data)
+    dictData7 = create_dictData7(data)
 
  				    
     return render_to_response('results.html',
@@ -79,7 +79,7 @@ def results(request):
 				'djangodict4': dictData4, 
 				'djangodict5': json.dumps(dictData5),
 				'djangodict6': json.dumps(dictData6),
-				'djangodict7': json.dumps(dictData6),
+				'djangodict7': json.dumps(dictData7),
 				'query': message } )
 
 
@@ -181,7 +181,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],2)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
 
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
@@ -244,9 +244,10 @@ def pull_tweets(q):
 	    if word not in stopw and word in scores and word not in terms:
 		tweet_words_dic[word] = fdist1[word]
 
+	puntuation = ['.',',','<','/',';','\'','[',']','`','>','<','?',':','"','|','`','~','!','@','#','%','^','&','*','(',')','-'.'_','+']
 	context_words_dic = {}
 	for word in vocab:
-	    if word not in stopw and word not in scores and word not in terms:
+	    if word not in stopw and word not in scores and word not in terms and word not in punctuation:
 		context_words_dic[word] = fdist1[word]
 	
 

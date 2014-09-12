@@ -274,16 +274,22 @@ def pull_tweets(q):
 	# based on the number of tweets retrieved in each case 	
 	for i in time_sample_1:
 		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
-		if d1 != 0:
+		if d1 != 0 and time_sample_1[i] != 0:
 			time_sample_1[i] = float(time_sample_1[i] / d1)
+		else:
+			time_sample_3[i] = 0.0
 
 	for i in time_sample_2:
-		if c_score[i][1][6][0] != 0:
+		if c_score[i][1][6][0] != 0 and time_sample_2[i] != 0:
 			time_sample_2[i] = float(time_sample_2[i] / (c_score[i][1][6][0]))
+		else:
+			time_sample_3[i] = 0.0
 
 	for i in time_sample_3:
-		if c_score[i][2][6][0] != 0:
-			time_sample_3[i] = float(time_sample_3[i] / (c_score[i][2][6][0]))
+		if c_score[i][2][6][0] != 0 and time_sample_3[i] != 0:
+		else:
+			time_sample_3[i] = 0.0
+			
 		
 
 	# Collect the four main data structures and return one composite structure
@@ -737,18 +743,18 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
     exclude = []
     between_words = []
     end_words = []
-    print '......'
+    #print '......'
     for hashtag in hashtags:
-	print str('Evaluate this hashtag: ') + str(convert_unicode_to_string(hashtag))
+	#print str('Evaluate this hashtag: ') + str(convert_unicode_to_string(hashtag))
         hashtag = convert_unicode_to_string(hashtag)
         if hashtag[0:].lower() not in scores and hashtag[0:].lower() in eng:
-	    print str(hashtag[0:].lower()) + str(' is a whole word, but not a sentiment word ')
+	    #print str(hashtag[0:].lower()) + str(' is a whole word, but not a sentiment word ')
             continue
         elif hashtag[0:].lower() in scores:
-	    print str(hashtag[0:].lower()) + str(' is a whole sentiment word ')
+	    #print str(hashtag[0:].lower()) + str(' is a whole sentiment word ')
             extracted_words.append(hashtag[0:].lower())
 	    extracted_words.append('_stop_hashtags_getting_consecutive_boost')
-	    print str('proof of whole extracted word: ') + str(extracted_words)
+	    #print str('proof of whole extracted word: ') + str(extracted_words)
             continue
         word_count = 0
         remainder_list = []
@@ -756,9 +762,9 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         for x in range(0,len(hashtag)+1):
             for y in range(x,len(hashtag)+1):
                 if hashtag[x:y].lower() in scores:
-		    print str('Sentiment Word Detected: ') + str(convert_unicode_to_string(hashtag[x:y]).lower())
-		    print str('Front gap: ') + str(hashtag[0:x].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[0:x].lower(),eng))
-		    print str('End gap: ') + str(hashtag[y:].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[y:].lower(),eng))
+		    #print str('Sentiment Word Detected: ') + str(convert_unicode_to_string(hashtag[x:y]).lower())
+		    #print str('Front gap: ') + str(hashtag[0:x].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[0:x].lower(),eng))
+		    #print str('End gap: ') + str(hashtag[y:].lower()) + str(' is ') + str(validate_hashtag_gap(hashtag[y:].lower(),eng))
                     if validate_hashtag_gap(hashtag[0:x].lower(),eng) == False:
                         continue
                     if validate_hashtag_gap(hashtag[y:].lower(),eng) == False:
@@ -768,7 +774,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                         if hashtag[x:y+k].lower() in scores:
                             idx = y + k
                     extracted_word = hashtag[x:idx]
-		    print str('===========> Successful ID: ') + str(convert_unicode_to_string(extracted_word))
+		    #print str('===========> Successful ID: ') + str(convert_unicode_to_string(extracted_word))
                     word_count += 1
                     exclude += [i for i in range(x,idx)]
                     remainder = [hashtag[i] for i in range(1,len(hashtag)) if i not in exclude]
@@ -816,7 +822,7 @@ def validate_hashtag_gap(gap,eng):
     for x in range(0,len(gap)+1):
         for y in range(x,len(gap)+1):
             if str(gap[x:(y+1)]).lower() in eng:
-		print str('(Re)Compiling valid gaps:  ') + str(gap[x:(y+1)].lower())
+		#print str('(Re)Compiling valid gaps:  ') + str(gap[x:(y+1)].lower())
                 gap_checker[x:(y+1)] = [1 for i in range(0,len(gap_checker[x:(y+1)]))]
     for i in gap_checker:
         if i == 0:

@@ -263,11 +263,11 @@ def pull_tweets(q):
 	# divide the tweet sentiment scores into three samples based on day
 	for i in cursor:
 		c = str(i['country'])
-		if i['created_at'].date() == time_list[2][0]:		
+		if i['created_at'].date() == time_list[0][0]:		
 			time_sample_1[c] += i['sentiment'] 
 		elif i['created_at'].date() == time_list[1][0]:	
 			time_sample_2[c] += i['sentiment'] 
-		elif i['created_at'].date() == time_list[0][0]:
+		elif i['created_at'].date() == time_list[2][0]:
 			time_sample_3[c] += i['sentiment'] 
        	
 	# find AVERAGE scores for each country-day combination 
@@ -275,22 +275,39 @@ def pull_tweets(q):
 	for i in time_sample_1:
 		d1 =  c_score[i][0][6] - (c_score[i][1][6][0] + c_score[i][2][6][0])
 		if d1 != 0 and time_sample_1[i] != 0:
+			print i
+			print str('This ') + str(time_sample_1[i]) + str(' divided by ') + str(d1)
+			print float(time_sample_1[i] / d1)
+			print '.............'
 			time_sample_1[i] = float(time_sample_1[i] / d1)
 		else:
-			time_sample_3[i] = 0.0
+			print i
+			print str('This       ') + str(time_sample_1[i]) + str(' divided by ') + str(d1)
+			time_sample_1[i] = 0.0
 
 	for i in time_sample_2:
 		if c_score[i][1][6][0] != 0 and time_sample_2[i] != 0:
+			print i
+			print str('This ') + str(time_sample_2[i]) + str(' divided by ') + str(c_score[i][1][6][0])
+			print float(time_sample_2[i] / (c_score[i][1][6][0]))
+			print '.............'
 			time_sample_2[i] = float(time_sample_2[i] / (c_score[i][1][6][0]))
 		else:
-			time_sample_3[i] = 0.0
+			print i
+			print str('This        ') + str(time_sample_2[i]) + str(' divided by ') + str(c_score[i][1][6][0])
+			time_sample_2[i] = 0.0
 
 	for i in time_sample_3:
 		if c_score[i][2][6][0] != 0 and time_sample_3[i] != 0:
+			print i
+			print str('This ') + str(time_sample_3[i]) + str(' divided by ') + str(c_score[i][2][6][0])
+			print float(time_sample_3[i] / (c_score[i][2][6][0]))
+			print '.............'
 			time_sample_3[i] = float(time_sample_3[i] / (c_score[i][2][6][0]))
 		else:
+			print i
+			print str('This       ') + str(time_sample_3[i]) + str(' divided by ') + str(c_score[i][2][6][0])
 			time_sample_3[i] = 0.0
-			
 		
 
 	# Collect the four main data structures and return one composite structure
@@ -610,24 +627,22 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				negation_matches.append(w)#=============================
 			elif ws in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(ws)
-
-			
-		data = { 'text': tweet_list, 
+	
+		data = { 'text': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in tweet_list], 
 			 'created_at': tweet.created_at, 
 			 'retweet_count': tweet.retweet_count, 
 			 'sentiment': tot, 
-			 'country': country, 
-			 'matches': matches,
-			 'emoticons': emoticon_matches,
-			 'hashtags': hash_matches,
-			 'negated_words': negation_matches,
-			 'exclamated_words': exclamation_matches,
-			 'boosted': boost_matches,
-			 'consecutive_words': consecutive_matches,
-			 'repeated_letter_words':squeezed_matches,
-			 'capitalized_words': all_caps_matches,
-			 'search_list': search_list
-			 
+			 'country': convert_unicode_to_string(str(country)), 
+			 'matches': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in matches],
+			 'emoticons': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in emoticon_matches],
+			 'hashtags': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in hash_matches],
+			 'negated_words': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in negation_matches],
+			 'exclamated_words': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in exclamation_matches],
+			 'boosted': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in boost_matches],
+			 'consecutive_words': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in consecutive_matches],
+			 'repeated_letter_words':[convert_unicode_to_string(x).encode('ascii', 'ignore') for x in squeezed_matches],
+			 'capitalized_words': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in all_caps_matches],
+			 'search_list': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in search_list]
 			}
 
 		#print data
@@ -808,11 +823,11 @@ def hashtag_expander(hashtags,slang_abbrev,eng):
 					for k in xrange(1,len(hashtag)):
 						if hashtag[x:y+k].lower() in slang_abbrev:
 							idx = y + k
-					extracted_word = hashtag[x:idx]
-					if is_all_caps(str(hashtag[x:y])) == True:
-						extracted_words = (map(lambda x: x.upper(), slang_abbrev[str(hashtag[x:y].lower())]))
+					extracted_word = convert_unicode_to_string(hashtag[x:idx])
+					if is_all_caps(str(hashtag[x:idx])) == True:
+						extracted_words = (map(lambda x: x.upper(), slang_abbrev[extracted_word.lower()]))
 					else:
-						extracted_words = (map(lambda x: x, slang_abbrev[str(hashtag[x:y].lower())]))
+						extracted_words = (map(lambda x: x, slang_abbrev[extracted_word.lower()]))
 	
 	return  extracted_words
 

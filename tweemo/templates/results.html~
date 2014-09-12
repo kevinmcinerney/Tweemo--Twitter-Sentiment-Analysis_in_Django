@@ -87,6 +87,24 @@
 			chart.draw(data, options);
 		      }
 		    </script>
+		    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		    <script type="text/javascript">
+		      google.load("visualization", "1", {packages:["corechart"]});
+		      google.setOnLoadCallback(drawChart);
+		      function drawChart() {
+			var data = {{ djangodict7|safe }};
+					var data = google.visualization.arrayToDataTable(data);
+
+			var options = {
+			  title: 'Word Distributions',
+			  vAxis: {title: 'Year',  titleTextStyle: {color: 'pink'}}
+			};
+
+			var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+
+			chart.draw(data, options);
+		      }
+		    </script>
   	  </head>
   
 	  <body style="width:990px;margin-left:150px;margin-top:100px;">
@@ -203,7 +221,7 @@
 	     		</iframe>
     		</div>
 		
-		<div id="chart_div3" style="margin-top:-30px; margin-left:40px; width: 850px; height: 1200px;"></div>
+		<div id="chart_div3" style="width: 450px; height: 1200px;"><div id="chart_div4" style="width: 450px; height: 1200px;"></div></div>
 		{% endblock %}
 
 		

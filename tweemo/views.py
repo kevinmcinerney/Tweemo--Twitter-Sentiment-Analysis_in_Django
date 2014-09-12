@@ -244,11 +244,11 @@ def pull_tweets(q):
 	    if word not in stopw and word in scores and word not in terms:
 		tweet_words_dic[word] = fdist1[word]
 
-	punctuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','\""','co','rt',
+	punctuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','co','rt',
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','','']
 	context_words_dic = {}
 	for word in vocab:
-	    if word not in stopw and word not in scores and word not in terms and word not in punctuation and squeeze(word) not in punctuation and word != '#':
+	    if word not in stopw and word not in scores and word not in terms and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#"':
 		context_words_dic[word] = fdist1[word]
 	
 
@@ -435,7 +435,7 @@ def create_dictData6(data):
     count = 1
     dictData6 = []
     sorted_dic = iter(sorted(data[4][0].iteritems(), key=operator.itemgetter(1), reverse=True)[:50])
-    dictData6.append(['Sentiment Words', 'Frequency'])
+    dictData6.append(['Sentiment Words', 'Freq'])
     for item in sorted_dic:
         dictData6.append([item[0], item[1]])
         count += 1
@@ -447,7 +447,7 @@ def create_dictData7(data):
     count = 1
     dictData7 = []
     sorted_dic = iter(sorted(data[5][0].iteritems(), key=operator.itemgetter(1), reverse=True)[:50])
-    dictData7.append(['Contextual Words', 'Frequency'])
+    dictData7.append(['Contextual Words', 'Freq'])
     for item in sorted_dic:
         dictData7.append([item[0], item[1]])
         count += 1

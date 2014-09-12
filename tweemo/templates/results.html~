@@ -220,7 +220,7 @@
 	      		<iframe src='/tweets' id="info" name="info" width="985px" height="500px" seamless="">
 	     		</iframe>
     		</div>
-		<div style="width:1100px">
+		<div style="width:1150px">
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>

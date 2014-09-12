@@ -79,7 +79,7 @@
 
 			var options = {
 			  title: 'Sentiment Word Distribution',
-			  vAxis: {title: 'Year',  titleTextStyle: {color: 'blue'}}
+			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
@@ -97,7 +97,7 @@
 
 			var options = {
 			  title: 'Contextual Word Distribution',
-			  vAxis: {title: 'Year',  titleTextStyle: {color: 'blue'}}
+			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
 			var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
@@ -219,7 +219,7 @@
 		<div>
 	      		<iframe src='/tweets' id="info" name="info" width="985px" height="500px" seamless="">
 	     		</iframe>
-    		</div>
+    		</div style="float:left">
 		<div style="width:1150px">
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>

@@ -145,7 +145,9 @@
 	<label for="query">                                                </label>
 	<input id="query" type="text" name="query" value="{{ current_query }}">
 	<input type="submit" value="Search">
+	<a style="font-size:75%;color:gray" href="/usingtweemo">help</a>
 	</form>
+	
       </div>
       {% endblock %}
 
@@ -184,7 +186,7 @@
 
 <!-- /END THE FEATURETTES -->
 	<div style="float:left">
-	<p style="float:left"><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div><a class="btn btn-lg btn-primary" href="#search" role="button">Search</a></p>
+	<p style="float:left"><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></p>
 	<p style="float:left;margin-top:-10px"><a href="http://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a></p>
 	</div>
       <div style="margin-left:100px" class="fb-comments" data-href="http://tweemo.herokuapp.com/" data-width="900" data-numposts="5" data-colorscheme="light"></div>

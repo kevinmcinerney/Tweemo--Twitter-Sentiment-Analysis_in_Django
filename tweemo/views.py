@@ -287,6 +287,7 @@ def pull_tweets(q):
 
 	for i in time_sample_3:
 		if c_score[i][2][6][0] != 0 and time_sample_3[i] != 0:
+			time_sample_3[i] = float(time_sample_3[i] / (c_score[i][2][6][0]))
 		else:
 			time_sample_3[i] = 0.0
 			

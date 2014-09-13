@@ -79,7 +79,7 @@ def results(request):
 
   
     for i in range(0,len(search_list)):
-    	fill += str(word)
+    	fill += str(search_list[i])
 	if i != len(search_list):
 		fill += str(',')
     trends = "<iframe style=''src='http://www.google.com/trends/fetchComponent?q="+ fill + "&cid=TIMESERIES_GRAPH_0&export=5' id=\"frame\" name=\"info2\" width=\"985px\" height=\"350px\" seamless=\"\"></iframe>"

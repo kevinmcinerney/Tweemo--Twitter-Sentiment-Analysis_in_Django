@@ -79,7 +79,7 @@
 
 			var options = {
 			  title: 'Sentiment Word Distribution',
-			  'chartArea': {'width': '80%', 'height': '85%'},
+			  'chartArea': {'width': '75%', 'height': '85%'},
 			  'axisTitlesPosition': 'none',
 			  'legend': {'position': 'none'},
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
@@ -100,7 +100,7 @@
 
 			var options = {
 			  title: 'Contextual Word Distribution',
-			  'chartArea': {'width': '80%', 'height': '85%'},
+			  'chartArea': {'width': '75%', 'height': '85%'},
 			  'legend': {'position': 'none'},
 			  'axisTitlesPosition': 'none',
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
@@ -113,8 +113,8 @@
 		    </script>
   	  </head>
   
-	  <body style="width:990px;margin-left:150px;margin-top:100px;">
-		<h1 style="margin-left:300px;margin-top:100px;"> You searched for: {{ query }} </h1>
+	  <body style="width:990px;margin-left:150px;margin-top:10px;">
+		<h1 style="margin-left:300px;margin-top:25px;"> You searched for: {{ query }} </h1>
 		
 		<div style="border:1px solid black;margin-top:70px; width: 380px; height: 280px;float:left" id="piechart" ></div>
 		<div style="border:1px solid black;margin-right:5px;margin-top: 70px; float:right; width: 600px; height: 400px;"id="chart_div"></div>
@@ -226,11 +226,11 @@
 	      		<iframe src='/tweets' id="info" name="info" width="985px" height="500px" seamless="">
 	     		</iframe>
     		</div style="float:left">
-		<div style="width:1150px;margin-left:-60px">
+		<div style="width:1150px;margin-left:-50px">
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
-		<div style=width="985px;margin-left:auto;margin-rigth;auto>
+		<div style="width=985px;margin-left:auto;margin-right:auto;border:1px solid black">
 		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="550px" height="350px" seamless="">
 	     	</iframe>
 		</div>

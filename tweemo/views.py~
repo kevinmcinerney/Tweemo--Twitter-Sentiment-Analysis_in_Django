@@ -181,7 +181,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],2)
 
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and

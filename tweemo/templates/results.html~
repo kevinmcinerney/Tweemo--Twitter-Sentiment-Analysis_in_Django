@@ -112,8 +112,8 @@
 		      }
 		    </script>
 		    <style>
-		    #wrap { width: 600px; height: 390px; padding: 0; overflow: hidden; }
-		    #frame { width: 800px; height: 520px; border: 1px solid black; }
+		    #wrap { width: 985px; height: 500px; padding: 0; overflow: hidden; }
+		    #frame { width: 652px; height: 325px; border: 1px solid black; }
 		    #frame {
 			-ms-zoom: 1.5;
 			-moz-transform: scale(1.5);
@@ -243,8 +243,9 @@
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
-		<div style="width=985px;border:1px solid black">
-		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="985px" height="350px" seamless="">
+
+		<div id="wrap">
+		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="frame" name="info2" width="985px" height="350px" seamless="">
 	     	</iframe>
 		<p>
 		   {{ trend_term1 }}

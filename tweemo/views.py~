@@ -60,6 +60,11 @@ def results(request):
 		
     else:
         message = 'You submitted an empty form.'
+
+    terms = WordPunctTokenizer().tokenize(message)
+	for word in terms:
+		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"' and word != '-':
+			search_list.append(convert_unicode_to_string(word.lower()))
     
     # call methods to parse data as required for graphs/analysis
     dictData = create_dictData(data)
@@ -69,8 +74,8 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
-    trend_term1 = dictData7[1]
-    trend_term2 = dictData7[2]	
+    trend_terms = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
+   	
 
  				    
     return render_to_response('results.html',

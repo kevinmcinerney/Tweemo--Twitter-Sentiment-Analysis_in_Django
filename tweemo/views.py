@@ -60,6 +60,12 @@ def results(request):
 		
     else:
         message = 'You submitted an empty form.'
+
+    search_list = []
+    terms = WordPunctTokenizer().tokenize(message)
+	for word in terms:
+		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"' and word != '-':
+			search_list.append(convert_unicode_to_string(word.lower()))
     
     # call methods to parse data as required for graphs/analysis
     dictData = create_dictData(data)
@@ -69,10 +75,10 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
-    trend_term1 = dictData7[1][0]
-    trend_term2 = dictData7[2][0]	
-
- 				    
+    trend_terms = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
+    for word in search_list:
+    	trend_terms += str(',') + str(word)
+   			    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),
 				'djangodict': json.dumps(dictData),
@@ -82,8 +88,7 @@ def results(request):
 				'djangodict5': json.dumps(dictData5),
 				'djangodict6': json.dumps(dictData6),
 				'djangodict7': json.dumps(dictData7),
-				'trend_term1': trend_term1,	
-				'trend_term2': trend_term2,
+				'trend_terms': trend_terms,	
 				'query': message } )
 
 

@@ -230,11 +230,11 @@
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
-		<div style="width=985px;margin-left:auto;margin-right:auto;border:1px solid black">
+		<div style="width=985px;margin-left:220px;border:1px solid black">
 		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="550px" height="350px" seamless="">
 	     	</iframe>
-		<p>{% for word in djangodict.1 %}
-		   {{ word }}
+		<p>{% for i in djangodict7.1 %}
+		   {{ i.1 }}
 		   {% endfor %}
 		</p>
 		</div>

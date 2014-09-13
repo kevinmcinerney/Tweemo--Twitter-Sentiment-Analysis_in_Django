@@ -202,7 +202,11 @@ def pull_tweets(q):
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
-			for tweet in searched_tweets:		
+			for tweet in searched_tweets:	
+				temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
+				for word in temp_tweet:
+					tweet_list.append(convert_unicode_to_string(word).encode('ascii','ignore'))
+				tweet_list_lower = [i.lower() for i in tweet_list]	
 				for search_term in search_list:
 					if search_term not in tweet_list_lower and or_check == False:
 						
@@ -216,10 +220,6 @@ def pull_tweets(q):
 						else:
 							query_in_text = False
 				if query_in_text:
-					temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
-					for word in temp_tweet:
-						tweet_list.append(convert_unicode_to_string(word).encode('ascii','ignore'))
-					tweet_list_lower = [i.lower() for i in tweet_list]
 					tweet_words += tweet_list_lower
 					tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng,q,search_list)
 				else:

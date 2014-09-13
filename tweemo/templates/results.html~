@@ -79,7 +79,9 @@
 
 			var options = {
 			  title: 'Sentiment Word Distribution',
-			  'chartArea': {'width': '80%', 'height': '95%'},
+			  'chartArea': {'width': '80%', 'height': '85%'},
+			  'axisTitlesPosition': 'none',
+			  'legend': {'position': 'none'},
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
@@ -98,7 +100,9 @@
 
 			var options = {
 			  title: 'Contextual Word Distribution',
-			  'chartArea': {'width': '80%', 'height': '95%'},
+			  'chartArea': {'width': '80%', 'height': '85%'},
+			  'legend': {'position': 'none'},
+			  'axisTitlesPosition': 'none',
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
@@ -222,12 +226,14 @@
 	      		<iframe src='/tweets' id="info" name="info" width="985px" height="500px" seamless="">
 	     		</iframe>
     		</div style="float:left">
-		<div style="width:1150px;margin-left:-80px">
+		<div style="width:1150px;margin-left:-60px">
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
-		<iframe src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="550px" height="400px" seamless="">
-	     		</iframe>
+		<div style=width="985px;margin-left:auto;margin-rigth;auto>
+		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="550px" height="350px" seamless="">
+	     	</iframe>
+		</div>
 		{% endblock %}
 
 		

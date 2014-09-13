@@ -79,7 +79,7 @@
 
 			var options = {
 			  title: 'Sentiment Word Distribution',
-			  'chartArea': {'width': '95%', 'height': '80%'},
+			  'chartArea': {'width': '80%', 'height': '95%'},
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
@@ -98,7 +98,7 @@
 
 			var options = {
 			  title: 'Contextual Word Distribution',
-			  'chartArea': {'width': '95%', 'height': '80%'},
+			  'chartArea': {'width': '80%', 'height': '95%'},
 			  vAxis: {title: 'Words',  titleTextStyle: {color: 'blue'}}
 			};
 
@@ -226,7 +226,7 @@
 		<div id="chart_div3" style="width: 550px; height: 1200px;float:left"></div>
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
-		<iframe src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="985px" height="500px" seamless="">
+		<iframe src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="info2" name="info2" width="550px" height="400px" seamless="">
 	     		</iframe>
 		{% endblock %}
 

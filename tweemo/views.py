@@ -69,8 +69,8 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
-    trend_term1 = dictData7[1]
-    trend_term2 = dictData7[2]	
+    trend_term1 = dictData7[1][0]
+    trend_term2 = dictData7[2][0]	
 
  				    
     return render_to_response('results.html',

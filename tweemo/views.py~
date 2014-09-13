@@ -76,9 +76,13 @@ def results(request):
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
     trend_terms = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
-    for word in search_list:
-    	trend_terms += str(',') + str(word)
-    trends = 'http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5'
+
+    fill = ''
+    for i in range(0,len(search_list)):
+    	fill += str(word)
+	if i != len(search_list):
+		fill += str(',')
+    trends = "<iframe style=''src='http://www.google.com/trends/fetchComponent?q=mary,bob&cid=TIMESERIES_GRAPH_0&export=5' id=\"frame\" name=\"info2\" width=\"985px\" height=\"350px\" seamless=\"\"></iframe>"
    			    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),

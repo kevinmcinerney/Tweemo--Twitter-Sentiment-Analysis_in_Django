@@ -202,12 +202,7 @@ def pull_tweets(q):
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
 			# return a summary of each tweet
-			for tweet in searched_tweets:
-				temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
-				for word in temp_tweet:
-					tweet_list.append(convert_unicode_to_string(word).encode('ascii','ignore'))
-				tweet_list_lower = [i.lower() for i in tweet_list]
-				tweet_words += tweet_list_lower		
+			for tweet in searched_tweets:		
 				for search_term in search_list:
 					if search_term not in tweet_list_lower and or_check == False:
 						
@@ -220,9 +215,12 @@ def pull_tweets(q):
 							break
 						else:
 							query_in_text = False
-						
-				
 				if query_in_text:
+					temp_tweet = WordPunctTokenizer().tokenize(tweet.text)	
+					for word in temp_tweet:
+						tweet_list.append(convert_unicode_to_string(word).encode('ascii','ignore'))
+					tweet_list_lower = [i.lower() for i in tweet_list]
+					tweet_words += tweet_list_lower
 					tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng,q,search_list)
 				else:
 					continue
@@ -264,7 +262,7 @@ def pull_tweets(q):
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','https','']
 	context_words_dic = {}
 	for word in vocab:
-	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#elde.tl.via"amp' and len(word) > 1:
+	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#elde.tl."via.amp' and len(word) > 1:
 		context_words_dic[word] = fdist1[word]
 	
 

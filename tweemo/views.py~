@@ -82,7 +82,7 @@ def results(request):
     	fill += str(word)
 	if i != len(search_list):
 		fill += str(',')
-    trends = "<iframe style=''src='http://www.google.com/trends/fetchComponent?q=mary,bob&cid=TIMESERIES_GRAPH_0&export=5' id=\"frame\" name=\"info2\" width=\"985px\" height=\"350px\" seamless=\"\"></iframe>"
+    trends = "<iframe style=''src='http://www.google.com/trends/fetchComponent?q="+ fill + "&cid=TIMESERIES_GRAPH_0&export=5' id=\"frame\" name=\"info2\" width=\"985px\" height=\"350px\" seamless=\"\"></iframe>"
    			    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),

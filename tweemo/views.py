@@ -75,9 +75,9 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
-    trend_terms = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
+    fill = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
 
-    fill = ''
+  
     for i in range(0,len(search_list)):
     	fill += str(word)
 	if i != len(search_list):

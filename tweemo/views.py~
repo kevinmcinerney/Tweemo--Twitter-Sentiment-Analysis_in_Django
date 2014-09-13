@@ -79,7 +79,7 @@ def results(request):
 
   
     for i in range(0,len(search_list)):
-	if i < (len(search_list) -1):
+	if i < (len(search_list)-1):
 		fill += str(',')
     	fill += str(search_list[i])
 	

@@ -261,7 +261,7 @@ def pull_tweets(q):
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','https','']
 	context_words_dic = {}
 	for word in vocab:
-	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#"' and len(word) > 1 and word not in eng:
+	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#.tl"' and len(word) > 1:
 		context_words_dic[word] = fdist1[word]
 	
 

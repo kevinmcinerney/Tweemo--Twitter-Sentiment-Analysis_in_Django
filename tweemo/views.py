@@ -69,6 +69,8 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
+    trend_term1 = dictData7[1]
+    trend_term2 = dictData7[2]	
 
  				    
     return render_to_response('results.html',
@@ -80,6 +82,8 @@ def results(request):
 				'djangodict5': json.dumps(dictData5),
 				'djangodict6': json.dumps(dictData6),
 				'djangodict7': json.dumps(dictData7),
+				'trend_term1': trend_term1	
+				'trend_term2': trend_term2
 				'query': message } )
 
 

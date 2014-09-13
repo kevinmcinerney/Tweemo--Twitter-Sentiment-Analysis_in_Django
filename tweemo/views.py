@@ -63,9 +63,9 @@ def results(request):
 
     search_list = []
     terms = WordPunctTokenizer().tokenize(message)
-	for word in terms:
-		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"' and word != '-':
-			search_list.append(convert_unicode_to_string(word.lower()))
+    for word in terms:
+	if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"' and word != '-':
+		search_list.append(convert_unicode_to_string(word.lower()))
     
     # call methods to parse data as required for graphs/analysis
     dictData = create_dictData(data)

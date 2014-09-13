@@ -248,8 +248,7 @@
 		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="frame" name="info2" width="985px" height="350px" seamless="">
 	     	</iframe>
 		<p>
-		   {{ trend_term1 }}
-		   {{ trend_term2 }}
+		   {{ trend_terms }}
 		</p>
 		</div>
 		{% endblock %}

@@ -65,7 +65,7 @@ def results(request):
     terms = WordPunctTokenizer().tokenize(message)
     for word in terms:
 	if word[0] == '"':
-		search_list = message
+		search_list.append(message)
 	elif word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and '-' not in word:
 		search_list.append(convert_unicode_to_string(word.lower()))
     

@@ -102,13 +102,21 @@ def results(request):
 def pull_tweets(q):
 
 	# For the purposes of iterating over the API.search by country
-	country_dictionary = { 'Ireland': '53.5000,-7.627493,100mi', 
+	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
+			       'Canada': '43.653226,-79.383184,50mi', 
+                               'America': '40.7127,-74.0059,50mi', 
+                               'Germany': '52.5167,13.3833,100mi', 
+                               'Spain': '40.4333,-3.7000,100mi', 
+                               'England': '51.5072,0.1275,100mi', 
+                               'France': '48.8567,2.3508,100mi' }
+"""
+				'Ireland': '53.5000,-7.627493,100mi', 
 			       'Canada': '57.653226,-109.383184,430mi', 
                                'America': '32.2000,-73.8500,780mi', 
                                'Germany': '52.1337,10.3633,170mi', 
                                'Spain': '40.4633,-3.7490,240mi', 
                                'England': '51.5072,0.1275,100mi', 
-                               'France': '47.4567,2.1208,200mi' }
+                               'France': '47.4567,2.1208,200mi' }"""
 
 	# For the purposes of iterating over the API.search by day
 	today = date.today()

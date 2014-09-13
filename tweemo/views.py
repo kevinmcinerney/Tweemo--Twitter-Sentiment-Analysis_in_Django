@@ -82,8 +82,8 @@ def results(request):
 				'djangodict5': json.dumps(dictData5),
 				'djangodict6': json.dumps(dictData6),
 				'djangodict7': json.dumps(dictData7),
-				'trend_term1': trend_term1	
-				'trend_term2': trend_term2
+				'trend_term1': trend_term1,	
+				'trend_term2': trend_term2,
 				'query': message } )
 
 

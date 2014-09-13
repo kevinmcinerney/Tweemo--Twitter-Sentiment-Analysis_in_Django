@@ -244,7 +244,7 @@
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
 
-		{{ trends| safe }}
+		{% autoescape off %}{{ trends| safe }}{% endautoescape %}
 		
 		{% endblock %}
 

@@ -197,7 +197,7 @@ def pull_tweets(q):
 			negative_sentiment_count = 0	
 
 			# Tweepy query for collecting tweets
-			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],25)
+			searched_tweets = tweepy_search(q,"en",time[0],time[0] + timedelta(days=1),country_dictionary[country],50)
 
 			
 			# make tweets lowercase, filter out names and stopwords, update relevant global values and
@@ -816,7 +816,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
                         if validate_hashtag_gap(between_words,eng) == False:
                             continue
                     extracted_words.append(extracted_word)
-		    extracted_words.append('_stop_hashtags_getting_consecutive_boost') 
+		    extracted_words.append('') 
                     x = y
 		    break
         remainder = ''.join(remainder)

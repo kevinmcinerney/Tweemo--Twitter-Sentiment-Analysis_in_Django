@@ -103,7 +103,7 @@ def pull_tweets(q):
 
 	# For the purposes of iterating over the API.search by country
 	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
-			       'Canada': '43.653226,-79.383184,50mi', 
+			       'Canada': '43.653226,-79.383184,150mi', 
                                'America': '40.7127,-74.0059,50mi', 
                                'Germany': '52.5167,13.3833,100mi', 
                                'Spain': '40.4333,-3.7000,100mi', 

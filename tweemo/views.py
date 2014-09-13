@@ -64,7 +64,9 @@ def results(request):
     search_list = []
     terms = WordPunctTokenizer().tokenize(message)
     for word in terms:
-	if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"' and word != '-':
+	if word[0] == '"':
+		search_list = message
+	elif word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and '-' not in word:
 		search_list.append(convert_unicode_to_string(word.lower()))
     
     # call methods to parse data as required for graphs/analysis
@@ -261,7 +263,7 @@ def pull_tweets(q):
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','https','']
 	context_words_dic = {}
 	for word in vocab:
-	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#.tl"' and len(word) > 1:
+	    if word not in stopw and word not in scores and word not in search_list and word not in punctuation and squeeze(word) not in punctuation and word not in 'ru#.tl"amp' and len(word) > 1:
 		context_words_dic[word] = fdist1[word]
 	
 

@@ -78,6 +78,7 @@ def results(request):
     trend_terms = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
     for word in search_list:
     	trend_terms += str(',') + str(word)
+    trends = str("style=''src='http://www.google.com/trends/fetchComponent?q=")+str(trend_terms)+str("&cid=TIMESERIES_GRAPH_0&export=5'")
    			    
     return render_to_response('results.html',
 				{'here': TwitterStream.objects.all(),
@@ -88,7 +89,7 @@ def results(request):
 				'djangodict5': json.dumps(dictData5),
 				'djangodict6': json.dumps(dictData6),
 				'djangodict7': json.dumps(dictData7),
-				'trend_terms': trend_terms,	
+				'trend_terms': trends,	
 				'query': message } )
 
 

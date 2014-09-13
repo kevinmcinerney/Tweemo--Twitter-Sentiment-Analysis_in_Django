@@ -127,7 +127,7 @@
   	  </head>
   
 	  <body style="width:990px;margin-left:150px;margin-top:10px;">
-		<h1 style="margin-left:300px;margin-top:25px;"> You searched for: {{ query }}{{ trend_terms }} </h1>
+		<h1 style="margin-left:300px;margin-top:25px;"> You searched for: {{ query }} </h1>
 		
 		<div style="border:1px solid black;margin-top:70px; width: 380px; height: 280px;float:left" id="piechart" ></div>
 		<div style="border:1px solid black;margin-right:5px;margin-top: 70px; float:right; width: 600px; height: 400px;"id="chart_div"></div>
@@ -244,13 +244,9 @@
 		<div id="chart_div4" style="width: 550px; height: 1200px;float:left"></div>
 		</div>
 
-		<div id="wrap">
-		<iframe style=''src='http://www.google.com/trends/fetchComponent?q=bob,mary&cid=TIMESERIES_GRAPH_0&export=5' id="frame" name="info2" width="985px" height="350px" seamless="">
+		<iframe {{trends}} id="frame" name="info2" width="985px" height="350px" seamless="">
 	     	</iframe>
-		<p>
-		   {{ trend_terms }}
-		</p>
-		</div>
+		
 		{% endblock %}
 
 		

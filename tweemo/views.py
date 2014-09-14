@@ -579,9 +579,9 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				booster_sentiment_checker[i] = boosterwords[w]
 			elif ws in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[ws]
-			if w == '?':
-				tot = 0
-				break
+			#if w == '?':
+				#tot = 0
+				#break
 			if w not in stopw and negation_checker[(i-num)] != 1:
 				if  w in scores:
 					w_score = scores[w]

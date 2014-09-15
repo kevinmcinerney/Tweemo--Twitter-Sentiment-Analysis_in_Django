@@ -1,22 +1,22 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context
+from django import forms as forms
+from django.forms.widgets import *
+from django.core.mail import send_mail, BadHeaderError
 from django.core.context_processors import csrf
 from tweemo.models import TwitterStream
 from django.shortcuts import render_to_response
-import tweepy
-import pymongo
-import sys
-import json
 from django.utils import encoding
 from nltk.probability import FreqDist
 from datetime import date, timedelta
 from nltk import WordPunctTokenizer
 from nltk import WhitespaceTokenizer
 from tweemo.models import ContactForm
-from django import forms as forms
-from django.forms.widgets import *
-from django.core.mail import send_mail, BadHeaderError
+import tweepy
+import pymongo
+import sys
+import json
 import os
 import string
 import operator
@@ -51,6 +51,7 @@ def thankyou(request):
 
 def results(request):
 
+    # retrieve search term(s)
     if 'query' in request.GET:
 	message = request.GET['query']
         message = message.encode('ascii','ignore')
@@ -61,6 +62,7 @@ def results(request):
     else:
         message = 'You submitted an empty form.'
 
+    # create list of search terms minus complex-search-words
     search_list = []
     terms = WordPunctTokenizer().tokenize(message)
     for word in terms:
@@ -78,12 +80,15 @@ def results(request):
     dictData5 = create_dictData5(data)
     dictData6 = create_dictData6(data)
     dictData7 = create_dictData7(data)
+
+    # get words from word distribution for google trends graph
     fill = str(dictData7[1][0]) + str(',')+str(dictData7[2][0])
 
-  
+    # add search terms to word-distribution words for google trends
     for i in range(0,len(search_list)):
     	fill += str(',') + str(search_list[i])
 	
+    # dynamic url for generating google trends graph
     trends = "<iframe style=''src='http://www.google.com/trends/fetchComponent?q="+ fill + "&cid=TIMESERIES_GRAPH_0&export=5' id=\"frame\" name=\"info2\" width=\"985px\" height=\"350px\" seamless=\"\"></iframe>"
    			    
     return render_to_response('results.html',
@@ -102,6 +107,7 @@ def results(request):
 def pull_tweets(q):
 
 	# For the purposes of iterating over the API.search by country
+	# co-ordinates fous on capital cities
 	country_dictionary = { 'Ireland': '53.344103,-6.267493,50mi', 
 			       'Canada': '43.653226,-79.383184,150mi', 
                                'America': '40.7127,-74.0059,50mi', 
@@ -168,27 +174,28 @@ def pull_tweets(q):
 
  	BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 	
+	# create lexicons using dynamic paths
 	stopw = set(line.strip() for line in open(os.path.join(BASE_DIR, 'assets/Dictionaries/stopwords')))
 	negation = set(line.strip() for line in open(os.path.join(BASE_DIR,'assets/Dictionaries/negation.txt')))
 	eng = set(line.strip() for line in open(os.path.join(BASE_DIR,'assets/Dictionaries/english.txt')))
 	
+	# create list of search terms & determine complex search type
 	search_list = []
-	
-	
 	or_check = False
-
 	terms = WordPunctTokenizer().tokenize(q)
 	for word in terms:
-		
 		if word == 'or' or word == 'OR':
 			or_check = True
 		if word != 'and' and word != 'or' and word != 'AND' and word != 'OR' and word != '"':
 			search_list.append(convert_unicode_to_string(word.lower()))
 
+	#loop through country and time values and search the twitter APi
 	for time in time_list:
 		for country in country_dictionary:
 			
+			
 			tweet_list = []
+			#must be reset and re-evaluated for each tweet
 			query_in_text = True
 			# Stores total sentiment-counts (must be reset)
 			positive_sentiment_total = 0
@@ -220,11 +227,15 @@ def pull_tweets(q):
 							break
 						else:
 							query_in_text = False
+
+				# calculate sentiment scores if the tweet body contains the search term
 				if query_in_text:
 					tweet_words += tweet_list_lower
 					tot = send_processed_tweet_to_db(posts, country, tweet, stopw, negation, boosterwords, scores, emoticons,eng,q,search_list)
 				else:
 					continue
+
+				# tally up sentiment strength and sentiment count scores
 				if tot < 0:
 					negative_sentiment_count += 1
 					negative_sentiment_total += tot
@@ -251,14 +262,18 @@ def pull_tweets(q):
 			overall_positive_count += positive_sentiment_count
 			overall_neutral_count += neutral_sentiment_count
 	
+	# get frequency distribution of words in searched tweets
 	fdist1 = FreqDist(tweet_words)
 	vocab = fdist1.keys()
-
+	
+	#filter just the sentiment words through
 	tweet_words_dic = {}
 	for word in vocab:
 	    if word not in stopw and word in scores and word not in search_list:
 		tweet_words_dic[word] = fdist1[word]
 
+
+	# filter out all words except contextual ones.
 	punctuation = ['.',',','<','/',';',"'",'[',']','`','>','<','?',':','co','rt',
 		      '|','`','~','!','@','%','^','&','*','(',')','-','_','+','http','://','https','']
 	context_words_dic = {}
@@ -344,6 +359,8 @@ def pull_tweets(q):
 	return data_list
 
 #--------------------------------------------------------------------------------#
+# for connecting to the database
+
 def connect():
 	
 	url =  'mongodb://kevin:6841734aa@ds027489.mongolab.com:27489/twitter'
@@ -356,6 +373,7 @@ def connect():
 	return conn
 
 #--------------------------------------------------------------------------------#
+# creates dictionary from lexicon text file..with dynamic paths
 
 def create_lexicon():
 	scores = {}
@@ -367,6 +385,7 @@ def create_lexicon():
 	return scores
 
 #--------------------------------------------------------------------------------#
+# creates a dictionary from the boosterwords text file
 
 def create_booster_lexicon():
 	boosterwords = {}
@@ -378,6 +397,7 @@ def create_booster_lexicon():
 	return boosterwords
 
 #--------------------------------------------------------------------------------#
+# creates a dictionary from the emoticon text file
 
 def create_emoticon_lexicon():
 	scores = {}
@@ -389,6 +409,8 @@ def create_emoticon_lexicon():
 	return scores
 
 #--------------------------------------------------------------------------------#
+# send message if boxes filled, otherwise just open the page with the form
+
 def send_message(request):
 	subject = request.POST.get('topic', '')
 	message = request.POST.get('message', '')
@@ -404,6 +426,8 @@ def send_message(request):
 		return render_to_response('contactus.html', {'form': ContactForm()})
 
 #--------------------------------------------------------------------------------#
+# parse data for the sentiment polarity piechart
+
 def create_dictData(data):
 	dictData=[[ 'Sentiment', 'Polarity'],['Negative', data[0][0]['negative_sentiment_count'] ],
 					 ['Objective', data[0][0]['neutral_sentiment_count'] ],
@@ -411,12 +435,16 @@ def create_dictData(data):
 	return dictData
 
 #--------------------------------------------------------------------------------#
+# parse data for the sentiment strength piechart
+
 def create_dictData2(data):
 	dictData2=[[ 'Sentiment', 'Strength'],['Negative', data[1][0]['negative_sentiment_total'] ],
 					  ['Positive', data[1][0]['positive_sentiment_total'] ] ]
 	return dictData2
 
 #--------------------------------------------------------------------------------#
+# parse data for the geo-sentiment map
+
 def create_dictData3(data):
 	dictData3=[['City','Sentiment'],	[ 'Ireland', data[2][0]['Ireland'][0][0] ],	
 					[ 'United Kingdom', data[2][0]['England'][0][0] ],	
@@ -428,6 +456,8 @@ def create_dictData3(data):
 	return dictData3
 
 #--------------------------------------------------------------------------------#
+# parse data for the descriptve statistics table
+
 def create_dictData4(data):
 	dictData4=[	[  data[2][0]['Ireland'][0] ],
 			[  data[2][0]['Spain'  ][0] ],
@@ -439,6 +469,8 @@ def create_dictData4(data):
 	return dictData4
 
 #--------------------------------------------------------------------------------#
+# parse data for timeline graph
+
 def create_dictData5(data):
 
 	day1 = str((date.today() - timedelta(days=2)))
@@ -469,6 +501,7 @@ def create_dictData5(data):
 	return dictData5
 
 #--------------------------------------------------------------------------------#
+# parse data and sort it for the sentiment word distribution
 
 def create_dictData6(data):
     count = 1
@@ -481,6 +514,7 @@ def create_dictData6(data):
     return dictData6
 
 #--------------------------------------------------------------------------------#
+# parse data and sort it for the contextual word distribution
 
 def create_dictData7(data):
     count = 1
@@ -493,6 +527,8 @@ def create_dictData7(data):
     return dictData7
 
 #--------------------------------------------------------------------------------#
+# tweepy search api and credentials
+
 def tweepy_search(q,lang,since,until,country,max_tweets):
 
 	# Twitter Authorization codes
@@ -517,6 +553,8 @@ def tweepy_search(q,lang,since,until,country,max_tweets):
 	return searched_tweets
 
 #--------------------------------------------------------------------------------#
+# returns connection the mongo collection for storing tweets
+
 def access_mongo_collection():
 	# Connection to MongoLab via pymongo
 	conn = connect()
@@ -530,6 +568,8 @@ def access_mongo_collection():
 	return posts
 
 #--------------------------------------------------------------------------------#
+# this method does all the sentiment analysis, and also calls other methods. It takes one tweet as arg.
+
 def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwords, scores, emoticons, eng,q,search_list):
 
 	# initialize sentiment score
@@ -550,19 +590,25 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 	slang_abbrev = expand_slang()
 
 	if tweet.text:
+		# create a list of tweet words for display purposes before its preprocessed.
 		temp_tweet = WordPunctTokenizer().tokenize(tweet.text)
 		for i in temp_tweet:
 			tweet_list.append(convert_unicode_to_string(i))	
-		#print tweet_list
+		# return hashtags from the tweet
 		hashtags = hashtag_finder(tweet.text)
+		# if hashtags are found, find sentiment words in those hashtags
 		if len(hashtags) > 0:
 			hash_words = get_hashtag_words(hashtags,scores,slang_abbrev,eng)
 			hash_matches = hash_words
+		# create emoticon dictionary of detectedemoticons and their scores
 		emo_dict = emoticon_score(tweet.text,emoticons)
 		emoticon_matches = [i for i in emo_dict]
 		tot = sum([emo_dict[i] for i in emo_dict])
+		# replace abbreviations with whole words
 		words = replace_abbrevs(tweet.text)
+		# add hashtag sentiment words to the tweet
 		words += hash_words
+		#initialise vecotrs for checking syntax
 		consecutive_sentiment_checker = [0 for x in range(0,len(words))]
 		booster_sentiment_checker = [0 for x in range(0,len(words))]
 		negation_checker = create_negation_vector(words,negation)
@@ -574,11 +620,13 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 				num = 1
 			w = convert_unicode_to_string(words[i].lower())
 			ws = convert_unicode_to_string(squeeze(w))
+			# check if the word is all uppercase 
 			all_caps = is_all_caps(words[i])
 			if w in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[w]
 			elif ws in boosterwords:
 				booster_sentiment_checker[i] = boosterwords[ws]
+			#this method was removed
 			#if w == '?':
 				#tot = 0
 				#break
@@ -646,6 +694,7 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 			elif ws in scores and negation_checker[(i-num)] == 1:
 				negation_matches.append(ws)
 	
+		# insert all the data for this particular tweet
 		data = { 'text': [convert_unicode_to_string(x).encode('ascii', 'ignore') for x in tweet_list], 
 			 'created_at': tweet.created_at, 
 			 'retweet_count': tweet.retweet_count, 
@@ -672,6 +721,8 @@ def send_processed_tweet_to_db(posts,country, tweet, stopw, negation, boosterwor
 
 
 #--------------------------------------------------------------------------------#
+# primitive spell checker removes repeating letters
+
 def squeeze(string):
     word = string
     n = 1
@@ -682,6 +733,7 @@ def squeeze(string):
     return word.strip(' ')
 
 #--------------------------------------------------------------------------------#
+# creates a dictionary of slang and their scores
 
 def expand_slang():
     d = {}
@@ -697,6 +749,9 @@ def expand_slang():
     return d
 
 #--------------------------------------------------------------------------------#
+# replace abbreviations with whole words
+# also replaces urls and hashtags with standard strings
+
 def replace_abbrevs(tweet):
     
     tweet = WordPunctTokenizer().tokenize(tweet)
@@ -728,6 +783,8 @@ def is_all_caps(word):
 	return word.isupper()
 
 #--------------------------------------------------------------------------------#
+# returns dictionary with detected emoticons and their scores
+
 def emoticon_score(tweet, emoticons):
 	d = {}
 	for emo in tweet.split():
@@ -739,6 +796,8 @@ def emoticon_score(tweet, emoticons):
 	return d
 
 #--------------------------------------------------------------------------------#
+#returns a vector with 0's, and ones where a negation word is found
+
 def create_negation_vector(tweet,negation):
 	vector = [0 for x in range(0,len(tweet))]
 	for i in range(0,len(tweet)):
@@ -750,6 +809,8 @@ def create_negation_vector(tweet,negation):
 	return vector
 
 #--------------------------------------------------------------------------------#
+# adjusts total sentiment score after boosting sentiment word that precedes an exclamation
+
 def exclamation_boost(vector,w_score,index,tot,exclam_num):
 	for i in vector[0:index][::-1]:
 		if i != 0 and w_score > 0:
@@ -763,6 +824,8 @@ def exclamation_boost(vector,w_score,index,tot,exclam_num):
 	return tot
 
 #--------------------------------------------------------------------------------#
+# returns all hashtags from a tweet
+
 def hashtag_finder(words):
 	l = []
 	words = words.split()
@@ -825,6 +888,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         extracted_words += hashtag_expander(remainder_list,slang_abbrev,eng)
     return extracted_words
 #--------------------------------------------------------------------------------#
+# returns any whole words from abbreviations found in a hashtag
 
 def hashtag_expander(hashtags,slang_abbrev,eng):
 	extracted_words = []
@@ -850,6 +914,8 @@ def hashtag_expander(hashtags,slang_abbrev,eng):
 	return  extracted_words
 
 #--------------------------------------------------------------------------------#
+# checks if a string slice is composed fully of english words
+
 def validate_hashtag_gap(gap,eng):
     gap = ''.join(gap)
     gap_checker = [0 for i in range(0,len(gap))]

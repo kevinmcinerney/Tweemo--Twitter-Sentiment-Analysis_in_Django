@@ -24,6 +24,7 @@ cya	bye
 cyo	see you online 
 dbau	doing business as usual 
 fud	fear, uncertainty, and doubt 
+ffs	for fuck sake
 fwiw	for what it's worth 
 fyi	for your information
 g2g	got to go 

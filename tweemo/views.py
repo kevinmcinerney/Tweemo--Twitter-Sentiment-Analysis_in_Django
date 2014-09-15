@@ -787,7 +787,7 @@ def get_hashtag_words(hashtags,scores,slang_abbrev,eng):
         elif hashtag[0:].lower() in scores:
 	    #print str(hashtag[0:].lower()) + str(' is a whole sentiment word ')
             extracted_words.append(hashtag[0:].lower())
-	    extracted_words.append('_stop_hashtags_getting_consecutive_boost')
+	    extracted_words.append('')
 	    #print str('proof of whole extracted word: ') + str(extracted_words)
             continue
         word_count = 0
